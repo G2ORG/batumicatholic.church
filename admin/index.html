@@ -118,38 +118,38 @@
 <!-- DASHBOARD -->
 <div class="panel active" id="panel-dashboard">
   <div class="row g-3 mb-4">
-    <div class="col-6 col-lg-3"><div class="stat-tile"><div class="ico ico-blue"><i class="fa fa-newspaper"></i></div><div><div class="num" id="stat-news">…</div><div class="lbl">Всего новостей</div></div></div></div>
-    <div class="col-6 col-lg-3"><div class="stat-tile"><div class="ico ico-green"><i class="fa fa-circle-check"></i></div><div><div class="num" id="stat-pub">…</div><div class="lbl">Опубликовано</div></div></div></div>
-    <div class="col-6 col-lg-3"><div class="stat-tile"><div class="ico ico-gold"><i class="fa fa-microphone"></i></div><div><div class="num" id="stat-sermons">…</div><div class="lbl">Проповедей</div></div></div></div>
-    <div class="col-6 col-lg-3"><div class="stat-tile"><div class="ico ico-red"><i class="fa fa-calendar-days"></i></div><div><div class="num" id="stat-events">…</div><div class="lbl">Событий</div></div></div></div>
+    <div class="col-6 col-lg-3"><div class="stat-tile"><div class="ico ico-blue"><i class="fa fa-newspaper"></i></div><div><div class="num" id="stat-news">…</div><div class="lbl" data-i18n="dash.stat_news">Всего новостей</div></div></div></div>
+    <div class="col-6 col-lg-3"><div class="stat-tile"><div class="ico ico-green"><i class="fa fa-circle-check"></i></div><div><div class="num" id="stat-pub">…</div><div class="lbl" data-i18n="dash.stat_pub">Опубликовано</div></div></div></div>
+    <div class="col-6 col-lg-3"><div class="stat-tile"><div class="ico ico-gold"><i class="fa fa-microphone"></i></div><div><div class="num" id="stat-sermons">…</div><div class="lbl" data-i18n="dash.stat_sermons">Проповедей</div></div></div></div>
+    <div class="col-6 col-lg-3"><div class="stat-tile"><div class="ico ico-red"><i class="fa fa-calendar-days"></i></div><div><div class="num" id="stat-events">…</div><div class="lbl" data-i18n="dash.stat_events">Событий</div></div></div></div>
   </div>
   <div class="row g-3">
     <div class="col-lg-8">
       <div class="card">
-        <div class="card-header"><h5><i class="fa fa-newspaper" style="color:var(--blue);margin-right:.4rem;"></i>Последние новости</h5><button class="btn-blue" onclick="showPanel('news',null);newArticle()"><i class="fa fa-plus"></i> Добавить</button></div>
-        <div class="card-body" style="padding:0;"><table class="admin-table"><thead><tr><th>Заголовок (KA)</th><th>Дата</th><th>Категория</th><th>Статус</th><th></th></tr></thead><tbody id="dash-news-list"><tr><td colspan="5" style="text-align:center;color:var(--muted);padding:1.5rem;"><i class="fa fa-spinner fa-spin"></i> Загрузка...</td></tr></tbody></table></div>
+        <div class="card-header"><h5><i class="fa fa-newspaper" style="color:var(--blue);margin-right:.4rem;"></i><span data-i18n="dash.latest_news">Последние новости</span></h5><button class="btn-blue" onclick="showPanel('news',null);newArticle()"><i class="fa fa-plus"></i> <span data-i18n="dash.add">Добавить</span></button></div>
+        <div class="card-body" style="padding:0;"><table class="admin-table"><thead><tr><th data-i18n="dash.th_title">Заголовок (KA)</th><th data-i18n="dash.th_date">Дата</th><th data-i18n="dash.th_cat">Категория</th><th data-i18n="dash.th_status">Статус</th><th></th></tr></thead><tbody id="dash-news-list"><tr><td colspan="5" style="text-align:center;color:var(--muted);padding:1.5rem;"><i class="fa fa-spinner fa-spin"></i> <span data-i18n="dash.loading">Загрузка...</span></td></tr></tbody></table></div>
       </div>
     </div>
     <div class="col-lg-4">
       <div class="card"><div class="card-body" style="display:flex;flex-direction:column;gap:.75rem;">
-        <button class="btn-blue" onclick="showPanel('news',null);newArticle()"><i class="fa fa-plus"></i> Новая статья</button>
-        <button class="btn-ghost" onclick="showPanel('schedule',null)"><i class="fa fa-clock"></i> Обновить расписание</button>
-        <button class="btn-ghost" onclick="showPanel('events',null)"><i class="fa fa-calendar-plus"></i> Добавить событие</button>
-        <button class="btn-ghost" onclick="showPanel('sermons',null)"><i class="fa fa-microphone"></i> Загрузить проповедь</button>
-        <button class="btn-ghost" onclick="showPanel('gallery',null)"><i class="fa fa-images"></i> Управление галереей</button>
+        <button class="btn-blue" onclick="showPanel('news',null);newArticle()"><i class="fa fa-plus"></i> <span data-i18n="dash.new_article">Новая статья</span></button>
+        <button class="btn-ghost" onclick="showPanel('schedule',null)"><i class="fa fa-clock"></i> <span data-i18n="dash.update_schedule">Обновить расписание</span></button>
+        <button class="btn-ghost" onclick="showPanel('events',null)"><i class="fa fa-calendar-plus"></i> <span data-i18n="dash.add_event">Добавить событие</span></button>
+        <button class="btn-ghost" onclick="showPanel('sermons',null)"><i class="fa fa-microphone"></i> <span data-i18n="dash.upload_sermon">Загрузить проповедь</span></button>
+        <button class="btn-ghost" onclick="showPanel('gallery',null)"><i class="fa fa-images"></i> <span data-i18n="dash.manage_gallery">Управление галереей</span></button>
         <hr style="border-color:var(--border);margin:.25rem 0;">
-        <div style="font-size:.72rem;color:var(--muted);font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.2rem 0;">Просмотр страниц</div>
-        <a href="../" target="_blank" class="btn-ghost"><i class="fa fa-house"></i> Главная</a>
-        <a href="../news/" target="_blank" class="btn-ghost"><i class="fa fa-newspaper"></i> Новости</a>
-        <a href="../gallery/" target="_blank" class="btn-ghost"><i class="fa fa-images"></i> Галерея</a>
-        <a href="../sermons/" target="_blank" class="btn-ghost"><i class="fa fa-microphone"></i> Проповеди</a>
-        <a href="../about/" target="_blank" class="btn-ghost"><i class="fa fa-church"></i> О приходе</a>
+        <div style="font-size:.72rem;color:var(--muted);font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.2rem 0;" data-i18n="dash.view_pages">Просмотр страниц</div>
+        <a href="../" target="_blank" class="btn-ghost"><i class="fa fa-house"></i> <span data-i18n="dash.page_home">Главная</span></a>
+        <a href="../news/" target="_blank" class="btn-ghost"><i class="fa fa-newspaper"></i> <span data-i18n="nav.news">Новости</span></a>
+        <a href="../gallery/" target="_blank" class="btn-ghost"><i class="fa fa-images"></i> <span data-i18n="nav.gallery">Галерея</span></a>
+        <a href="../sermons/" target="_blank" class="btn-ghost"><i class="fa fa-microphone"></i> <span data-i18n="nav.sermons">Проповеди</span></a>
+        <a href="../about/" target="_blank" class="btn-ghost"><i class="fa fa-church"></i> <span data-i18n="dash.page_about">О приходе</span></a>
       </div></div>
-      <div class="card mt-3"><div class="card-header"><h5 style="font-size:.9rem;">ℹ️ Подсказки</h5></div><div class="card-body" style="font-size:.8rem;color:var(--muted);line-height:1.8;">
-        <p>• Обязательный язык — <strong>KA</strong> (грузинский).</p>
-        <p>• «Черновик» — сохраняет без публикации.</p>
-        <p>• Фото: JPG/PNG до 8 МБ — сжимается автоматически.</p>
-        <p>• Проповеди: MP3/M4A до 50 МБ.</p>
+      <div class="card mt-3"><div class="card-header"><h5 style="font-size:.9rem;">ℹ️ <span data-i18n="dash.tips_title">Подсказки</span></h5></div><div class="card-body" style="font-size:.8rem;color:var(--muted);line-height:1.8;">
+        <p data-i18n="dash.tip1">• Обязательный язык — <strong>KA</strong> (грузинский).</p>
+        <p data-i18n="dash.tip2">• «Черновик» — сохраняет без публикации.</p>
+        <p data-i18n="dash.tip3">• Фото: JPG/PNG до 8 МБ — сжимается автоматически.</p>
+        <p data-i18n="dash.tip4">• Проповеди: MP3/M4A до 50 МБ.</p>
       </div></div>
     </div>
   </div>
@@ -542,6 +542,19 @@ const ADMIN_LANG = {
     'manual.title':'Мануал контент-менеджера',
     'p.dashboard':'Дашборд','p.news':'Новости','p.schedule':'Расписание',
     'p.events':'События','p.sermons':'Проповеди','p.gallery':'Галерея','p.manual':'Мануал',
+    'dash.stat_news':'Всего новостей','dash.stat_pub':'Опубликовано',
+    'dash.stat_sermons':'Проповедей','dash.stat_events':'Событий',
+    'dash.latest_news':'Последние новости','dash.add':'Добавить','dash.loading':'Загрузка...',
+    'dash.th_title':'Заголовок (KA)','dash.th_date':'Дата','dash.th_cat':'Категория','dash.th_status':'Статус',
+    'dash.new_article':'Новая статья','dash.update_schedule':'Обновить расписание',
+    'dash.add_event':'Добавить событие','dash.upload_sermon':'Загрузить проповедь',
+    'dash.manage_gallery':'Управление галереей','dash.view_pages':'Просмотр страниц',
+    'dash.page_home':'Главная','dash.page_about':'О приходе',
+    'dash.tips_title':'Подсказки',
+    'dash.tip1':'• Обязательный язык — <strong>KA</strong> (грузинский).',
+    'dash.tip2':'• «Черновик» — сохраняет без публикации.',
+    'dash.tip3':'• Фото: JPG/PNG до 8 МБ — сжимается автоматически.',
+    'dash.tip4':'• Проповеди: MP3/M4A до 50 МБ.',
   },
   en: {
     'nav.main':'Main','nav.content':'Content','nav.help':'Help',
@@ -551,6 +564,19 @@ const ADMIN_LANG = {
     'manual.title':'Content Manager Manual',
     'p.dashboard':'Dashboard','p.news':'News','p.schedule':'Schedule',
     'p.events':'Events','p.sermons':'Sermons','p.gallery':'Gallery','p.manual':'Manual',
+    'dash.stat_news':'Total News','dash.stat_pub':'Published',
+    'dash.stat_sermons':'Sermons','dash.stat_events':'Events',
+    'dash.latest_news':'Latest News','dash.add':'Add','dash.loading':'Loading...',
+    'dash.th_title':'Title (KA)','dash.th_date':'Date','dash.th_cat':'Category','dash.th_status':'Status',
+    'dash.new_article':'New Article','dash.update_schedule':'Update Schedule',
+    'dash.add_event':'Add Event','dash.upload_sermon':'Upload Sermon',
+    'dash.manage_gallery':'Manage Gallery','dash.view_pages':'View Pages',
+    'dash.page_home':'Home','dash.page_about':'About Parish',
+    'dash.tips_title':'Tips',
+    'dash.tip1':'• Required language — <strong>KA</strong> (Georgian).',
+    'dash.tip2':'• "Draft" — saves without publishing.',
+    'dash.tip3':'• Photos: JPG/PNG up to 8 MB — auto-compressed.',
+    'dash.tip4':'• Sermons: MP3/M4A up to 50 MB.',
   },
   ka: {
     'nav.main':'მთავარი','nav.content':'კონტენტი','nav.help':'დახმარება',
@@ -560,6 +586,19 @@ const ADMIN_LANG = {
     'manual.title':'კონტენტ-მენეჯერის სახელმძღვანელო',
     'p.dashboard':'დაფა','p.news':'სიახლეები','p.schedule':'განრიგი',
     'p.events':'ღონისძიებები','p.sermons':'ქადაგებები','p.gallery':'გალერეა','p.manual':'მანუალი',
+    'dash.stat_news':'სიახლეები სულ','dash.stat_pub':'გამოქვეყნებული',
+    'dash.stat_sermons':'ქადაგებები','dash.stat_events':'ღონისძიებები',
+    'dash.latest_news':'ბოლო სიახლეები','dash.add':'დამატება','dash.loading':'იტვირთება...',
+    'dash.th_title':'სათაური (KA)','dash.th_date':'თარიღი','dash.th_cat':'კატეგორია','dash.th_status':'სტატუსი',
+    'dash.new_article':'ახალი სტატია','dash.update_schedule':'განრიგის განახლება',
+    'dash.add_event':'ღონისძიების დამატება','dash.upload_sermon':'ქადაგების ატვირთვა',
+    'dash.manage_gallery':'გალერეის მართვა','dash.view_pages':'გვერდების ნახვა',
+    'dash.page_home':'მთავარი','dash.page_about':'მრევლის შესახებ',
+    'dash.tips_title':'რჩევები',
+    'dash.tip1':'• სავალდებულო ენა — <strong>KA</strong> (ქართული).',
+    'dash.tip2':'• „მონახაზი" — ინახავს გამოქვეყნების გარეშე.',
+    'dash.tip3':'• ფოტო: JPG/PNG 8 МБ-მდე — ავტომატური შეკუმშვა.',
+    'dash.tip4':'• ქადაგებები: MP3/M4A 50 МБ-მდე.',
   }
 };
 
