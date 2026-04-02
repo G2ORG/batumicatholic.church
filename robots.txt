@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Закрываем служебные директории
+Disallow: /admin/
+Disallow: /data/
+Disallow: /api/
+Disallow: /uploads/caritas/
+
+# Карта сайта
+Sitemap: https://batumicatholic.church/sitemap.xml

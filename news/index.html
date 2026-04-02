@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ka" data-lang="ka">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="სიახლეები · სულიწმიდის კათოლიკური მრევლი ბათუმი" />
+  <title>სიახლეები · სულიწმიდის მრევლი ბათუმი</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&family=Noto+Sans+Georgian:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --blue:       #1B4F8C;
+      --blue-dark:  #123566;
+      --blue-light: #E8F0F7;
+      --gold:       #C9A84C;
+      --gold-light: #F5E9C8;
+      --white:      #FAFAF8;
+      --text:       #1A1A1A;
+      --muted:      #6B7280;
+      --border:     #DDE3EC;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
+    html { scroll-behavior: smooth; }
+    body { font-family:'Lato','Noto Sans Georgian',sans-serif; background:var(--white); color:var(--text); font-size:16px; line-height:1.7; }
+    h1,h2,h3,h4,h5 { font-family:'Cormorant Garamond',serif; font-weight:600; line-height:1.2; }
+    a { color:inherit; text-decoration:none; }
+
+    /* ── Navbar (same as main) ── */
+    .navbar { background:rgba(27,79,140,.97); backdrop-filter:blur(8px); padding:.75rem 0; position:sticky; top:0; z-index:1000; border-bottom:2px solid var(--gold); }
+    .navbar-brand { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:700; color:#fff !important; letter-spacing:.02em; }
+    .navbar-brand .cross { color:var(--gold); margin-right:.4rem; font-size:1.2rem; }
+    .nav-link { color:rgba(255,255,255,.88) !important; font-size:.85rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.4rem .75rem !important; transition:color .2s; }
+    .nav-link:hover,.nav-link.active-link { color:var(--gold) !important; }
+    .navbar-toggler { border-color:rgba(255,255,255,.4); }
+    .navbar-toggler-icon { filter:invert(1); }
+    .lang-switcher { display:flex; gap:4px; align-items:center; }
+    .lang-btn { background:transparent; border:1px solid rgba(255,255,255,.3); color:rgba(255,255,255,.7); font-size:.7rem; font-weight:700; letter-spacing:.06em; padding:3px 8px; border-radius:3px; cursor:pointer; transition:all .2s; }
+    .lang-btn:hover,.lang-btn.active { background:var(--gold); border-color:var(--gold); color:#fff; }
+    .btn-donate { background:var(--gold); color:#fff !important; font-size:.78rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:6px 16px; border-radius:3px; transition:background .2s; }
+    .btn-donate:hover { background:#b0912f; }
+
+    /* ── Page hero ── */
+    .page-hero {
+      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 100%);
+      padding: 3.5rem 0 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '✝';
+      position: absolute;
+      right: -1rem;
+      top: -2rem;
+      font-size: 12rem;
+      color: rgba(255,255,255,.04);
+      font-family: serif;
+      line-height: 1;
+    }
+    .page-hero h1 { color:#fff; font-size:clamp(2rem,5vw,3rem); margin-bottom:.4rem; }
+    .page-hero .breadcrumb { background:transparent; padding:0; margin:0; }
+    .page-hero .breadcrumb-item { font-size:.82rem; color:rgba(255,255,255,.55); }
+    .page-hero .breadcrumb-item a { color:rgba(255,255,255,.7); }
+    .page-hero .breadcrumb-item a:hover { color:var(--gold); }
+    .page-hero .breadcrumb-item.active { color:rgba(255,255,255,.85); }
+    .page-hero .breadcrumb-item+.breadcrumb-item::before { color:rgba(255,255,255,.35); }
+    .gold-tag { display:inline-block; background:var(--gold); color:#fff; font-size:.68rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; padding:3px 12px; border-radius:2px; margin-bottom:.8rem; }
+
+    /* ── Filter bar ── */
+    .filter-bar {
+      background:#fff;
+      border-bottom:1px solid var(--border);
+      padding:.75rem 0;
+      position:sticky;
+      top:58px;
+      z-index:50;
+    }
+    .filter-btn {
+      background:transparent;
+      border:1px solid var(--border);
+      color:var(--muted);
+      font-size:.78rem;
+      font-weight:700;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      padding:5px 14px;
+      border-radius:20px;
+      cursor:pointer;
+      transition:all .2s;
+    }
+    .filter-btn:hover,.filter-btn.active {
+      background:var(--blue);
+      border-color:var(--blue);
+      color:#fff;
+    }
+    .filter-btn.f-liturgy.active  { background:#1B4F8C; border-color:#1B4F8C; }
+    .filter-btn.f-caritas.active  { background:#DC2626; border-color:#DC2626; }
+    .filter-btn.f-announce.active { background:#D97706; border-color:#D97706; }
+    .filter-btn.f-event.active    { background:#16A34A; border-color:#16A34A; }
+
+    /* ── News grid ── */
+    .news-section { padding:3rem 0 5rem; }
+
+    .featured-card {
+      border-radius:8px;
+      overflow:hidden;
+      position:relative;
+      height:420px;
+      cursor:pointer;
+      transition:box-shadow .25s;
+    }
+    .featured-card:hover { box-shadow:0 12px 40px rgba(27,79,140,.22); }
+    .featured-card img { width:100%;height:100%;object-fit:cover;transition:transform .4s; }
+    .featured-card:hover img { transform:scale(1.03); }
+    .featured-card .overlay {
+      position:absolute;inset:0;
+      background:linear-gradient(to top,rgba(10,30,58,.92) 0%,rgba(10,30,58,.2) 60%,transparent 100%);
+    }
+    .featured-card .content {
+      position:absolute;bottom:0;left:0;right:0;
+      padding:2rem;
+      color:#fff;
+    }
+    .featured-card .tag-pill { margin-bottom:.6rem; }
+    .featured-card h2 { font-size:1.7rem; color:#fff; margin-bottom:.4rem; }
+    .featured-card .date { font-size:.78rem; color:rgba(255,255,255,.65); letter-spacing:.1em; text-transform:uppercase; }
+    .featured-card .excerpt { font-size:.92rem; color:rgba(255,255,255,.8); margin-top:.4rem; }
+
+    .news-card {
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:8px;
+      overflow:hidden;
+      transition:box-shadow .25s,transform .25s;
+      height:100%;
+      cursor:pointer;
+      display:flex;
+      flex-direction:column;
+    }
+    .news-card:hover { box-shadow:0 8px 32px rgba(27,79,140,.14); transform:translateY(-3px); }
+    .news-card .card-img { height:200px; object-fit:cover; width:100%; }
+    .news-card .card-body { padding:1.25rem; flex:1; display:flex; flex-direction:column; }
+    .news-card .tag-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:.5rem; }
+    .news-card .news-date { font-size:.72rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; }
+    .news-card h4 { font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:var(--blue-dark); margin-bottom:.5rem; flex:1; }
+    .news-card .excerpt { font-size:.88rem; color:var(--muted); }
+    .news-card .read-more { font-size:.8rem; font-weight:700; color:var(--blue); margin-top:1rem; letter-spacing:.04em; }
+    .news-card .read-more:hover { color:var(--gold); }
+
+    /* Tag pills */
+    .tag-pill { display:inline-block; font-size:.68rem; font-weight:700; letter-spacing:.06em; padding:2px 9px; border-radius:10px; }
+    .tp-liturgy  { background:var(--blue-light); color:var(--blue); }
+    .tp-caritas  { background:#FEE2E2; color:#9B2020; }
+    .tp-announce { background:var(--gold-light); color:#8B5B00; }
+    .tp-event    { background:#DCFCE7; color:#15803D; }
+
+    /* Pagination */
+    .pagination .page-link {
+      color:var(--blue);
+      border-color:var(--border);
+      font-weight:700;
+      font-size:.85rem;
+    }
+    .pagination .page-item.active .page-link { background:var(--blue); border-color:var(--blue); }
+
+    /* Sidebar */
+    .sidebar-card { background:#fff; border:1px solid var(--border); border-radius:8px; padding:1.25rem; margin-bottom:1.25rem; }
+    .sidebar-card h5 { font-family:'Cormorant Garamond',serif; font-size:1.15rem; color:var(--blue-dark); margin-bottom:.9rem; padding-bottom:.4rem; border-bottom:1px solid var(--border); }
+    .sidebar-news-item { display:flex; gap:.75rem; padding:.6rem 0; border-bottom:1px solid var(--border); cursor:pointer; }
+    .sidebar-news-item:last-child { border-bottom:none; }
+    .sidebar-news-item img { width:60px; height:50px; object-fit:cover; border-radius:4px; flex-shrink:0; }
+    .sidebar-news-item .info h6 { font-family:'Cormorant Garamond',serif; font-size:.95rem; color:var(--blue-dark); margin-bottom:2px; }
+    .sidebar-news-item .info .dt { font-size:.72rem; color:var(--muted); }
+    .sidebar-news-item:hover .info h6 { color:var(--gold); }
+
+    /* Article view (modal-like) */
+    .article-overlay {
+      display:none;
+      position:fixed;inset:0;
+      background:rgba(10,20,40,.7);
+      z-index:2000;
+      overflow-y:auto;
+      padding:2rem 1rem;
+    }
+    .article-overlay.open { display:block; }
+    .article-modal {
+      max-width:760px;
+      margin:0 auto;
+      background:#fff;
+      border-radius:10px;
+      overflow:hidden;
+      animation:fadeUp .3s ease;
+    }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    .article-modal .art-hero { width:100%;height:280px;object-fit:cover; }
+    .article-modal .art-content { padding:2rem; }
+    .article-modal .art-title { font-size:2rem; color:var(--blue-dark); margin-bottom:.3rem; }
+    .article-modal .art-meta { font-size:.8rem; color:var(--muted); margin-bottom:1.5rem; display:flex; gap:1rem; flex-wrap:wrap; }
+    .article-modal .art-body { font-size:.97rem; line-height:1.85; color:var(--text); }
+    .article-modal .art-body p { margin-bottom:1rem; }
+    .article-modal audio { width:100%;margin:1rem 0;border-radius:6px; }
+    .close-art { position:absolute;top:1rem;right:1rem;background:#fff;border:none;width:36px;height:36px;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.2);transition:all .2s;z-index:10; }
+    .close-art:hover { background:var(--gold);color:#fff; }
+
+    /* Footer */
+    footer { background:#0a1e3a;color:rgba(255,255,255,.7);padding:3rem 0 1.5rem; }
+    footer .ft-logo { font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:#fff;font-weight:700;margin-bottom:.5rem; }
+    footer .ft-logo .cross { color:var(--gold);margin-right:.3rem; }
+    footer h6 { font-family:'Cormorant Garamond',serif;font-size:1rem;color:#fff;font-weight:600;letter-spacing:.06em;margin-bottom:1rem;text-transform:uppercase; }
+    footer ul { list-style:none;padding:0; }
+    footer ul li { margin-bottom:.4rem; }
+    footer ul li a { font-size:.85rem;color:rgba(255,255,255,.65);transition:color .2s; }
+    footer ul li a:hover { color:var(--gold); }
+    .social-links { display:flex;gap:.6rem;margin-top:1rem; }
+    .social-links a { width:36px;height:36px;border:1px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.7);font-size:.9rem;transition:all .2s; }
+    .social-links a:hover { background:var(--gold);border-color:var(--gold);color:#fff; }
+    .footer-divider { border-color:rgba(255,255,255,.1);margin:2rem 0 1rem; }
+    .footer-bottom { font-size:.78rem;color:rgba(255,255,255,.45); }
+    .footer-bottom a { color:rgba(255,255,255,.55); }
+    .footer-bottom a:hover { color:var(--gold); }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="../">
+      <span class="cross">✝</span>
+      <span data-i18n="nav.brand">სულიწმიდის მრევლი · ბათუმი</span>
+    </a>
+    <button class="navbar-toggler ms-auto me-2" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav mx-auto gap-1">
+        <li class="nav-item"><a class="nav-link" href="../#about"    data-i18n="nav.about">მრევლის შესახებ</a></li>
+        <li class="nav-item"><a class="nav-link" href="../#schedule" data-i18n="nav.schedule">განრიგი</a></li>
+        <li class="nav-item"><a class="nav-link active-link" href="../news/" data-i18n="nav.news">სიახლეები</a></li>
+        <li class="nav-item"><a class="nav-link" href="../#calendar"  data-i18n="nav.calendar">კალენდარი</a></li>
+        <li class="nav-item"><a class="nav-link" href="../#donate"    data-i18n="nav.donate">შეწირვა</a></li>
+        <li class="nav-item"><a class="nav-link" href="../#contact"   data-i18n="nav.contact">კონტაქტი</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-3 mt-2 mt-lg-0">
+        <div class="lang-switcher">
+          <button class="lang-btn active" onclick="setLang('ka')">🇬🇪 KA</button>
+          <button class="lang-btn"        onclick="setLang('en')">🇬🇧 EN</button>
+          <button class="lang-btn"        onclick="setLang('ru')">🇷🇺 RU</button>
+        </div>
+        <a href="../#donate" class="btn-donate" data-i18n="nav.donate_btn">შეწირვა</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ PAGE HERO ═══ -->
+<div class="page-hero">
+  <div class="container">
+    <div class="gold-tag" data-i18n="news.tag">სიახლეები</div>
+    <h1 data-i18n="news.title">ბოლო სიახლეები</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../" data-i18n="home">მთავარი</a></li>
+        <li class="breadcrumb-item active" data-i18n="news.tag">სიახლეები</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<!-- ═══ FILTER BAR ═══ -->
+<div class="filter-bar">
+  <div class="container">
+    <div style="display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;">
+      <button class="filter-btn active" onclick="filterNews('all',this)" data-i18n="filter.all">ყველა</button>
+      <button class="filter-btn f-liturgy"  onclick="filterNews('liturgy',this)"  data-i18n="filter.liturgy">⛪ ლიტურგია</button>
+      <button class="filter-btn f-caritas"  onclick="filterNews('caritas',this)"  data-i18n="filter.caritas">❤️ კარიტასი</button>
+      <button class="filter-btn f-announce" onclick="filterNews('announce',this)" data-i18n="filter.announce">📢 განცხადება</button>
+      <button class="filter-btn f-event"    onclick="filterNews('event',this)"    data-i18n="filter.event">🎉 ღონისძიება</button>
+      <div style="margin-left:auto;">
+        <input type="search" id="search-input" placeholder="ძიება..." onkeyup="searchNews(this.value)"
+          style="border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:.82rem;outline:none;width:180px;" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ NEWS SECTION ═══ -->
+<div class="news-section">
+  <div class="container">
+    <div class="row g-4">
+
+      <!-- Main feed -->
+      <div class="col-lg-8">
+
+        <!-- Featured (first article) -->
+        <div class="featured-card mb-4" onclick="openArticle(0)" data-category="liturgy">
+          <img src="../pexe.jpg" alt="Featured" />
+          <div class="overlay"></div>
+          <div class="content">
+            <div class="tag-pill tp-liturgy" data-i18n="tag.liturgy">ლიტურგია</div>
+            <h2 data-i18n="art0.title">აღდგომის მარხვის განრიგი 2026</h2>
+            <div class="date">25 მარტი 2026 · Fr. Gabriele Bragantini</div>
+            <div class="excerpt" data-i18n="art0.excerpt">წმინდა კვირის ყველა ლიტურგიული ღონისძიების სრული განრიგი ჩვენს მრევლში. პალმის კვირა, დიდი ხუთშაბათი, სიკვდილის პარასკევი და აღდგომის ვიგილია.</div>
+          </div>
+        </div>
+
+        <!-- Grid articles -->
+        <div class="row g-3" id="news-grid">
+
+          <div class="col-md-6 news-item" data-category="caritas">
+            <div class="news-card" onclick="openArticle(1)">
+              <img src="../pexe.jpg" class="card-img" alt="News" />
+              <div class="card-body">
+                <div class="tag-row">
+                  <span class="tag-pill tp-caritas" data-i18n="tag.caritas">კარიტასი</span>
+                  <span class="news-date">18 მარ 2026</span>
+                </div>
+                <h4 data-i18n="art1.title">კარიტასი: დახმარება ოჯახებს</h4>
+                <p class="excerpt" data-i18n="art1.excerpt">მოწყალების სამსახური ეხმარება ბათუმის 12 ოჯახს საკვებითა და სამედიცინო მხარდაჭერით.</p>
+                <span class="read-more" data-i18n="read_more">წაიკითხეთ →</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 news-item" data-category="event">
+            <div class="news-card" onclick="openArticle(2)">
+              <img src="../pexe.jpg" class="card-img" alt="News" />
+              <div class="card-body">
+                <div class="tag-row">
+                  <span class="tag-pill tp-event" data-i18n="tag.event">ღონისძიება</span>
+                  <span class="news-date">10 მარ 2026</span>
+                </div>
+                <h4 data-i18n="art2.title">კონცერტი სულიწმიდის ეკლესიაში</h4>
+                <p class="excerpt" data-i18n="art2.excerpt">სულიერი მუსიკის საღამო ბათუმის ახალგაზრდა მომღერლებთან ერთად.</p>
+                <span class="read-more" data-i18n="read_more">წაიკითხეთ →</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 news-item" data-category="announce">
+            <div class="news-card" onclick="openArticle(3)">
+              <img src="../pexe.jpg" class="card-img" alt="News" />
+              <div class="card-body">
+                <div class="tag-row">
+                  <span class="tag-pill tp-announce" data-i18n="tag.announce">განცხადება</span>
+                  <span class="news-date">5 მარ 2026</span>
+                </div>
+                <h4 data-i18n="art3.title">კათეხიზმის კლასები — გაზაფხული 2026</h4>
+                <p class="excerpt" data-i18n="art3.excerpt">ახალი სემესტრი იწყება 1 მარტს. მოიწვიეთ ყველა, ვინც სწავლებელია ან გინდა შეერთება.</p>
+                <span class="read-more" data-i18n="read_more">წაიკითხეთ →</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 news-item" data-category="liturgy">
+            <div class="news-card" onclick="openArticle(4)">
+              <img src="../pexe.jpg" class="card-img" alt="News" />
+              <div class="card-body">
+                <div class="tag-row">
+                  <span class="tag-pill tp-liturgy" data-i18n="tag.liturgy">ლიტურგია</span>
+                  <span class="news-date">20 თებ 2026</span>
+                </div>
+                <h4 data-i18n="art4.title">ნაცრის ოთხშაბათი 2026</h4>
+                <p class="excerpt" data-i18n="art4.excerpt">ნაცრის ოთხშაბათის განრიგი: 08:00 და 18:00. მარხვის დაწყება.</p>
+                <span class="read-more" data-i18n="read_more">წაიკითხეთ →</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 news-item" data-category="event">
+            <div class="news-card" onclick="openArticle(5)">
+              <img src="../pexe.jpg" class="card-img" alt="News" />
+              <div class="card-body">
+                <div class="tag-row">
+                  <span class="tag-pill tp-event" data-i18n="tag.event">ღონისძიება</span>
+                  <span class="news-date">15 იან 2026</span>
+                </div>
+                <h4 data-i18n="art5.title">ნათლობა 2026 წელს</h4>
+                <p class="excerpt" data-i18n="art5.excerpt">ოთხი ახალი წევრი მიიღეს ნათლობას გასულ კვირა. მადლობა ყველა ოჯახს.</p>
+                <span class="read-more" data-i18n="read_more">წაიკითხეთ →</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 news-item" data-category="caritas">
+            <div class="news-card" onclick="openArticle(6)">
+              <img src="../pexe.jpg" class="card-img" alt="News" />
+              <div class="card-body">
+                <div class="tag-row">
+                  <span class="tag-pill tp-caritas" data-i18n="tag.caritas">კარიტასი</span>
+                  <span class="news-date">8 იან 2026</span>
+                </div>
+                <h4 data-i18n="art6.title">საახალწლო პაკეტები 25+ ოჯახს</h4>
+                <p class="excerpt" data-i18n="art6.excerpt">კარიტასის გუნდმა განაწილა საახალწლო პაკეტები 25 ოჯახს ბათუმის მაიკო-ნუიპირის უბნებში.</p>
+                <span class="read-more" data-i18n="read_more">წაიკითხეთ →</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /news-grid -->
+
+        <!-- Empty state -->
+        <div id="no-results" style="display:none;text-align:center;padding:3rem;color:var(--muted);">
+          <i class="fa fa-newspaper" style="font-size:2.5rem;margin-bottom:.8rem;display:block;opacity:.3;"></i>
+          <span data-i18n="no_results">ამ კატეგორიაში სიახლე არ მოიძებნა</span>
+        </div>
+
+        <!-- Pagination -->
+        <nav class="mt-4" aria-label="Pagination">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled"><a class="page-link" href="#"><i class="fa fa-chevron-left"></i></a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#"><i class="fa fa-chevron-right"></i></a></li>
+          </ul>
+        </nav>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-lg-4">
+
+        <!-- Recent posts -->
+        <div class="sidebar-card">
+          <h5 data-i18n="sidebar.recent">ბოლო სიახლეები</h5>
+          <div class="sidebar-news-item" onclick="openArticle(0)">
+            <img src="../pexe.jpg" alt="" />
+            <div class="info">
+              <h6 data-i18n="art0.title">აღდგომის მარხვის განრიგი 2026</h6>
+              <div class="dt">25 მარ 2026</div>
+            </div>
+          </div>
+          <div class="sidebar-news-item" onclick="openArticle(1)">
+            <img src="../pexe.jpg" alt="" />
+            <div class="info">
+              <h6 data-i18n="art1.title">კარიტასი: დახმარება ოჯახებს</h6>
+              <div class="dt">18 მარ 2026</div>
+            </div>
+          </div>
+          <div class="sidebar-news-item" onclick="openArticle(2)">
+            <img src="../pexe.jpg" alt="" />
+            <div class="info">
+              <h6 data-i18n="art2.title">კონცერტი სულიწმიდის ეკლესიაში</h6>
+              <div class="dt">10 მარ 2026</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categories -->
+        <div class="sidebar-card">
+          <h5 data-i18n="sidebar.categories">კატეგორიები</h5>
+          <div style="display:flex;flex-direction:column;gap:.4rem;">
+            <button class="filter-btn text-start active" onclick="filterNews('all',this)" data-i18n="filter.all" style="border-radius:6px;padding:7px 14px;width:100%;display:flex;justify-content:space-between;">
+              <span data-i18n="filter.all">ყველა</span><span style="background:var(--blue-light);color:var(--blue);border-radius:10px;padding:1px 8px;font-size:.72rem;">7</span>
+            </button>
+            <button class="filter-btn f-liturgy text-start" onclick="filterNews('liturgy',this)" style="border-radius:6px;padding:7px 14px;width:100%;display:flex;justify-content:space-between;">
+              <span>⛪ <span data-i18n="filter.liturgy">ლიტურგია</span></span><span style="background:var(--blue-light);color:var(--blue);border-radius:10px;padding:1px 8px;font-size:.72rem;">2</span>
+            </button>
+            <button class="filter-btn f-caritas text-start" onclick="filterNews('caritas',this)" style="border-radius:6px;padding:7px 14px;width:100%;display:flex;justify-content:space-between;">
+              <span>❤️ <span data-i18n="filter.caritas">კარიტასი</span></span><span style="background:#FEE2E2;color:#9B2020;border-radius:10px;padding:1px 8px;font-size:.72rem;">2</span>
+            </button>
+            <button class="filter-btn f-announce text-start" onclick="filterNews('announce',this)" style="border-radius:6px;padding:7px 14px;width:100%;display:flex;justify-content:space-between;">
+              <span>📢 <span data-i18n="filter.announce">განცხადება</span></span><span style="background:var(--gold-light);color:#8B5B00;border-radius:10px;padding:1px 8px;font-size:.72rem;">1</span>
+            </button>
+            <button class="filter-btn f-event text-start" onclick="filterNews('event',this)" style="border-radius:6px;padding:7px 14px;width:100%;display:flex;justify-content:space-between;">
+              <span>🎉 <span data-i18n="filter.event">ღონისძიება</span></span><span style="background:#DCFCE7;color:#15803D;border-radius:10px;padding:1px 8px;font-size:.72rem;">2</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Schedule snippet -->
+        <div class="sidebar-card" style="background:var(--blue);color:#fff;border-color:var(--blue);">
+          <h5 style="color:var(--gold);border-bottom-color:rgba(255,255,255,.15);" data-i18n="nav.schedule">განრიგი</h5>
+          <div style="font-size:.85rem;line-height:2.1;">
+            <div><span style="color:rgba(255,255,255,.6);" data-i18n="day.sun">კვირა</span> · <strong>10:00 · 18:00</strong></div>
+            <div><span style="color:rgba(255,255,255,.6);" data-i18n="day.sat">შაბათი</span> · <strong>10:00</strong></div>
+            <div><span style="color:rgba(255,255,255,.6);" data-i18n="day.weekday">ორ–პარ</span> · <strong>08:00</strong></div>
+          </div>
+          <a href="../#schedule" style="display:inline-block;margin-top:.75rem;font-size:.78rem;color:var(--gold);font-weight:700;" data-i18n="full_schedule">სრული განრიგი →</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ARTICLE OVERLAY ═══ -->
+<div class="article-overlay" id="article-overlay" onclick="handleOverlayClick(event)">
+  <div class="article-modal" id="article-modal">
+    <div style="position:relative;">
+      <button class="close-art" onclick="closeArticle()"><i class="fa fa-times"></i></button>
+      <img id="art-hero-img" src="../pexe.jpg" class="art-hero" alt="" />
+    </div>
+    <div class="art-content">
+      <span class="tag-pill tp-liturgy" id="art-cat-badge">ლიტურგია</span>
+      <h2 class="art-title" id="art-title-el" style="margin-top:.6rem;">სტატიის სათაური</h2>
+      <div class="art-meta">
+        <span id="art-date-el"><i class="fa fa-calendar" style="margin-right:.3rem;"></i>25 მარტი 2026</span>
+        <span id="art-author-el"><i class="fa fa-user" style="margin-right:.3rem;"></i>Fr. Gabriele Bragantini</span>
+      </div>
+      <div class="art-body" id="art-body-el">
+        <p>სტატიის ტექსტი იქნება აქ.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="ft-logo"><span class="cross">✝</span> სულიწმიდის მრევლი</div>
+        <p style="font-size:.85rem;max-width:280px;" data-i18n="footer.desc">ბათუმის კათოლიკური სამოციქულო მრევლი · ადჯარა, საქართველო</p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/batumicatholic" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://t.me/batumicatholic" target="_blank"><i class="fab fa-telegram"></i></a>
+          <a href="https://www.youtube.com/@batumicatholic" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a href="mailto:batumicatholic@gmail.com"><i class="fa fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2 offset-lg-2">
+        <h6 data-i18n="footer.nav">ნავიგაცია</h6>
+        <ul>
+          <li><a href="../#about"    data-i18n="nav.about">მრევლის შესახებ</a></li>
+          <li><a href="../#schedule" data-i18n="nav.schedule">განრიგი</a></li>
+          <li><a href="./"          data-i18n="nav.news">სიახლეები</a></li>
+          <li><a href="../#calendar" data-i18n="nav.calendar">კალენდარი</a></li>
+          <li><a href="../#donate"   data-i18n="nav.donate">შეწირვა</a></li>
+          <li><a href="../#contact"  data-i18n="nav.contact">კონტაქტი</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6 data-i18n="footer.info">ინფო</h6>
+        <ul>
+          <li><a href="https://en.wikipedia.org/wiki/Church_of_the_Holy_Spirit_(Batumi)" target="_blank" data-i18n="footer.wiki">ეკლესიის ისტორია</a></li>
+          <li><a href="https://www.vatican.va" target="_blank">Vatican.va</a></li>
+          <li><a href="../admin/">Admin ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="footer-divider" />
+    <div class="d-flex flex-wrap justify-content-between align-items-center footer-bottom gap-2">
+      <span>© 2026 სულიწმიდის კათოლიკური მრევლი, ბათუმი</span>
+      <span>✠ORDER OF CHRIST'S PILGRIMS✠</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// ── Article data (замените на PHP/JSON в продакшне) ──
+const articles = [
+  { title:'აღდგომის მარხვის განრიგი 2026', titleEn:'Lent Schedule 2026', titleRu:'Расписание Великого поста 2026',
+    cat:'liturgy', date:'25 მარტი 2026', author:'Fr. Gabriele Bragantini',
+    body:'<p>ბათუმის სულიწმიდის კათოლიკური ეკლესიაში წმინდა კვირის სრული განრიგი:</p><p><strong>20 აპრილი — პალმის კვირა:</strong> 10:00 მესა ქართულად, 18:00 მესა რუსულად.<br><strong>24 აპრილი — დიდი ხუთშაბათი:</strong> 18:00 ბოლო სერობის ლიტურგია.<br><strong>25 აპრილი — სიკვდილის პარასკევი:</strong> 15:00 ჯვრის გზა, 18:00 ვნების ღამე.<br><strong>26 აპრილი — დიდი შაბათი:</strong> 23:00 აღდგომის ვიგილია, ნათლობა.<br><strong>27 აპრილი — აღდგომა:</strong> 10:00 და 18:00 მშვიდობის მესა.</p>' },
+  { title:'კარიტასი: დახმარება ოჯახებს', titleEn:'Caritas: Help for Families', titleRu:'Каритас: помощь семьям',
+    cat:'caritas', date:'18 მარტი 2026', author:'Caritas Batumi',
+    body:'<p>ჩვენი კარიტასის გუნდი ამ თვეში ეხმარება 12 ოჯახს ბათუმის სხვადასხვა უბნებში.</p><p>მათ შორის არის მოხუცები, ავადმყოფები და ბავშვებიანი ოჯახები, რომლებიც მძიმე ეკონომიკურ მდგომარეობაში არიან. გადაეცა საკვები, მედიკამენტები და სკოლის საჭიროებები.</p><p>თუ გინდათ დახმარების გაწევა ან თქვენ გჭირდებათ დახმარება — მოგვწერეთ.</p>' },
+  { title:'კონცერტი სულიწმიდის ეკლესიაში', titleEn:'Concert at Holy Spirit Church', titleRu:'Концерт в церкви Святого Духа',
+    cat:'event', date:'10 მარტი 2026', author:'Parish Admin',
+    body:'<p>10 მარტს ჩვენს ეკლესიაში გაიმართა სულიერი მუსიკის საღამო ბათუმის ახალგაზრდა მომღერლებთან ერთად.</p><p>პროგრამაში შედიოდა გრიგოლ ხმის, ქართული ლოცვები და კლასიკური სასულიერო ნაწარმოებები.</p>' },
+  { title:'კათეხიზმის კლასები — გაზაფხული 2026', titleEn:'Catechism Classes — Spring 2026', titleRu:'Катехизис — весна 2026',
+    cat:'announce', date:'5 მარტი 2026', author:'Parish Admin',
+    body:'<p>გაზაფხულის კათეხიზმის კლასები იწყება 1 აპრილს.</p><p>ვიწვევთ ყველა ასაკის ადამიანს, ვინც გინდა შეიტყოს კათოლიკური სარწმუნოების საფუძვლები, ან ემზადება ნათლობისთვის ან სხვა საიდუმლოებისთვის.</p><p>კლასები: ყოველ ოთხშაბათს 18:30. ენა: ქართული, ინგლისური, რუსული.</p>' },
+  { title:'ნაცრის ოთხშაბათი 2026', titleEn:'Ash Wednesday 2026', titleRu:'Пепельная среда 2026',
+    cat:'liturgy', date:'20 თებ 2026', author:'Fr. Gabriele Bragantini',
+    body:'<p>ნაცრის ოთხშაბათი — მარხვის 40 დღის დაწყება. ეკლესია ღიაა 07:00-დან.</p><p>მესები: 08:00 (ქართ./ინგლ.) და 18:00 (ქართ./რუს.). ნაცარი: ყველა მესაზე.</p>' },
+  { title:'ნათლობა 2026 წელს', titleEn:'Baptisms in 2026', titleRu:'Крещения 2026',
+    cat:'event', date:'15 იანვ 2026', author:'Fr. Gabriele Bragantini',
+    body:'<p>12 იანვარს, ქრისტეს ნათლობის დღეს, ოთხმა ახალმა წევრმა მიიღო ნათლობა ჩვენს ეკლესიაში.</p><p>ვილოცებ ახლა განახლებული ცხოვრებისთვის ყველა ახლად ნათელღებულთათვის!</p>' },
+  { title:'საახალწლო პაკეტები 25+ ოჯახს', titleEn:'New Year Packages for 25+ Families', titleRu:'Новогодние пакеты 25+ семьям',
+    cat:'caritas', date:'8 იანვ 2026', author:'Caritas Batumi',
+    body:'<p>ახალ წელს ჩვენმა კარიტასის გუნდმა განაწილა საახალწლო სურსათი-სამარაგო 25 ოჯახს.</p><p>კიდევ ერთხელ დიდ მადლობას ვუხდით ყველა მოხალისეს და შემოწირებს, ვინც ეს გახადა შესაძლებელი!</p>' },
+];
+
+function openArticle(i) {
+  const a = articles[i];
+  const lang = document.documentElement.getAttribute('data-lang') || 'ka';
+  const title = lang==='en' && a.titleEn ? a.titleEn : lang==='ru' && a.titleRu ? a.titleRu : a.title;
+  document.getElementById('art-title-el').textContent = title;
+  document.getElementById('art-date-el').innerHTML = `<i class="fa fa-calendar" style="margin-right:.3rem;"></i>${a.date}`;
+  document.getElementById('art-author-el').innerHTML = `<i class="fa fa-user" style="margin-right:.3rem;"></i>${a.author}`;
+  document.getElementById('art-body-el').innerHTML = a.body;
+  const badge = document.getElementById('art-cat-badge');
+  const cats = {liturgy:['tp-liturgy','ლიტურგია','Liturgy','Литургия'],caritas:['tp-caritas','კარიტასი','Caritas','Каритас'],announce:['tp-announce','განცხადება','Announcement','Объявление'],event:['tp-event','ღონისძიება','Event','Событие']};
+  const c = cats[a.cat] || cats.liturgy;
+  badge.className = 'tag-pill ' + c[0];
+  badge.textContent = lang==='en' ? c[2] : lang==='ru' ? c[3] : c[1];
+  document.getElementById('article-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeArticle() {
+  document.getElementById('article-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('article-overlay')) closeArticle();
+}
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeArticle(); });
+
+// ── Filter ──
+function filterNews(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const items = document.querySelectorAll('.news-item');
+  let visible = 0;
+  items.forEach(item => {
+    const show = cat==='all' || item.dataset.category===cat;
+    item.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  const feat = document.querySelector('.featured-card');
+  if (feat) feat.style.display = (cat==='all'||cat==='liturgy') ? '' : 'none';
+  document.getElementById('no-results').style.display = visible===0 ? 'block' : 'none';
+}
+
+// ── Search ──
+function searchNews(q) {
+  q = q.toLowerCase().trim();
+  const items = document.querySelectorAll('.news-item');
+  let visible = 0;
+  items.forEach(item => {
+    const text = item.textContent.toLowerCase();
+    const show = !q || text.includes(q);
+    item.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('no-results').style.display = visible===0 ? 'block' : 'none';
+}
+
+// ── i18n (same pattern as index.html) ──
+const translations = {
+  ka: { "nav.brand":"სულიწმიდის მრევლი · ბათუმი","nav.about":"მრევლის შესახებ","nav.schedule":"განრიგი","nav.news":"სიახლეები","nav.calendar":"კალენდარი","nav.donate":"შეწირვა","nav.contact":"კონტაქტი","nav.donate_btn":"შეწირვა","news.tag":"სიახლეები","news.title":"ბოლო სიახლეები","home":"მთავარი","filter.all":"ყველა","filter.liturgy":"ლიტურგია","filter.caritas":"კარიტასი","filter.announce":"განცხადება","filter.event":"ღონისძიება","tag.liturgy":"ლიტურგია","tag.caritas":"კარიტასი","tag.announce":"განცხადება","tag.event":"ღონისძიება","read_more":"წაიკითხეთ →","no_results":"სიახლე ვერ მოიძებნა","sidebar.recent":"ბოლო სიახლეები","sidebar.categories":"კატეგორიები","day.sun":"კვირა","day.sat":"შაბათი","day.weekday":"ორ–პარ","full_schedule":"სრული განრიგი →","footer.desc":"ბათუმის კათოლიკური სამოციქულო მრევლი","footer.nav":"ნავიგაცია","footer.info":"ინფო","footer.wiki":"ეკლესიის ისტორია","art0.title":"აღდგომის მარხვის განრიგი 2026","art1.title":"კარიტასი: დახმარება ოჯახებს","art2.title":"კონცერტი სულიწმიდის ეკლესიაში","art3.title":"კათეხიზმის კლასები","art4.title":"ნაცრის ოთხშაბათი 2026","art5.title":"ნათლობა 2026 წელს","art6.title":"საახალწლო პაკეტები","art0.excerpt":"წმინდა კვირის ყველა ლიტურგიული ღონისძიების სრული განრიგი.","art1.excerpt":"მოწყალების სამსახური ეხმარება ბათუმის 12 ოჯახს.","art2.excerpt":"სულიერი მუსიკის საღამო ახალგაზრდა მომღერლებთან." },
+  en: { "nav.brand":"Holy Spirit Parish · Batumi","nav.about":"About","nav.schedule":"Schedule","nav.news":"News","nav.calendar":"Calendar","nav.donate":"Donate","nav.contact":"Contact","nav.donate_btn":"Donate","news.tag":"News","news.title":"Latest News","home":"Home","filter.all":"All","filter.liturgy":"Liturgy","filter.caritas":"Caritas","filter.announce":"Announcements","filter.event":"Events","tag.liturgy":"Liturgy","tag.caritas":"Caritas","tag.announce":"Announcement","tag.event":"Event","read_more":"Read more →","no_results":"No news found in this category","sidebar.recent":"Recent Posts","sidebar.categories":"Categories","day.sun":"Sunday","day.sat":"Saturday","day.weekday":"Mon–Fri","full_schedule":"Full schedule →","footer.desc":"Catholic Apostolic Parish · Adjara, Georgia","footer.nav":"Navigation","footer.info":"Info","footer.wiki":"Church History","art0.title":"Lent Schedule 2026","art1.title":"Caritas: Help for Families","art2.title":"Concert at Holy Spirit Church","art3.title":"Catechism Classes","art4.title":"Ash Wednesday 2026","art5.title":"Baptisms in 2026","art6.title":"New Year Packages 25+ Families","art0.excerpt":"Full schedule of Holy Week liturgies in our parish.","art1.excerpt":"Our mercy ministry supports 12 Batumi families.","art2.excerpt":"An evening of sacred music with young singers." },
+  ru: { "nav.brand":"Приход Святого Духа · Батуми","nav.about":"О приходе","nav.schedule":"Расписание","nav.news":"Новости","nav.calendar":"Календарь","nav.donate":"Пожертвовать","nav.contact":"Контакты","nav.donate_btn":"Пожертвовать","news.tag":"Новости","news.title":"Последние новости","home":"Главная","filter.all":"Все","filter.liturgy":"Литургия","filter.caritas":"Каритас","filter.announce":"Объявления","filter.event":"События","tag.liturgy":"Литургия","tag.caritas":"Каритас","tag.announce":"Объявление","tag.event":"Событие","read_more":"Читать →","no_results":"Новостей в этой категории нет","sidebar.recent":"Последние новости","sidebar.categories":"Категории","day.sun":"Воскресенье","day.sat":"Суббота","day.weekday":"Пн–Пт","full_schedule":"Полное расписание →","footer.desc":"Католический апостольский приход · Аджария, Грузия","footer.nav":"Навигация","footer.info":"Информация","footer.wiki":"История церкви","art0.title":"Расписание Великого поста 2026","art1.title":"Каритас: помощь семьям","art2.title":"Концерт в церкви Святого Духа","art3.title":"Катехизис — весна 2026","art4.title":"Пепельная среда 2026","art5.title":"Крещения 2026","art6.title":"Новогодние пакеты 25+ семьям","art0.excerpt":"Полное расписание литургий Страстной недели.","art1.excerpt":"Служба милосердия помогает 12 батумским семьям.","art2.excerpt":"Вечер духовной музыки с молодыми певцами Батуми." }
+};
+function setLang(lang) {
+  document.documentElement.setAttribute('lang',lang);
+  document.documentElement.setAttribute('data-lang',lang);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.lang-btn').forEach(b => { if (b.textContent.toLowerCase().includes(lang)) b.classList.add('active'); });
+  const t = translations[lang] || translations.ka;
+  document.querySelectorAll('[data-i18n]').forEach(el => { const k=el.getAttribute('data-i18n'); if(t[k]) el.textContent=t[k]; });
+  localStorage.setItem('parish-lang',lang);
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  const saved = localStorage.getItem('parish-lang') || 'ka';
+  setLang(['ka','en','ru'].includes(saved)?saved:'ka');
+});
+</script>
+</body>
+</html>

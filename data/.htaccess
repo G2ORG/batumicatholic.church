@@ -1,0 +1,3 @@
+# Запрет прямого доступа к директории /data/
+Order deny,allow
+Deny from all

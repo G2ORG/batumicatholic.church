@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Админ · სულიწმიდის მრევლი</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet" />
+  <style>
+    :root{--blue:#1B4F8C;--blue-dark:#123566;--blue-light:#E8F0F7;--gold:#C9A84C;--gold-light:#F5E9C8;--sidebar-w:240px;--header-h:58px;--white:#FAFAF8;--text:#1A1A1A;--muted:#6B7280;--border:#DDE3EC;--success:#16A34A;--danger:#DC2626;--warning:#D97706}
+    *,*::before,*::after{box-sizing:border-box}body{font-family:'Lato',sans-serif;background:#F0F4F9;color:var(--text);font-size:14px;margin:0}
+    h1,h2,h3,h4,h5{font-family:'Cormorant Garamond',serif;font-weight:600}a{text-decoration:none;color:inherit}
+    .sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-w);background:var(--blue-dark);z-index:200;display:flex;flex-direction:column;overflow-y:auto;transition:transform .25s}
+    .sidebar-logo{padding:1.1rem 1.25rem .9rem;border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:.6rem}
+    .sidebar-logo .cross{color:var(--gold);font-size:1.3rem}.sidebar-logo .name{color:#fff;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;line-height:1.2}.sidebar-logo .sub{color:rgba(255,255,255,.45);font-size:.68rem;letter-spacing:.05em;text-transform:uppercase}
+    .nav-section{padding:.6rem 1rem .25rem;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.3rem}
+    .sidebar .nav-link{display:flex;align-items:center;gap:.65rem;padding:.52rem 1.25rem;color:rgba(255,255,255,.72);font-size:.85rem;border-radius:0;transition:all .15s}
+    .sidebar .nav-link i{width:18px;text-align:center;font-size:.9rem;color:rgba(255,255,255,.45);transition:color .15s}
+    .sidebar .nav-link:hover,.sidebar .nav-link.active{background:rgba(255,255,255,.1);color:#fff}
+    .sidebar .nav-link:hover i,.sidebar .nav-link.active i{color:var(--gold)}
+    .sidebar .nav-link .badge{margin-left:auto;background:var(--gold);color:#fff;font-size:.65rem;padding:2px 6px;border-radius:8px;font-weight:700}
+    .sidebar-footer{margin-top:auto;padding:1rem 1.25rem;border-top:1px solid rgba(255,255,255,.08);font-size:.75rem;color:rgba(255,255,255,.38)}
+    .sidebar-footer a{color:rgba(255,255,255,.55)}.sidebar-footer a:hover{color:var(--gold)}
+    .topbar{position:fixed;top:0;left:var(--sidebar-w);right:0;height:var(--header-h);background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1.5rem;gap:1rem;z-index:100}
+    .topbar .page-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--blue-dark)}
+    .topbar .ms-auto{display:flex;align-items:center;gap:.75rem}
+    .topbar .site-link{font-size:.78rem;color:var(--blue);border:1px solid var(--border);border-radius:4px;padding:4px 12px;transition:all .15s}
+    .topbar .site-link:hover{background:var(--blue-light)}
+    .btn-mobile-toggle{display:none;background:none;border:none;font-size:1.2rem;color:var(--muted);cursor:pointer}
+    .main{margin-left:var(--sidebar-w);padding-top:var(--header-h);min-height:100vh}.main-inner{padding:1.75rem}
+    .card{border:1px solid var(--border);border-radius:8px;background:#fff;box-shadow:0 1px 4px rgba(27,79,140,.05)}
+    .card-header{padding:.9rem 1.25rem;border-bottom:1px solid var(--border);background:#fff;border-radius:8px 8px 0 0 !important;display:flex;align-items:center;justify-content:space-between;gap:.75rem}
+    .card-header h5{font-size:1rem;margin:0;color:var(--blue-dark)}.card-body{padding:1.25rem}
+    .stat-tile{background:#fff;border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.25rem;display:flex;align-items:center;gap:1rem;box-shadow:0 1px 4px rgba(27,79,140,.05)}
+    .stat-tile .ico{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+    .ico-blue{background:var(--blue-light);color:var(--blue)}.ico-gold{background:var(--gold-light);color:#8B6914}.ico-green{background:#DCFCE7;color:var(--success)}.ico-red{background:#FEE2E2;color:var(--danger)}
+    .stat-tile .num{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--blue-dark);line-height:1}.stat-tile .lbl{font-size:.75rem;color:var(--muted);margin-top:2px}
+    .admin-table{width:100%;border-collapse:collapse;font-size:.84rem}
+    .admin-table th{background:var(--blue-light);color:var(--blue-dark);font-weight:700;font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;padding:.6rem .85rem;border:none;text-align:left}
+    .admin-table td{padding:.65rem .85rem;border-bottom:1px solid var(--border);vertical-align:middle}
+    .admin-table tr:last-child td{border-bottom:none}.admin-table tr:hover td{background:#F8FBFF;cursor:pointer}
+    .tag-pill{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.06em;padding:2px 8px;border-radius:10px}
+    .tag-liturgy{background:var(--blue-light);color:var(--blue)}.tag-caritas{background:#FEE2E2;color:var(--danger)}.tag-announce{background:var(--gold-light);color:#8B6914}.tag-event{background:#DCFCE7;color:var(--success)}.tag-pub{background:#DCFCE7;color:var(--success)}.tag-draft{background:#F3F4F6;color:var(--muted)}
+    .btn-blue{background:var(--blue);color:#fff;border:none;padding:7px 18px;font-size:.82rem;font-weight:700;border-radius:5px;cursor:pointer;transition:background .15s;display:inline-flex;align-items:center;gap:.4rem}
+    .btn-blue:hover{background:var(--blue-dark);color:#fff}.btn-blue:disabled{opacity:.55;cursor:not-allowed}
+    .btn-gold-sm{background:var(--gold);color:#fff;border:none;padding:5px 13px;font-size:.78rem;font-weight:700;border-radius:4px;cursor:pointer}
+    .btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border);padding:5px 11px;font-size:.78rem;border-radius:4px;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:.3rem}
+    .btn-ghost:hover{background:var(--blue-light);color:var(--blue);border-color:var(--blue)}
+    .btn-danger-sm{background:#FEE2E2;color:var(--danger);border:none;padding:5px 11px;font-size:.78rem;border-radius:4px;cursor:pointer}
+    .btn-danger-sm:hover{background:var(--danger);color:#fff}
+    .form-label{font-size:.8rem;font-weight:700;color:var(--blue-dark);margin-bottom:.3rem}
+    .form-control,.form-select{border:1px solid var(--border);border-radius:5px;font-size:.85rem;padding:.45rem .75rem;color:var(--text)}
+    .form-control:focus,.form-select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(27,79,140,.1);outline:none}
+    .form-hint{font-size:.72rem;color:var(--muted);margin-top:.25rem}.form-group{margin-bottom:1rem}
+    .ql-toolbar{border-radius:5px 5px 0 0 !important;border-color:var(--border) !important}
+    .ql-container{border-radius:0 0 5px 5px !important;border-color:var(--border) !important;font-size:.9rem;min-height:180px}
+    .admin-tabs{border-bottom:2px solid var(--border);margin-bottom:1.25rem;display:flex;gap:0}
+    .admin-tab{padding:.6rem 1.1rem;font-size:.82rem;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s;background:none;border-top:none;border-left:none;border-right:none}
+    .admin-tab:hover{color:var(--blue)}.admin-tab.active{color:var(--blue);border-bottom-color:var(--gold)}
+    .panel{display:none}.panel.active{display:block}
+    .upload-zone{border:2px dashed var(--border);border-radius:8px;padding:2rem;text-align:center;cursor:pointer;transition:all .2s;background:#F8FBFF}
+    .upload-zone:hover{border-color:var(--blue);background:var(--blue-light)}.upload-zone i{font-size:2rem;color:var(--muted);margin-bottom:.5rem;display:block}
+    .toast-area{position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;display:flex;flex-direction:column;gap:.5rem}
+    .toast-item{background:#fff;border-left:4px solid var(--success);border-radius:6px;padding:.75rem 1.2rem;box-shadow:0 4px 20px rgba(0,0,0,.12);font-size:.85rem;font-weight:700;animation:slideIn .3s ease;display:flex;align-items:center;gap:.6rem;min-width:240px}
+    .toast-item.error{border-left-color:var(--danger)}.toast-item.warn{border-left-color:var(--warning)}
+    @keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+    .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .progress-wrap{display:none;margin-top:.5rem}.progress-bar-inner{height:4px;background:var(--blue-light);border-radius:2px;overflow:hidden}.progress-fill{height:100%;background:var(--blue);width:0%;transition:width .3s}
+    .editor-lang-panel{display:none}.editor-lang-panel.active{display:block}
+    @media(max-width:768px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.topbar{left:0}.main{margin-left:0}.btn-mobile-toggle{display:block}}
+    .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:199}.sidebar-overlay.show{display:block}
+  </style>
+</head>
+<body>
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-logo"><span class="cross">✝</span><div><div class="name">Parish Admin</div><div class="sub">batumicatholic.church</div></div></div>
+  <div class="nav-section">Главное</div>
+  <a href="#" class="nav-link active" onclick="showPanel('dashboard',this)"><i class="fa fa-gauge"></i> Дашборд</a>
+  <div class="nav-section">Контент</div>
+  <a href="#" class="nav-link" onclick="showPanel('news',this)"><i class="fa fa-newspaper"></i> Новости <span class="badge" id="badge-news">…</span></a>
+  <a href="#" class="nav-link" onclick="showPanel('schedule',this)"><i class="fa fa-clock"></i> Расписание</a>
+  <a href="#" class="nav-link" onclick="showPanel('events',this)"><i class="fa fa-calendar-days"></i> События</a>
+  <a href="#" class="nav-link" onclick="showPanel('sermons',this)"><i class="fa fa-microphone"></i> Проповеди</a>
+  <a href="#" class="nav-link" onclick="showPanel('gallery',this)"><i class="fa fa-images"></i> Галерея</a>
+  <div class="nav-section">Справка</div>
+  <a href="#" class="nav-link" onclick="showPanel('manual',this)"><i class="fa fa-book-open"></i> Мануал</a>
+  <div class="sidebar-footer">
+    <div>Вошли как <strong>admin</strong></div>
+    <div style="margin-top:.3rem;"><a href="../" target="_blank">← На сайт</a></div>
+    <div style="margin-top:.5rem;color:rgba(255,255,255,.25);font-size:.65rem;">v2.0 ✠ORDER OF CHRIST'S PILGRIMS✠</div>
+  </div>
+</div>
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<div class="topbar">
+  <button class="btn-mobile-toggle" onclick="openSidebar()"><i class="fa fa-bars"></i></button>
+  <div class="page-title" id="topbar-title">Дашборд</div>
+  <div class="ms-auto">
+    <a href="../" target="_blank" class="site-link"><i class="fa fa-arrow-up-right-from-square"></i> Сайт</a>
+    <div style="width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;">A</div>
+  </div>
+</div>
+
+<div class="main"><div class="main-inner">
+
+<!-- DASHBOARD -->
+<div class="panel active" id="panel-dashboard">
+  <div class="row g-3 mb-4">
+    <div class="col-6 col-lg-3"><div class="stat-tile"><div class="ico ico-blue"><i class="fa fa-newspaper"></i></div><div><div class="num" id="stat-news">…</div><div class="lbl">Всего новостей</div></div></div></div>
+    <div class="col-6 col-lg-3"><div class="stat-tile"><div class="ico ico-green"><i class="fa fa-circle-check"></i></div><div><div class="num" id="stat-pub">…</div><div class="lbl">Опубликовано</div></div></div></div>
+    <div class="col-6 col-lg-3"><div class="stat-tile"><div class="ico ico-gold"><i class="fa fa-microphone"></i></div><div><div class="num" id="stat-sermons">…</div><div class="lbl">Проповедей</div></div></div></div>
+    <div class="col-6 col-lg-3"><div class="stat-tile"><div class="ico ico-red"><i class="fa fa-calendar-days"></i></div><div><div class="num" id="stat-events">…</div><div class="lbl">Событий</div></div></div></div>
+  </div>
+  <div class="row g-3">
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-header"><h5><i class="fa fa-newspaper" style="color:var(--blue);margin-right:.4rem;"></i>Последние новости</h5><button class="btn-blue" onclick="showPanel('news',null);newArticle()"><i class="fa fa-plus"></i> Добавить</button></div>
+        <div class="card-body" style="padding:0;"><table class="admin-table"><thead><tr><th>Заголовок (KA)</th><th>Дата</th><th>Категория</th><th>Статус</th><th></th></tr></thead><tbody id="dash-news-list"><tr><td colspan="5" style="text-align:center;color:var(--muted);padding:1.5rem;"><i class="fa fa-spinner fa-spin"></i> Загрузка...</td></tr></tbody></table></div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card"><div class="card-body" style="display:flex;flex-direction:column;gap:.75rem;">
+        <button class="btn-blue" onclick="showPanel('news',null);newArticle()"><i class="fa fa-plus"></i> Новая статья</button>
+        <button class="btn-ghost" onclick="showPanel('schedule',null)"><i class="fa fa-clock"></i> Обновить расписание</button>
+        <button class="btn-ghost" onclick="showPanel('events',null)"><i class="fa fa-calendar-plus"></i> Добавить событие</button>
+        <button class="btn-ghost" onclick="showPanel('sermons',null)"><i class="fa fa-microphone"></i> Загрузить проповедь</button>
+        <button class="btn-ghost" onclick="showPanel('gallery',null)"><i class="fa fa-images"></i> Управление галереей</button>
+        <hr style="border-color:var(--border);margin:.25rem 0;">
+        <div style="font-size:.72rem;color:var(--muted);font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.2rem 0;">Просмотр страниц</div>
+        <a href="../" target="_blank" class="btn-ghost"><i class="fa fa-house"></i> Главная</a>
+        <a href="../news/" target="_blank" class="btn-ghost"><i class="fa fa-newspaper"></i> Новости</a>
+        <a href="../gallery/" target="_blank" class="btn-ghost"><i class="fa fa-images"></i> Галерея</a>
+        <a href="../sermons/" target="_blank" class="btn-ghost"><i class="fa fa-microphone"></i> Проповеди</a>
+        <a href="../about/" target="_blank" class="btn-ghost"><i class="fa fa-church"></i> О приходе</a>
+      </div></div>
+      <div class="card mt-3"><div class="card-header"><h5 style="font-size:.9rem;">ℹ️ Подсказки</h5></div><div class="card-body" style="font-size:.8rem;color:var(--muted);line-height:1.8;">
+        <p>• Обязательный язык — <strong>KA</strong> (грузинский).</p>
+        <p>• «Черновик» — сохраняет без публикации.</p>
+        <p>• Фото: JPG/PNG до 8 МБ — сжимается автоматически.</p>
+        <p>• Проповеди: MP3/M4A до 50 МБ.</p>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWS -->
+<div class="panel" id="panel-news">
+  <div class="row g-3">
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-header"><h5>Все статьи</h5><button class="btn-blue" onclick="newArticle()"><i class="fa fa-plus"></i> Новая</button></div>
+        <div class="card-body" style="padding:0;max-height:72vh;overflow-y:auto;">
+          <table class="admin-table"><thead><tr><th>Заголовок</th><th>Статус</th><th></th></tr></thead><tbody id="news-file-list"><tr><td colspan="3" style="text-align:center;padding:1.5rem;color:var(--muted);"><i class="fa fa-spinner fa-spin"></i></td></tr></tbody></table>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 id="editor-title">Новая статья</h5>
+          <div style="display:flex;gap:.4rem;">
+            <button class="btn-ghost" id="btn-draft" onclick="submitNews('draft')"><i class="fa fa-floppy-disk"></i> Черновик</button>
+            <button class="btn-blue"  id="btn-publish" onclick="submitNews('published')"><i class="fa fa-globe"></i> Опубликовать</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <input type="hidden" id="edit-filename" value="" />
+          <div class="admin-tabs">
+            <button class="admin-tab active" onclick="switchLang('ka',this)">🇬🇪 ქართ. *</button>
+            <button class="admin-tab"        onclick="switchLang('en',this)">🇬🇧 English</button>
+            <button class="admin-tab"        onclick="switchLang('ru',this)">🇷🇺 Русский</button>
+          </div>
+          <div class="editor-lang-panel active" id="ep-ka">
+            <div class="form-group"><label class="form-label">Заголовок (KA) <span style="color:var(--danger)">*</span></label><input type="text" class="form-control" id="title-ka" placeholder="სათაური..."/></div>
+            <div class="form-group"><label class="form-label">Краткое описание (KA)</label><textarea class="form-control" id="excerpt-ka" rows="2" placeholder="მოკლე აღწერა..."></textarea></div>
+            <div class="form-group"><label class="form-label">Текст статьи (KA)</label><div id="quill-ka"></div></div>
+          </div>
+          <div class="editor-lang-panel" id="ep-en">
+            <div class="form-group"><label class="form-label">Заголовок (EN)</label><input type="text" class="form-control" id="title-en" placeholder="Title in English..."/></div>
+            <div class="form-group"><label class="form-label">Краткое описание (EN)</label><textarea class="form-control" id="excerpt-en" rows="2"></textarea></div>
+            <div class="form-group"><label class="form-label">Текст (EN)</label><div id="quill-en"></div></div>
+          </div>
+          <div class="editor-lang-panel" id="ep-ru">
+            <div class="form-group"><label class="form-label">Заголовок (RU)</label><input type="text" class="form-control" id="title-ru" placeholder="Заголовок..."/></div>
+            <div class="form-group"><label class="form-label">Краткое описание (RU)</label><textarea class="form-control" id="excerpt-ru" rows="2"></textarea></div>
+            <div class="form-group"><label class="form-label">Текст (RU)</label><div id="quill-ru"></div></div>
+          </div>
+          <div class="row g-3 mt-1">
+            <div class="col-md-4"><label class="form-label">Категория</label><select class="form-select" id="art-category"><option value="liturgy">⛪ Богослужение</option><option value="caritas">❤️ Каритас</option><option value="announce">📢 Объявление</option><option value="event">🎉 Событие</option></select></div>
+            <div class="col-md-4"><label class="form-label">Дата</label><input type="date" class="form-control" id="art-date"/></div>
+            <div class="col-md-4"><label class="form-label">Автор</label><input type="text" class="form-control" id="art-author" value="Fr. Gabriele Bragantini"/></div>
+            <div class="col-12">
+              <label class="form-label">Фото обложки</label>
+              <div class="upload-zone" id="img-drop" onclick="document.getElementById('img-file').click()">
+                <i class="fa fa-image"></i>
+                <div style="font-size:.82rem;color:var(--muted);">Нажмите или перетащите · JPG/PNG/WebP · до 8 МБ</div>
+                <input type="file" id="img-file" accept="image/*" style="display:none;" onchange="uploadImage(this)"/>
+              </div>
+              <div class="progress-wrap" id="img-progress"><div style="font-size:.75rem;color:var(--muted);margin-bottom:.2rem;" id="img-plabel">Загрузка...</div><div class="progress-bar-inner"><div class="progress-fill" id="img-pfill"></div></div></div>
+              <div id="img-preview" style="display:none;margin-top:.5rem;align-items:center;gap:.6rem;">
+                <img id="img-preview-el" src="" style="max-height:70px;border-radius:5px;border:1px solid var(--border);" />
+                <div><div id="img-url-label" style="font-size:.72rem;color:var(--muted);word-break:break-all;"></div><button class="btn-ghost mt-1" onclick="clearImage()"><i class="fa fa-times"></i> Удалить</button></div>
+              </div>
+              <input type="hidden" id="art-image" value=""/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCHEDULE -->
+<div class="panel" id="panel-schedule">
+  <div class="card">
+    <div class="card-header">
+      <h5><i class="fa fa-clock" style="color:var(--blue);margin-right:.4rem;"></i>Расписание богослужений</h5>
+      <div style="display:flex;gap:.4rem;">
+        <button class="btn-ghost" onclick="addSchedRow()"><i class="fa fa-plus"></i> Строка</button>
+        <button class="btn-blue" onclick="saveSchedule()" id="btn-save-sched"><i class="fa fa-floppy-disk"></i> Сохранить</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:1rem;"><i class="fa fa-info-circle"></i> Сохраняется в <code>data/schedule.json</code> и сразу обновляет сайт.</p>
+      <div style="overflow-x:auto;"><table class="admin-table"><thead><tr><th>День</th><th>Время</th><th>Тип</th><th>Языки</th><th>Примечание</th><th></th></tr></thead><tbody id="sched-body"></tbody></table></div>
+    </div>
+  </div>
+</div>
+
+<!-- EVENTS -->
+<div class="panel" id="panel-events">
+  <div class="row g-3">
+    <div class="col-lg-5">
+      <div class="card">
+        <div class="card-header"><h5>Добавить событие</h5></div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-12"><label class="form-label">Название (KA) *</label><input type="text" class="form-control" id="ev-title-ka"/></div>
+            <div class="col-12"><label class="form-label">Название (EN)</label><input type="text" class="form-control" id="ev-title-en"/></div>
+            <div class="col-12"><label class="form-label">Название (RU)</label><input type="text" class="form-control" id="ev-title-ru"/></div>
+            <div class="col-6"><label class="form-label">Дата *</label><input type="date" class="form-control" id="ev-date"/></div>
+            <div class="col-6"><label class="form-label">Время</label><input type="time" class="form-control" id="ev-time"/></div>
+            <div class="col-12"><label class="form-label">Тип</label><select class="form-select" id="ev-type"><option value="liturgy">Богослужение</option><option value="sacrament">Таинство</option><option value="concert">Концерт</option><option value="caritas">Каритас</option><option value="catechesis">Катехизис</option><option value="other">Другое</option></select></div>
+            <div class="col-12"><label class="form-label">Место</label><input type="text" class="form-control" id="ev-location" value="სულიწმიდის ეკლესია, ბათუმი"/></div>
+            <div class="col-12"><label class="form-label">Описание (KA)</label><textarea class="form-control" id="ev-desc-ka" rows="3"></textarea></div>
+            <div class="col-12"><button class="btn-blue" id="btn-save-event" onclick="saveEvent()"><i class="fa fa-calendar-plus"></i> Добавить</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-7">
+      <div class="card">
+        <div class="card-header"><h5>Предстоящие события</h5></div>
+        <div class="card-body" style="padding:0;max-height:55vh;overflow-y:auto;">
+          <table class="admin-table"><thead><tr><th>Дата</th><th>Название</th><th></th></tr></thead><tbody id="events-list"><tr><td colspan="3" style="text-align:center;padding:1.5rem;color:var(--muted);"><i class="fa fa-spinner fa-spin"></i></td></tr></tbody></table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERMONS -->
+<div class="panel" id="panel-sermons">
+  <div class="row g-3">
+    <div class="col-lg-5">
+      <div class="card">
+        <div class="card-header"><h5>Загрузить проповедь</h5></div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-12"><label class="form-label">Название (KA) *</label><input type="text" class="form-control" id="ser-title-ka"/></div>
+            <div class="col-12"><label class="form-label">Название (EN)</label><input type="text" class="form-control" id="ser-title-en"/></div>
+            <div class="col-12"><label class="form-label">Название (RU)</label><input type="text" class="form-control" id="ser-title-ru"/></div>
+            <div class="col-6"><label class="form-label">Дата *</label><input type="date" class="form-control" id="ser-date"/></div>
+            <div class="col-6"><label class="form-label">Язык</label><select class="form-select" id="ser-lang"><option value="ka">ქართული</option><option value="en">English</option><option value="ru">Русский</option><option value="it">Italiano</option></select></div>
+            <div class="col-12"><label class="form-label">Проповедник</label><input type="text" class="form-control" id="ser-preacher" value="Fr. Gabriele Bragantini"/></div>
+            <div class="col-12"><label class="form-label">Контекст (праздник)</label><input type="text" class="form-control" id="ser-context"/></div>
+            <div class="col-12">
+              <label class="form-label">Аудиофайл (MP3/M4A до 50 МБ)</label>
+              <div class="upload-zone" onclick="document.getElementById('ser-file').click()">
+                <i class="fa fa-microphone"></i><div style="font-size:.82rem;color:var(--muted);">MP3, M4A, OGG</div>
+                <input type="file" id="ser-file" accept=".mp3,.m4a,.ogg,audio/*" style="display:none;" onchange="showAudioName(this)"/>
+              </div>
+              <div id="ser-fname" style="font-size:.78rem;color:var(--success);margin-top:.3rem;display:none;"></div>
+            </div>
+            <div class="col-12"><label class="form-label">Или ссылка YouTube</label><input type="url" class="form-control" id="ser-youtube" placeholder="https://youtu.be/..."/></div>
+            <div class="col-12"><button class="btn-blue" id="btn-save-sermon" onclick="saveSermon()"><i class="fa fa-upload"></i> Загрузить</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-7">
+      <div class="card">
+        <div class="card-header"><h5>Архив проповедей</h5></div>
+        <div class="card-body" style="padding:0;max-height:65vh;overflow-y:auto;">
+          <table class="admin-table"><thead><tr><th>Дата</th><th>Название</th><th>Язык</th><th>Аудио</th><th></th></tr></thead><tbody id="sermons-list"><tr><td colspan="5" style="text-align:center;padding:1.5rem;color:var(--muted);"><i class="fa fa-spinner fa-spin"></i></td></tr></tbody></table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div class="panel" id="panel-gallery">
+  <div class="card">
+    <div class="card-header">
+      <h5><i class="fa fa-images" style="color:var(--blue);margin-right:.4rem;"></i>Управление галереей</h5>
+      <div style="display:flex;gap:.4rem;">
+        <button class="btn-blue" onclick="document.getElementById('gal-upload').click()"><i class="fa fa-upload"></i> Загрузить фото</button>
+        <input type="file" id="gal-upload" multiple accept="image/*" style="display:none;" onchange="handleGalleryUpload(this)"/>
+      </div>
+    </div>
+    <div class="card-body">
+      <div style="background:var(--blue-light);border-left:4px solid var(--blue);padding:.75rem 1rem;border-radius:0 6px 6px 0;margin-bottom:1.25rem;font-size:.84rem;">
+        <i class="fa fa-info-circle"></i> Фотографии хранятся в папке <code>/uploads/</code> и отображаются на странице <a href="../gallery/" target="_blank" style="color:var(--blue);">batumicatholic.church/gallery/</a>. Загружайте JPG/PNG/WebP до 8 МБ.
+      </div>
+
+      <!-- Upload zone -->
+      <div class="upload-zone mb-4" onclick="document.getElementById('gal-upload').click()" id="gal-drop-zone">
+        <i class="fa fa-images"></i>
+        <div style="font-size:.84rem;color:var(--muted);">Перетащите фото или нажмите для выбора<br><span style="font-size:.72rem;">JPG, PNG, WebP · до 8 МБ · можно несколько</span></div>
+      </div>
+
+      <!-- Upload progress -->
+      <div id="gal-progress-wrap" style="display:none;margin-bottom:1rem;">
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:.3rem;" id="gal-progress-label">Загрузка...</div>
+        <div style="height:4px;background:var(--blue-light);border-radius:2px;overflow:hidden;">
+          <div id="gal-progress-fill" style="height:100%;background:var(--blue);width:0%;transition:width .3s;"></div>
+        </div>
+      </div>
+
+      <!-- Uploaded preview grid -->
+      <div id="gal-preview-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin-bottom:1rem;"></div>
+
+      <!-- Existing photos from server -->
+      <h6 style="font-family:'Cormorant Garamond',serif;color:var(--blue-dark);font-size:1.05rem;margin-bottom:.75rem;">Уже загружены</h6>
+      <div id="gal-existing" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;">
+        <div style="border:1px solid var(--border);border-radius:5px;overflow:hidden;position:relative;aspect-ratio:4/3;">
+          <img src="../pexe.jpg" style="width:100%;height:100%;object-fit:cover;" />
+          <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.5);color:#fff;font-size:.62rem;padding:3px 6px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">pexe.jpg</div>
+        </div>
+      </div>
+      <p style="font-size:.78rem;color:var(--muted);margin-top:.75rem;"><i class="fa fa-info-circle"></i> Для удаления фото используйте cPanel File Manager → /uploads/</p>
+    </div>
+  </div>
+</div><!-- /gallery -->
+
+<!-- MANUAL -->
+<div class="panel" id="panel-manual">
+  <div class="card"><div class="card-header"><h5>📖 Мануал контент-менеджера ✠ORDER OF CHRIST'S PILGRIMS✠</h5></div>
+  <div class="card-body" style="max-width:680px;">
+    <div style="background:var(--blue-light);border-left:4px solid var(--blue);padding:.75rem 1rem;border-radius:0 6px 6px 0;margin-bottom:1.5rem;font-size:.88rem;">Для тех, кто добавляет контент. Всё по шагам, без технических знаний.</div>
+    <h4 style="color:var(--blue-dark);">🔐 1. Вход</h4><ol style="font-size:.88rem;line-height:2.2;padding-left:1.25rem;"><li>Откройте <strong>batumicatholic.church/admin/</strong></li><li>Введите логин/пароль от координатора ✠ORDER OF CHRIST'S PILGRIMS✠</li></ol>
+    <h4 style="color:var(--blue-dark);margin-top:1.5rem;">📰 2. Добавить новость</h4><ol style="font-size:.88rem;line-height:2.2;padding-left:1.25rem;"><li>Меню → <strong>«Новости»</strong> → <strong>«+ Новая»</strong></li><li>Вкладка <strong>🇬🇪 ქართ.</strong> — заголовок и текст (обязательно)</li><li>Вкладки EN и RU — переводы (опционально)</li><li>Выберите категорию, дату, загрузите фото</li><li><strong>«Опубликовать»</strong> → сразу на сайте<br><strong>«Черновик»</strong> → сохранить позже</li></ol>
+    <h4 style="color:var(--blue-dark);margin-top:1.5rem;">🕐 3. Расписание</h4><ol style="font-size:.88rem;line-height:2.2;padding-left:1.25rem;"><li>Меню → <strong>«Расписание»</strong></li><li>Изменяйте строки, нажмите <strong>«Сохранить»</strong></li></ol>
+    <h4 style="color:var(--blue-dark);margin-top:1.5rem;">🎙️ 4. Проповедь</h4><ol style="font-size:.88rem;line-height:2.2;padding-left:1.25rem;"><li>Меню → <strong>«Проповеди»</strong></li><li>Название (KA), дата, язык → нажмите зону загрузки</li><li><strong>«Загрузить»</strong></li></ol>
+    <h4 style="color:var(--blue-dark);margin-top:1.5rem;">📅 5. Событие</h4><ol style="font-size:.88rem;line-height:2.2;padding-left:1.25rem;"><li>Меню → <strong>«События»</strong></li><li>Название (KA), дата, время → <strong>«Добавить»</strong></li></ol>
+    <div style="background:var(--gold-light);border-left:4px solid var(--gold);padding:.75rem 1rem;border-radius:0 6px 6px 0;margin-top:2rem;font-size:.85rem;">💡 Вопросы? <a href="/cdn-cgi/l/email-protection#36545742435b5f5557425e595a5f5576515b575f5a1855595b"><span class="__cf_email__" data-cfemail="e0828194958d89838194888f8c8983a0878d81898cce838f8d">[email&#160;protected]</span></a></div>
+  </div></div>
+</div>
+
+</div></div>
+<div class="toast-area" id="toast-area"></div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+<script>
+const qCfg = { theme:'snow', modules:{ toolbar:[[{header:[2,3,false]}],['bold','italic','underline'],[{list:'ordered'},{list:'bullet'}],['link'],['clean']] } };
+const qKa = new Quill('#quill-ka', {...qCfg, placeholder:'ტექსტი ქართულად...'});
+const qEn = new Quill('#quill-en', {...qCfg, placeholder:'Text in English...'});
+const qRu = new Quill('#quill-ru', {...qCfg, placeholder:'Текст на русском...'});
+
+const PANEL_TITLES = {dashboard:'Дашборд',news:'Новости',schedule:'Расписание',events:'События',sermons:'Проповеди',gallery:'Галерея',manual:'Мануал'};
+
+function showPanel(id, el) {
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  document.querySelectorAll('.sidebar .nav-link').forEach(l=>l.classList.remove('active'));
+  if(el) el.classList.add('active');
+  document.getElementById('topbar-title').textContent = PANEL_TITLES[id]||id;
+  closeSidebar();
+  if(id==='dashboard') loadDashboard();
+  if(id==='news')      loadNewsList();
+  if(id==='events')    loadEventsList();
+  if(id==='sermons')   loadSermonsList();
+  if(id==='schedule')  loadSchedule();
+  return false;
+}
+
+function toast(msg, type='ok') {
+  const area = document.getElementById('toast-area');
+  const t = document.createElement('div');
+  const icons = {ok:'circle-check',error:'circle-xmark',warn:'triangle-exclamation'};
+  const colors = {ok:'var(--success)',error:'var(--danger)',warn:'var(--warning)'};
+  t.className = 'toast-item'+(type!=='ok'?' '+type:'');
+  t.innerHTML = `<i class="fa fa-${icons[type]||icons.ok}" style="color:${colors[type]||colors.ok};"></i> ${msg}`;
+  area.appendChild(t);
+  setTimeout(()=>t.style.opacity='0',2800);
+  setTimeout(()=>t.remove(),3200);
+}
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function today(){ return new Date().toISOString().split('T')[0]; }
+function openSidebar(){ document.getElementById('sidebar').classList.add('open'); document.getElementById('overlay').classList.add('show'); }
+function closeSidebar(){ document.getElementById('sidebar').classList.remove('open'); document.getElementById('overlay').classList.remove('show'); }
+
+async function apiGet(params){ try{ const r=await fetch('save.php?'+new URLSearchParams(params)); return await r.json(); }catch(e){ return {ok:false,message:e.message}; } }
+async function apiPost(fd){ try{ const r=await fetch('save.php',{method:'POST',body:fd}); return await r.json(); }catch(e){ return {ok:false,message:e.message}; } }
+function mkfd(obj){ const f=new FormData(); Object.entries(obj).forEach(([k,v])=>f.append(k,v)); return f; }
+
+// DASHBOARD
+async function loadDashboard(){
+  const [rN,rS,rE] = await Promise.all([apiGet({action:'list_news'}),apiGet({action:'list_sermons'}),apiGet({action:'list_events'})]);
+  const news=rN.ok?rN.items:[]; const ser=rS.ok?rS.items:[]; const ev=rE.ok?rE.items:[];
+  const pub=news.filter(n=>n.status==='published').length;
+  document.getElementById('stat-news').textContent=news.length;
+  document.getElementById('stat-pub').textContent=pub;
+  document.getElementById('stat-sermons').textContent=ser.length;
+  document.getElementById('stat-events').textContent=ev.length;
+  document.getElementById('badge-news').textContent=news.length;
+  const cc={liturgy:'tag-liturgy',caritas:'tag-caritas',announce:'tag-announce',event:'tag-event'};
+  const cn={liturgy:'Литургия',caritas:'Каритас',announce:'Объявл.',event:'Событие'};
+  document.getElementById('dash-news-list').innerHTML = news.slice(0,5).map(n=>`
+    <tr onclick="showPanel('news',null);editArticle('${esc(n.filename)}')">
+      <td><strong>${esc(n.title)}</strong></td>
+      <td style="color:var(--muted);white-space:nowrap;">${n.date}</td>
+      <td><span class="tag-pill ${cc[n.category]||'tag-announce'}">${cn[n.category]||n.category}</span></td>
+      <td><span class="tag-pill ${n.status==='published'?'tag-pub':'tag-draft'}">${n.status==='published'?'Опубл.':'Черновик'}</span></td>
+      <td><button class="btn-ghost" onclick="event.stopPropagation();showPanel('news',null);editArticle('${esc(n.filename)}')"><i class="fa fa-pen"></i></button></td>
+    </tr>`).join('') || '<tr><td colspan="5" style="text-align:center;padding:1.5rem;color:var(--muted);">Нет новостей. Создайте первую!</td></tr>';
+}
+
+// NEWS LIST
+async function loadNewsList(){
+  const r=await apiGet({action:'list_news'});
+  if(!r.ok){ toast('Ошибка: '+r.message,'error'); return; }
+  document.getElementById('news-file-list').innerHTML = r.items.map(n=>`
+    <tr onclick="editArticle('${esc(n.filename)}')">
+      <td>
+        ${n.image?`<img src="../${esc(n.image)}" style="width:34px;height:28px;object-fit:cover;border-radius:3px;margin-right:5px;vertical-align:middle;">`:''}
+        <strong>${esc(n.title)}</strong><br>
+        <small style="color:var(--muted);">${n.date}</small>
+      </td>
+      <td><span class="tag-pill ${n.status==='published'?'tag-pub':'tag-draft'}">${n.status==='published'?'✓':'Черн.'}</span></td>
+      <td><button class="btn-danger-sm" onclick="event.stopPropagation();deleteNews('${esc(n.filename)}',this)" title="Удалить"><i class="fa fa-trash"></i></button></td>
+    </tr>`).join('') || '<tr><td colspan="3" style="text-align:center;padding:1.5rem;color:var(--muted);">Нет статей</td></tr>';
+}
+
+async function editArticle(filename){
+  document.getElementById('editor-title').textContent='Загрузка…';
+  const r=await apiGet({action:'get_news',filename});
+  if(!r.ok){ toast('Ошибка: '+r.message,'error'); return; }
+  document.getElementById('editor-title').textContent='Редактировать';
+  document.getElementById('edit-filename').value=r.filename;
+  document.getElementById('title-ka').value=r.title_ka; document.getElementById('title-en').value=r.title_en; document.getElementById('title-ru').value=r.title_ru;
+  document.getElementById('excerpt-ka').value=r.excerpt_ka; document.getElementById('excerpt-en').value=r.excerpt_en; document.getElementById('excerpt-ru').value=r.excerpt_ru;
+  document.getElementById('art-date').value=r.date; document.getElementById('art-author').value=r.author||'Fr. Gabriele Bragantini';
+  document.getElementById('art-category').value=r.category||'announce'; document.getElementById('art-image').value=r.image||'';
+  qKa.root.innerHTML=r.body_ka||''; qEn.root.innerHTML=r.body_en||''; qRu.root.innerHTML=r.body_ru||'';
+  if(r.image){ document.getElementById('img-preview-el').src='../'+r.image; document.getElementById('img-url-label').textContent=r.image; document.getElementById('img-preview').style.display='flex'; document.getElementById('img-drop').style.display='none'; } else { clearImage(); }
+}
+
+function newArticle(){
+  document.getElementById('editor-title').textContent='Новая статья';
+  document.getElementById('edit-filename').value='';
+  ['title-ka','title-en','title-ru','excerpt-ka','excerpt-en','excerpt-ru'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('art-date').value=today(); document.getElementById('art-author').value='Fr. Gabriele Bragantini';
+  document.getElementById('art-image').value=''; qKa.setText(''); qEn.setText(''); qRu.setText(''); clearImage();
+}
+
+async function submitNews(status){
+  const btn = document.getElementById(status==='published'?'btn-publish':'btn-draft');
+  const orig = btn.innerHTML; btn.disabled=true; btn.innerHTML='<span class="spinner"></span>';
+  const fd=new FormData();
+  fd.append('action','save_news'); fd.append('id',document.getElementById('edit-filename').value);
+  fd.append('title_ka',document.getElementById('title-ka').value); fd.append('title_en',document.getElementById('title-en').value); fd.append('title_ru',document.getElementById('title-ru').value);
+  fd.append('excerpt_ka',document.getElementById('excerpt-ka').value); fd.append('excerpt_en',document.getElementById('excerpt-en').value); fd.append('excerpt_ru',document.getElementById('excerpt-ru').value);
+  fd.append('body_ka',qKa.root.innerHTML); fd.append('body_en',qEn.root.innerHTML); fd.append('body_ru',qRu.root.innerHTML);
+  fd.append('date',document.getElementById('art-date').value); fd.append('category',document.getElementById('art-category').value);
+  fd.append('author',document.getElementById('art-author').value); fd.append('image',document.getElementById('art-image').value); fd.append('status',status);
+  const r=await apiPost(fd);
+  btn.disabled=false; btn.innerHTML=orig;
+  r.ok ? (toast(r.message), loadNewsList(), loadDashboard()) : toast('Ошибка: '+r.message,'error');
+}
+
+async function deleteNews(filename,btn){
+  if(!confirm('Удалить эту статью? Отменить невозможно.')) return;
+  btn.disabled=true;
+  const r=await apiPost(mkfd({action:'delete',type:'news',filename}));
+  r.ok ? (toast('Удалено'), loadNewsList(), loadDashboard()) : (toast('Ошибка: '+r.message,'error'), btn.disabled=false);
+}
+
+// IMAGE UPLOAD
+async function uploadImage(input){
+  if(!input.files[0]) return;
+  const pw=document.getElementById('img-progress'), pf=document.getElementById('img-pfill'), pl=document.getElementById('img-plabel');
+  pw.style.display='block'; pl.textContent='Загрузка '+input.files[0].name+'…'; pf.style.width='40%';
+  const fd=new FormData(); fd.append('action','upload_image'); fd.append('image',input.files[0]);
+  pf.style.width='80%';
+  const r=await apiPost(fd);
+  pf.style.width='100%'; setTimeout(()=>{pw.style.display='none';pf.style.width='0%';},500);
+  if(r.ok){
+    document.getElementById('art-image').value=r.url;
+    document.getElementById('img-preview-el').src='../'+r.url;
+    document.getElementById('img-url-label').textContent=r.url;
+    document.getElementById('img-preview').style.display='flex';
+    document.getElementById('img-drop').style.display='none';
+    toast('Фото загружено ✓');
+  } else { toast('Ошибка загрузки: '+r.message,'error'); }
+}
+function clearImage(){
+  document.getElementById('art-image').value=''; document.getElementById('img-file').value='';
+  document.getElementById('img-preview').style.display='none'; document.getElementById('img-drop').style.display='block';
+}
+
+// LANG SWITCH
+function switchLang(lang,el){
+  el.closest('.admin-tabs').querySelectorAll('.admin-tab').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.editor-lang-panel').forEach(p=>{p.classList.remove('active');p.style.display='none';});
+  const ep=document.getElementById('ep-'+lang); if(ep){ep.classList.add('active');ep.style.display='block';}
+}
+
+// SCHEDULE
+const SCHED_DAYS=['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота','Пн–Пт','Сб–Вс'];
+const SCHED_TYPES=['Месса','Исповедь','Розарий','Вечерня','Поклонение','Молебен'];
+async function loadSchedule(){
+  const r=await fetch('save.php?action=get_schedule').then(x=>x.json()).catch(()=>({rows:[]}));
+  const rows=r.rows||[];
+  document.getElementById('sched-body').innerHTML='';
+  if(!rows.length){ [{day:'Воскресенье',time:'10:00',type:'Месса',langs:['KA','EN'],note:'Главная месса'},{day:'Воскресенье',time:'18:00',type:'Месса',langs:['RU'],note:'Вечерняя месса'},{day:'Пн–Пт',time:'08:00',type:'Месса',langs:['KA'],note:''}].forEach(r=>addSchedRow(r)); }
+  else rows.forEach(r=>addSchedRow(r));
+}
+function addSchedRow(data={}){
+  const tr=document.createElement('tr');
+  const langs=data.langs||[];
+  tr.innerHTML=`
+    <td><select class="form-select form-select-sm">${SCHED_DAYS.map(d=>`<option${d===data.day?' selected':''}>${d}</option>`).join('')}</select></td>
+    <td><input type="time" class="form-control form-control-sm" value="${data.time||'10:00'}"/></td>
+    <td><select class="form-select form-select-sm">${SCHED_TYPES.map(t=>`<option${t===data.type?' selected':''}>${t}</option>`).join('')}</select></td>
+    <td><div style="display:flex;gap:5px;flex-wrap:wrap;">${['KA','EN','RU','PL'].map(l=>`<label style="font-size:.78rem;display:flex;align-items:center;gap:2px;"><input type="checkbox" ${langs.includes(l)?'checked':''}> ${l}</label>`).join('')}</div></td>
+    <td><input type="text" class="form-control form-control-sm" value="${esc(data.note||'')}" placeholder="Примечание"/></td>
+    <td><button class="btn-danger-sm" onclick="this.closest('tr').remove()"><i class="fa fa-trash"></i></button></td>`;
+  document.getElementById('sched-body').appendChild(tr);
+}
+async function saveSchedule(){
+  const btn=document.getElementById('btn-save-sched'), orig=btn.innerHTML;
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span>';
+  const rows=[];
+  document.querySelectorAll('#sched-body tr').forEach(tr=>{
+    const cells=tr.querySelectorAll('td'); const langs=[];
+    tr.querySelectorAll('input[type=checkbox]').forEach(cb=>{if(cb.checked)langs.push(cb.parentElement.textContent.trim());});
+    rows.push({day:cells[0].querySelector('select').value,time:cells[1].querySelector('input').value,type:cells[2].querySelector('select').value,langs,note:cells[4].querySelector('input').value});
+  });
+  const r=await fetch('save.php?action=save_schedule',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(rows)}).then(x=>x.json()).catch(e=>({ok:false,message:e.message}));
+  btn.disabled=false; btn.innerHTML=orig;
+  r.ok ? toast(r.message) : toast('Ошибка: '+r.message,'error');
+}
+
+// EVENTS
+async function loadEventsList(){
+  const r=await apiGet({action:'list_events'});
+  document.getElementById('events-list').innerHTML = !r.ok
+    ? `<tr><td colspan="3" style="color:var(--danger);padding:1rem;">${r.message}</td></tr>`
+    : r.items.map(e=>`<tr><td style="white-space:nowrap;"><strong>${e.date}</strong><br><small style="color:var(--muted);">${e.time||''}</small></td><td>${esc(e.title)}</td><td><button class="btn-danger-sm" onclick="delItem('event','${esc(e.filename)}',this)"><i class="fa fa-trash"></i></button></td></tr>`).join('')
+    || '<tr><td colspan="3" style="text-align:center;padding:1.5rem;color:var(--muted);">Нет предстоящих событий</td></tr>';
+}
+async function saveEvent(){
+  const tKa=document.getElementById('ev-title-ka').value.trim(), dt=document.getElementById('ev-date').value;
+  if(!tKa||!dt){ toast('Название (KA) и дата обязательны','warn'); return; }
+  const btn=document.getElementById('btn-save-event'), orig=btn.innerHTML;
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span>';
+  const r=await apiPost(mkfd({action:'save_event',title_ka:tKa,title_en:document.getElementById('ev-title-en').value,title_ru:document.getElementById('ev-title-ru').value,date:dt,time:document.getElementById('ev-time').value,type:document.getElementById('ev-type').value,location:document.getElementById('ev-location').value,desc_ka:document.getElementById('ev-desc-ka').value}));
+  btn.disabled=false; btn.innerHTML=orig;
+  if(r.ok){ toast(r.message); loadEventsList(); document.getElementById('ev-title-ka').value=''; document.getElementById('ev-desc-ka').value=''; }
+  else toast('Ошибка: '+r.message,'error');
+}
+
+// SERMONS
+async function loadSermonsList(){
+  const r=await apiGet({action:'list_sermons'});
+  document.getElementById('sermons-list').innerHTML = !r.ok
+    ? `<tr><td colspan="5" style="color:var(--danger);padding:1rem;">${r.message}</td></tr>`
+    : r.items.map(s=>`<tr><td style="white-space:nowrap;color:var(--muted);">${s.date}</td><td><strong>${esc(s.title)}</strong><br><small style="color:var(--muted);">${esc(s.preacher)}</small></td><td><span class="tag-pill tag-liturgy">${(s.lang||'ka').toUpperCase()}</span></td><td>${s.audio?'<i class="fa fa-headphones" style="color:var(--success);"></i> MP3':'—'}</td><td><button class="btn-danger-sm" onclick="delItem('sermon','${esc(s.filename)}',this)"><i class="fa fa-trash"></i></button></td></tr>`).join('')
+    || '<tr><td colspan="5" style="text-align:center;padding:1.5rem;color:var(--muted);">Нет проповедей</td></tr>';
+}
+function showAudioName(input){ if(input.files[0]){ const el=document.getElementById('ser-fname'); el.textContent='✓ '+input.files[0].name; el.style.display='block'; } }
+async function saveSermon(){
+  const tKa=document.getElementById('ser-title-ka').value.trim(), dt=document.getElementById('ser-date').value;
+  if(!tKa||!dt){ toast('Название (KA) и дата обязательны','warn'); return; }
+  const btn=document.getElementById('btn-save-sermon'), orig=btn.innerHTML;
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span>';
+  const fd=new FormData();
+  fd.append('action','save_sermon'); fd.append('title_ka',tKa); fd.append('title_en',document.getElementById('ser-title-en').value); fd.append('title_ru',document.getElementById('ser-title-ru').value);
+  fd.append('date',dt); fd.append('lang',document.getElementById('ser-lang').value); fd.append('preacher',document.getElementById('ser-preacher').value);
+  fd.append('context',document.getElementById('ser-context').value); fd.append('youtube',document.getElementById('ser-youtube').value);
+  const af=document.getElementById('ser-file').files[0]; if(af) fd.append('audio_file',af);
+  const r=await apiPost(fd);
+  btn.disabled=false; btn.innerHTML=orig;
+  r.ok ? (toast(r.message), loadSermonsList()) : toast('Ошибка: '+r.message,'error');
+}
+
+// GENERIC DELETE
+async function delItem(type,filename,btn){
+  if(!confirm('Удалить? Отменить невозможно.')) return;
+  btn.disabled=true;
+  const r=await apiPost(mkfd({action:'delete',type,filename}));
+  r.ok ? (toast('Удалено'), type==='event'?loadEventsList():loadSermonsList()) : (toast('Ошибка: '+r.message,'error'), btn.disabled=false);
+}
+
+// GALLERY UPLOAD
+async function handleGalleryUpload(input) {
+  const files = Array.from(input.files);
+  if (!files.length) return;
+  const pw=document.getElementById('gal-progress-wrap'), pf=document.getElementById('gal-progress-fill'), pl=document.getElementById('gal-progress-label');
+  const grid=document.getElementById('gal-preview-grid');
+  pw.style.display='block';
+  for (let i=0;i<files.length;i++) {
+    const file=files[i];
+    pl.textContent=`Загрузка ${i+1}/${files.length}: ${file.name}`;
+    pf.style.width=Math.round(((i+1)/files.length)*100)+'%';
+    const fd=new FormData(); fd.append('action','upload_image'); fd.append('image',file);
+    const r=await fetch('save.php',{method:'POST',body:fd}).then(x=>x.json()).catch(()=>({ok:false}));
+    if(r.ok){
+      const div=document.createElement('div');
+      div.style.cssText='border:1px solid var(--border);border-radius:5px;overflow:hidden;position:relative;aspect-ratio:4/3;';
+      div.innerHTML=`<img src="../${esc(r.url)}" style="width:100%;height:100%;object-fit:cover;"/><div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.5);color:#fff;font-size:.62rem;padding:3px 6px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">${esc(file.name)}</div><div style="position:absolute;top:4px;right:4px;background:var(--success);color:#fff;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:.65rem;">✓</div>`;
+      grid.appendChild(div);
+    }
+  }
+  setTimeout(()=>{pw.style.display='none';pf.style.width='0%';},800);
+  toast(`Загружено ${files.length} фото ✓`);
+  input.value='';
+}
+
+// DRAG & DROP for gallery
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('art-date').value=today();
+  document.getElementById('ser-date').value=today();
+  document.getElementById('ev-date').value=today();
+  loadDashboard();
+
+  // Drag-drop for gallery zone
+  const dz=document.getElementById('gal-drop-zone');
+  if(dz){
+    dz.addEventListener('dragover',e=>{e.preventDefault();dz.style.borderColor='var(--blue)';});
+    dz.addEventListener('dragleave',()=>{dz.style.borderColor='';});
+    dz.addEventListener('drop',e=>{
+      e.preventDefault();dz.style.borderColor='';
+      const input=document.getElementById('gal-upload');
+      // Create a DataTransfer to assign files
+      const dt=new DataTransfer();
+      Array.from(e.dataTransfer.files).forEach(f=>dt.items.add(f));
+      input.files=dt.files;
+      handleGalleryUpload(input);
+    });
+  }
+});
+</script>
+</body>
+</html>

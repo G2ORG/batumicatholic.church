@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="ka" data-lang="ka">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="სულიწმიდის კათოლიკური მრევლი — ბათუმი, საქართველო. Roman Catholic Parish of the Holy Spirit, Batumi, Georgia." />
+  <meta property="og:title" content="სულიწმიდის კათოლიკური მრევლი · Batumi" />
+  <meta property="og:image" content="https://batumicatholic.church/pexe.jpg" />
+  <title>სულიწმიდის კათოლიკური მრევლი · Batumi</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&family=Noto+Sans+Georgian:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root{--blue:#1B4F8C;--blue-dark:#123566;--blue-light:#E8F0F7;--gold:#C9A84C;--gold-light:#F5E9C8;--white:#FAFAF8;--text:#1A1A1A;--muted:#6B7280;--border:#DDE3EC}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Lato','Noto Sans Georgian',sans-serif;background:var(--white);color:var(--text);font-size:16px;line-height:1.7}
+    h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.2}
+    a{color:inherit;text-decoration:none}
+
+    /* ── Navbar ── */
+    .navbar{background:rgba(27,79,140,.97);backdrop-filter:blur(8px);padding:.75rem 0;position:sticky;top:0;z-index:1000;border-bottom:2px solid var(--gold)}
+    .navbar-brand{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:700;color:#fff !important;letter-spacing:.02em}
+    .navbar-brand .cross{color:var(--gold);margin-right:.4rem;font-size:1.2rem}
+    .nav-link{color:rgba(255,255,255,.88) !important;font-size:.78rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.4rem .6rem !important;transition:color .2s}
+    .nav-link:hover,.nav-link.active-link{color:var(--gold) !important}
+    .navbar-toggler{border-color:rgba(255,255,255,.4)}.navbar-toggler-icon{filter:invert(1)}
+    .lang-switcher{display:flex;gap:3px;align-items:center}
+    .lang-btn{background:transparent;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);font-size:.68rem;font-weight:700;padding:2px 7px;border-radius:3px;cursor:pointer;transition:all .2s}
+    .lang-btn:hover,.lang-btn.active{background:var(--gold);border-color:var(--gold);color:#fff}
+    .btn-donate-nav{background:var(--gold);color:#fff !important;font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:5px 14px;border-radius:3px;transition:background .2s}
+    .btn-donate-nav:hover{background:#b0912f}
+
+    /* ── Hero ── */
+    .hero{position:relative;min-height:92vh;display:flex;align-items:flex-end;overflow:hidden;background:#0a1e3a}
+    .hero-bg{position:absolute;inset:0;background:url('pexe.jpg') center/cover no-repeat;transform:scale(1.04);animation:slowZoom 20s ease-in-out infinite alternate}
+    @keyframes slowZoom{from{transform:scale(1.04)}to{transform:scale(1.00)}}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,30,58,.92) 0%,rgba(10,30,58,.45) 50%,rgba(10,30,58,.15) 100%)}
+    .hero-content{position:relative;z-index:2;padding:4rem 0 5rem;animation:fadeUp 1.2s ease both}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    .hero-eyebrow{display:inline-block;background:var(--gold);color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:4px 14px;border-radius:2px;margin-bottom:1.2rem}
+    .hero h1{font-size:clamp(2.4rem,6vw,4.2rem);color:#fff;font-weight:600;margin-bottom:.4rem}
+    .hero h1 em{color:var(--gold);font-style:normal}
+    .hero .hero-sub{color:rgba(255,255,255,.78);font-size:1.1rem;font-weight:300;letter-spacing:.04em;margin-bottom:2rem}
+    .hero-actions{display:flex;gap:.8rem;flex-wrap:wrap}
+    .btn-primary-hero{background:var(--blue);color:#fff;border:2px solid var(--blue);padding:10px 28px;font-weight:700;font-size:.85rem;letter-spacing:.07em;text-transform:uppercase;border-radius:3px;transition:all .2s}
+    .btn-primary-hero:hover{background:var(--blue-dark);border-color:var(--blue-dark);color:#fff}
+    .btn-outline-hero{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.55);padding:10px 28px;font-weight:700;font-size:.85rem;letter-spacing:.07em;text-transform:uppercase;border-radius:3px;transition:all .2s}
+    .btn-outline-hero:hover{border-color:var(--gold);color:var(--gold)}
+    .scroll-arrow{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:1.4rem;animation:bounce 2s infinite}
+    @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+    /* ── Schedule band ── */
+    .schedule-band{background:var(--blue);color:#fff;padding:1.4rem 0}
+    .schedule-band .s-label{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:3px}
+    .schedule-band .s-time{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600}
+    .schedule-band .s-lang{font-size:.8rem;color:rgba(255,255,255,.65)}
+    .schedule-divider{width:1px;background:rgba(255,255,255,.18);align-self:stretch}
+
+    /* ── Section ── */
+    .section-tag{display:inline-block;font-size:.67rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);border-bottom:2px solid var(--gold);padding-bottom:2px;margin-bottom:.8rem}
+    .section-title{font-size:clamp(1.9rem,4vw,2.8rem);color:var(--blue-dark);margin-bottom:1rem}
+    .section-lead{font-size:1.05rem;color:var(--muted);max-width:640px}
+    section{padding:5rem 0}
+    section:nth-child(even){background:var(--blue-light)}
+
+    /* ── About ── */
+    #about .about-img{border-radius:4px;box-shadow:0 16px 48px rgba(27,79,140,.18);width:100%;object-fit:cover;height:400px}
+    .about-stat{border-left:3px solid var(--gold);padding-left:1rem}
+    .about-stat .num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;color:var(--blue);line-height:1}
+    .about-stat .lbl{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+
+    /* ── Schedule table ── */
+    #schedule table th{background:var(--blue);color:#fff;font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;border:none}
+    #schedule table td{vertical-align:middle;font-size:.92rem;border-color:var(--border)}
+    .time-badge{background:var(--gold-light);color:#8B6914;font-weight:700;font-size:.88rem;padding:2px 9px;border-radius:3px;white-space:nowrap}
+    .lang-pill{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.05em;padding:2px 7px;border-radius:10px;margin:1px}
+    .pill-ka{background:var(--blue-light);color:var(--blue)}.pill-ru{background:#FFF3F3;color:#9B2020}.pill-en{background:#F0FAF4;color:#1A6B3A}.pill-pl{background:#FFF8F0;color:#8B5B00}
+
+    /* ── News ── */
+    .news-card{background:#fff;border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:box-shadow .25s,transform .25s;height:100%;cursor:pointer}
+    .news-card:hover{box-shadow:0 8px 32px rgba(27,79,140,.14);transform:translateY(-4px)}
+    .news-card .card-img-top{height:180px;object-fit:cover;width:100%}
+    .news-card .card-body{padding:1.1rem}
+    .news-card .news-date{font-size:.7rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem}
+    .news-card h5{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--blue-dark);margin-bottom:.4rem}
+    .news-card p{font-size:.88rem;color:var(--muted)}
+    .tag-pill-sm{display:inline-block;font-size:.63rem;font-weight:700;padding:2px 7px;border-radius:8px;margin-bottom:.4rem}
+    .tp-liturgy{background:var(--blue-light);color:var(--blue)}.tp-caritas{background:#FEE2E2;color:#9B2020}.tp-announce{background:var(--gold-light);color:#8B5B00}.tp-event{background:#DCFCE7;color:#15803D}
+
+    /* ── Events ── */
+    .event-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.25rem;display:flex;gap:1rem;align-items:center;transition:box-shadow .2s}
+    .event-card:hover{box-shadow:0 4px 16px rgba(27,79,140,.12)}
+    .event-date-box{background:var(--blue);color:#fff;border-radius:6px;padding:.5rem .75rem;text-align:center;min-width:52px;flex-shrink:0}
+    .event-date-box .ed-day{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;line-height:1}
+    .event-date-box .ed-mon{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+    .event-card h6{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--blue-dark);margin-bottom:.15rem}
+    .event-card .e-time{font-size:.78rem;color:var(--muted)}
+
+    /* ── Caritas ── */
+    .mercy-card{background:var(--blue-light);border:1px solid var(--border);border-radius:8px;padding:1.25rem;text-align:left;height:100%}
+    .mercy-card i{font-size:1.5rem;color:var(--blue);margin-bottom:.6rem;display:block}
+    .mercy-card h5{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--blue-dark);margin-bottom:.3rem}
+    .mercy-card p{font-size:.83rem;color:var(--muted);margin:0}
+
+    /* ── Donate ── */
+    #donate{background:var(--blue-dark);color:#fff}
+    #donate .section-title{color:#fff}
+    #donate .section-lead{color:rgba(255,255,255,.72)}
+    .donate-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:1.75rem;text-align:center;transition:background .2s}
+    .donate-card:hover{background:rgba(255,255,255,.12)}
+    .donate-card i{font-size:2rem;color:var(--gold);margin-bottom:.8rem;display:block}
+    .donate-card h4{font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:.5rem}
+    .donate-card p{font-size:.86rem;color:rgba(255,255,255,.68)}
+    .btn-gold{background:var(--gold);color:#fff;border:none;padding:11px 28px;font-weight:700;font-size:.86rem;letter-spacing:.07em;text-transform:uppercase;border-radius:3px;cursor:pointer;transition:background .2s;display:inline-block}
+    .btn-gold:hover{background:#b0912f;color:#fff}
+    .bank-box{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:1.25rem;font-size:.84rem;line-height:2.1}
+
+    /* ── Contact ── */
+    .contact-box{background:#fff;border:1px solid var(--border);border-radius:6px;padding:1.75rem}
+    .contact-row{display:flex;gap:.9rem;align-items:flex-start;padding:.7rem 0;border-bottom:1px solid var(--border)}
+    .contact-row:last-child{border-bottom:none}
+    .contact-icon{width:36px;height:36px;background:var(--blue-light);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--blue);flex-shrink:0}
+    .map-embed{border-radius:6px;overflow:hidden;border:1px solid var(--border)}
+    .map-embed iframe{width:100%;height:320px;border:none}
+
+    /* ── Social widgets section ── */
+    #social-widgets{background:#f5f5f2;padding:4rem 0}
+    .widget-frame{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+    .widget-header{padding:.7rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:700;color:var(--blue-dark)}
+    .widget-header i{font-size:1rem}
+    .widget-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:240px;text-align:center;color:var(--muted);gap:.7rem;padding:2rem}
+    .widget-placeholder i{font-size:2.5rem}
+
+    /* Vatican News widget */
+    .vatican-widget-wrap{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+    .vatican-widget-wrap iframe{width:100%;border:none;display:block}
+
+    /* ── Partners band ── */
+    .partners-band{background:var(--blue-dark);padding:2.5rem 0}
+    .partners-band h6{color:rgba(255,255,255,.5);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;text-align:center;margin-bottom:1.5rem}
+    .partner-logo{display:inline-flex;align-items:center;justify-content:center;padding:.5rem 1rem;border:1px solid rgba(255,255,255,.12);border-radius:5px;color:rgba(255,255,255,.65);font-size:.78rem;font-weight:700;letter-spacing:.04em;transition:all .2s;text-decoration:none;margin:.3rem}
+    .partner-logo:hover{background:rgba(255,255,255,.1);border-color:var(--gold);color:var(--gold)}
+    .partner-logo i{margin-right:.4rem}
+
+    /* ── Footer ── */
+    footer{background:#0a1e3a;color:rgba(255,255,255,.7);padding:3rem 0 1.5rem}
+    footer .ft-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:#fff;font-weight:700;margin-bottom:.5rem}
+    footer .ft-logo .cross{color:var(--gold);margin-right:.3rem}
+    footer h6{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:#fff;font-weight:600;letter-spacing:.06em;margin-bottom:.9rem;text-transform:uppercase}
+    footer ul{list-style:none;padding:0}
+    footer ul li{margin-bottom:.35rem}
+    footer ul li a{font-size:.82rem;color:rgba(255,255,255,.62);transition:color .2s}
+    footer ul li a:hover{color:var(--gold)}
+    .social-links{display:flex;gap:.5rem;margin-top:.9rem}
+    .social-links a{width:34px;height:34px;border:1px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.65);font-size:.85rem;transition:all .2s}
+    .social-links a:hover{background:var(--gold);border-color:var(--gold);color:#fff}
+    .footer-divider{border-color:rgba(255,255,255,.1);margin:2rem 0 1rem}
+    .footer-bottom{font-size:.76rem;color:rgba(255,255,255,.4)}
+    .footer-bottom a{color:rgba(255,255,255,.52)}
+    .footer-bottom a:hover{color:var(--gold)}
+
+    /* ── Skeleton loader ── */
+    .skeleton{background:linear-gradient(90deg,#e8f0f7 25%,#f5f8fc 50%,#e8f0f7 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:5px}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+    @media(max-width:768px){.schedule-divider{display:none}#about .about-img{height:260px}}
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="/"><span class="cross">✝</span><span data-i18n="nav.brand">სულიწმიდის მრევლი · ბათუმი</span></a>
+    <button class="navbar-toggler ms-auto me-2" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav mx-auto gap-0">
+        <li class="nav-item"><a class="nav-link" href="/about/"   data-i18n="nav.about">შესახებ</a></li>
+        <li class="nav-item"><a class="nav-link" href="#schedule" data-i18n="nav.schedule">განრიგი</a></li>
+        <li class="nav-item"><a class="nav-link" href="/news/"    data-i18n="nav.news">სიახლეები</a></li>
+        <li class="nav-item"><a class="nav-link" href="/gallery/" data-i18n="nav.gallery">გალერეა</a></li>
+        <li class="nav-item"><a class="nav-link" href="/sermons/" data-i18n="nav.sermons">ქადაგებები</a></li>
+        <li class="nav-item"><a class="nav-link" href="#calendar" data-i18n="nav.calendar">კალენდარი</a></li>
+        <li class="nav-item"><a class="nav-link" href="#donate"   data-i18n="nav.donate">შეწირვა</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact"  data-i18n="nav.contact">კონტაქტი</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2 mt-2 mt-lg-0">
+        <div class="lang-switcher">
+          <button class="lang-btn active" onclick="setLang('ka')">🇬🇪 KA</button>
+          <button class="lang-btn"        onclick="setLang('en')">🇬🇧 EN</button>
+          <button class="lang-btn"        onclick="setLang('ru')">🇷🇺 RU</button>
+        </div>
+        <a href="#donate" class="btn-donate-nav" data-i18n="nav.donate">შეწირვა</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home" style="padding:0;">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <div class="col-lg-8">
+      <div class="hero-eyebrow" data-i18n="hero.eyebrow">Roman Catholic Parish · Batumi, Georgia</div>
+      <h1><span data-i18n="hero.title1">სულიწმიდის</span><br><em data-i18n="hero.title2">კათოლიკური ეკლესია</em></h1>
+      <p class="hero-sub" data-i18n="hero.subtitle">ბათუმი, საქართველო · მამა გაბრიელე ბრაგანტინი</p>
+      <div class="hero-actions">
+        <a href="#schedule" class="btn-primary-hero" data-i18n="hero.btn1">მსახურების განრიგი</a>
+        <a href="/about/"   class="btn-outline-hero"  data-i18n="hero.btn2">მრევლის შესახებ</a>
+      </div>
+    </div>
+  </div>
+  <a href="#schedule-band" class="scroll-arrow"><i class="fa fa-chevron-down"></i></a>
+</section>
+
+<!-- SCHEDULE BAND -->
+<div class="schedule-band" id="schedule-band">
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-center align-items-center gap-4 gap-md-5">
+      <div class="text-center"><div class="s-label" data-i18n="band.sunday">კვირა</div><div class="s-time">10:00 · 18:00</div><div class="s-lang" data-i18n="band.sunday_lang">ქართ. / ინგლ.</div></div>
+      <div class="schedule-divider"></div>
+      <div class="text-center"><div class="s-label" data-i18n="band.weekdays">სამუშ. დღეები</div><div class="s-time">08:00</div><div class="s-lang">ორ–პარ</div></div>
+      <div class="schedule-divider"></div>
+      <div class="text-center"><div class="s-label" data-i18n="band.confessions">აღსარება</div><div class="s-time">09:30 · 17:30</div><div class="s-lang" data-i18n="band.confessions_lang">შაბ–კვირა</div></div>
+      <div class="schedule-divider"></div>
+      <div class="text-center"><div class="s-label" data-i18n="band.address">მისამართი</div><div class="s-time" style="font-size:.95rem;">გოგებაშვილის 74</div><div class="s-lang">Batumi, Adjara</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5">
+        <img src="pexe.jpg" alt="Church of the Holy Spirit, Batumi" class="about-img" loading="lazy" />
+      </div>
+      <div class="col-lg-7">
+        <div class="section-tag" data-i18n="about.tag">მრევლის შესახებ</div>
+        <h2 class="section-title" data-i18n="about.title">სულიწმიდის კათოლიკური ეკლესია</h2>
+        <p class="mb-3" data-i18n="about.p1">ეკლესია აშენდა 2000 წელს ქართველი არქიტექტორების ოლეგ პატარიძისა და გიორგი ბაღოშვილის პროექტით. მდებარეობს იმ ადგილას, სადაც საბჭოთა პერიოდამდე კათოლიკური ტაძარი იდგა.</p>
+        <p class="mb-4" data-i18n="about.p2">1995 წლიდან მრევლს ხელმძღვანელობს მამა გაბრიელე ბრაგანტინი. ეკლესია ემსახურება ქართველ, ამერიკელ, ევროპელ და სხვა ეროვნებათა კათოლიკეებს.</p>
+        <div class="row g-3 mb-4">
+          <div class="col-4"><div class="about-stat"><div class="num">2000</div><div class="lbl" data-i18n="about.stat1">დაარსება</div></div></div>
+          <div class="col-4"><div class="about-stat"><div class="num">3+</div><div class="lbl" data-i18n="about.stat2">ენა</div></div></div>
+          <div class="col-4"><div class="about-stat"><div class="num">30+</div><div class="lbl" data-i18n="about.stat3">ქვეყნები</div></div></div>
+        </div>
+        <div class="d-flex gap-2 flex-wrap">
+          <a href="/about/" class="btn-gold" data-i18n="about.more_btn">ისტორია →</a>
+          <a href="/gallery/" class="btn-outline-hero" style="background:transparent;color:var(--blue);border-color:var(--blue);" data-i18n="about.gallery_btn">გალერეა →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-tag" data-i18n="sched.tag">მსახურების განრიგი</div>
+      <h2 class="section-title" data-i18n="sched.title">ლიტურგიული განრიგი</h2>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover" id="schedule-table">
+        <thead>
+          <tr>
+            <th data-i18n="sched.col_day">დღე</th>
+            <th data-i18n="sched.col_time">დრო</th>
+            <th data-i18n="sched.col_type">სახეობა</th>
+            <th data-i18n="sched.col_lang">ენა</th>
+            <th data-i18n="sched.col_note">შენიშვნა</th>
+          </tr>
+        </thead>
+        <tbody id="schedule-body">
+          <!-- loaded from data/schedule.json or fallback below -->
+          <tr><td><strong>კვირა</strong></td><td><span class="time-badge">10:00</span></td><td data-i18n="mass">მესა</td><td><span class="lang-pill pill-ka">KA</span><span class="lang-pill pill-en">EN</span></td><td data-i18n="sched.main_mass">მთავარი მესა</td></tr>
+          <tr><td><strong>კვირა</strong></td><td><span class="time-badge">18:00</span></td><td data-i18n="mass">მესა</td><td><span class="lang-pill pill-ru">RU</span><span class="lang-pill pill-pl">PL</span></td><td data-i18n="sched.evening">საღამოს მესა</td></tr>
+          <tr><td><strong>შაბათი</strong></td><td><span class="time-badge">10:00</span></td><td data-i18n="mass">მესა</td><td><span class="lang-pill pill-ka">KA</span></td><td>—</td></tr>
+          <tr><td><strong>ორ–პარ</strong></td><td><span class="time-badge">08:00</span></td><td data-i18n="mass">მესა</td><td><span class="lang-pill pill-ka">KA</span><span class="lang-pill pill-en">EN</span></td><td>—</td></tr>
+          <tr><td><strong>შაბ–კვირა</strong></td><td><span class="time-badge">09:30 · 17:30</span></td><td data-i18n="confession">აღსარება</td><td><span class="lang-pill pill-ka">KA</span><span class="lang-pill pill-en">EN</span><span class="lang-pill pill-ru">RU</span></td><td data-i18n="sched.before_mass">მსახ.-ის წინ</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-center mt-3" style="font-size:.83rem;color:var(--muted);"><i class="fa fa-info-circle"></i> <span data-i18n="sched.note">* ზეიმებსა და სადღესასწაულო დღეებში განრიგი შეიძლება შეიცვალოს.</span></p>
+  </div>
+</section>
+
+<!-- NEWS — dynamic -->
+<section id="news">
+  <div class="container">
+    <div class="row mb-4 align-items-end">
+      <div class="col">
+        <div class="section-tag" data-i18n="news.tag">სიახლეები</div>
+        <h2 class="section-title mb-0" data-i18n="news.title">ბოლო სიახლეები</h2>
+      </div>
+      <div class="col-auto">
+        <a href="/news/" class="btn-gold" data-i18n="news.all">ყველა →</a>
+      </div>
+    </div>
+    <div class="row g-4" id="news-grid">
+      <!-- Skeleton loaders -->
+      <div class="col-md-4"><div style="height:260px;" class="skeleton rounded"></div></div>
+      <div class="col-md-4"><div style="height:260px;" class="skeleton rounded"></div></div>
+      <div class="col-md-4"><div style="height:260px;" class="skeleton rounded"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CALENDAR + EVENTS — dynamic -->
+<section id="calendar">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-tag" data-i18n="cal.tag">კალენდარი</div>
+      <h2 class="section-title" data-i18n="cal.title">ლიტურგიული კალენდარი</h2>
+      <p class="section-lead mx-auto" data-i18n="cal.lead">კათოლიკური, ქართული სახელმწიფო და ადგილობრივი ღონისძიებები.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-7">
+        <div style="border:1px solid var(--border);border-radius:6px;overflow:hidden;">
+          <iframe src="https://calendar.google.com/calendar/embed?src=en.christian%23holiday%40group.v.calendar.google.com&src=ka.ge%23holiday%40group.v.calendar.google.com&ctz=Asia%2FTbilisi&mode=MONTH&showTitle=0&showNav=1&showPrint=0&showTabs=0&showCalendars=0&bgcolor=%23FAFAF8&color=%231B4F8C&color=%23C9A84C" style="width:100%;height:400px;border:0;" frameborder="0" scrolling="no" title="Church Calendar"></iframe>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <h5 style="font-family:'Cormorant Garamond',serif;color:var(--blue-dark);margin-bottom:1rem;" data-i18n="cal.upcoming">მომავალი ღონისძიებები</h5>
+        <div id="events-list" style="display:flex;flex-direction:column;gap:.6rem;">
+          <div style="height:72px;" class="skeleton rounded"></div>
+          <div style="height:72px;" class="skeleton rounded"></div>
+          <div style="height:72px;" class="skeleton rounded"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CARITAS -->
+<section id="mercy" style="background:#fff;">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="section-tag" data-i18n="mercy.tag">მოწყალების სამსახური</div>
+        <h2 class="section-title" data-i18n="mercy.title">კარიტასი ბათუმი</h2>
+        <p class="mb-3" data-i18n="mercy.p1">ჩვენი მოწყალების სამსახური ეხმარება მოხუცებს, ოჯახებს მძიმე მდგომარეობაში, ავადმყოფებს.</p>
+        <p class="mb-4" data-i18n="mercy.p2">გჭირდებათ დახმარება ან გინდათ დახმარება გაუწიოთ?</p>
+        <div class="d-flex gap-2 flex-wrap">
+          <a href="#caritas-form" class="btn-gold" data-i18n="mercy.btn_help">დახმარების მოთხოვნა</a>
+          <a href="#donate" class="btn-outline-hero" style="background:transparent;color:var(--blue);border-color:var(--blue);" data-i18n="mercy.btn_donate">შეწირვა კარიტასისთვის</a>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="row g-3">
+          <div class="col-6"><div class="mercy-card"><i class="fa fa-bowl-food"></i><h5 data-i18n="mercy.card1">საკვები პაკეტები</h5><p data-i18n="mercy.card1d">ყოველ თვე 20+ ოჯახს</p></div></div>
+          <div class="col-6"><div class="mercy-card"><i class="fa fa-pills"></i><h5 data-i18n="mercy.card2">სამედიცინო</h5><p data-i18n="mercy.card2d">მედიკამენტები, გამოკვლევები</p></div></div>
+          <div class="col-6"><div class="mercy-card"><i class="fa fa-graduation-cap"></i><h5 data-i18n="mercy.card3">სასწავლო</h5><p data-i18n="mercy.card3d">სტიპენდიები ბავშვებისთვის</p></div></div>
+          <div class="col-6"><div class="mercy-card"><i class="fa fa-house-heart"></i><h5 data-i18n="mercy.card4">საბინაო</h5><p data-i18n="mercy.card4d">სარემონტო, კრიზისული</p></div></div>
+        </div>
+      </div>
+    </div>
+    <!-- Caritas form -->
+    <div class="row mt-5" id="caritas-form">
+      <div class="col-lg-7 mx-auto">
+        <div style="background:var(--blue-light);border-radius:8px;padding:2rem;">
+          <h4 style="font-family:'Cormorant Garamond',serif;color:var(--blue-dark);margin-bottom:1.2rem;" data-i18n="mercy.form_title">დახმარების მოთხოვნის ფორმა</h4>
+          <form id="caritasForm" action="caritas-form.php" method="POST">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label style="font-size:.8rem;font-weight:700;color:var(--blue-dark);display:block;margin-bottom:.3rem;" data-i18n="mercy.f_name">სახელი *</label>
+                <input type="text" name="name" required class="form-control" style="border:1px solid var(--border);border-radius:5px;padding:.45rem .75rem;font-size:.88rem;" />
+              </div>
+              <div class="col-md-6">
+                <label style="font-size:.8rem;font-weight:700;color:var(--blue-dark);display:block;margin-bottom:.3rem;" data-i18n="mercy.f_phone">ტელეფონი / Email *</label>
+                <input type="text" name="contact" required class="form-control" style="border:1px solid var(--border);border-radius:5px;padding:.45rem .75rem;font-size:.88rem;" />
+              </div>
+              <div class="col-md-6">
+                <label style="font-size:.8rem;font-weight:700;color:var(--blue-dark);display:block;margin-bottom:.3rem;" data-i18n="mercy.f_type">დახმარების სახე</label>
+                <select name="type" class="form-select" style="border:1px solid var(--border);border-radius:5px;font-size:.88rem;">
+                  <option data-i18n="mercy.f_food">საკვები</option>
+                  <option data-i18n="mercy.f_med">სამედიცინო</option>
+                  <option data-i18n="mercy.f_edu">სასწავლო</option>
+                  <option data-i18n="mercy.f_house">საბინაო</option>
+                  <option data-i18n="mercy.f_other">სხვა</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label style="font-size:.8rem;font-weight:700;color:var(--blue-dark);display:block;margin-bottom:.3rem;" data-i18n="mercy.f_lang">ენა</label>
+                <select name="lang" class="form-select" style="border:1px solid var(--border);border-radius:5px;font-size:.88rem;">
+                  <option value="ka">ქართული</option>
+                  <option value="ru">Русский</option>
+                  <option value="en">English</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label style="font-size:.8rem;font-weight:700;color:var(--blue-dark);display:block;margin-bottom:.3rem;" data-i18n="mercy.f_desc">აღწერა</label>
+                <textarea name="description" rows="3" class="form-control" style="border:1px solid var(--border);border-radius:5px;font-size:.88rem;"></textarea>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn-gold" id="caritasSubmitBtn" data-i18n="mercy.f_submit">გაგზავნა</button>
+                <div id="caritasSuccess" style="display:none;margin-top:.75rem;background:#DCFCE7;color:#15803D;padding:.6rem 1rem;border-radius:5px;font-size:.88rem;font-weight:700;" data-i18n="mercy.f_sent">✓ მადლობა! თქვენი მოთხოვნა გაგზავნილია.</div>
+                <div id="caritasError" style="display:none;margin-top:.75rem;background:#FEE2E2;color:#9B2020;padding:.6rem 1rem;border-radius:5px;font-size:.88rem;" data-i18n="mercy.f_error">შეცდომა. სცადეთ ელ-ფოსტით: batumicatholic@gmail.com</div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DONATE -->
+<section id="donate">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-tag" data-i18n="donate.tag">შეწირვა</div>
+      <h2 class="section-title" data-i18n="donate.title">მხარი დაუჭირეთ მრევლს</h2>
+      <p class="section-lead mx-auto" data-i18n="donate.lead">თქვენი შეწირვა ეხმარება ეკლესიის შენახვას, კარიტასს და კათეხიზმს.</p>
+    </div>
+    <div class="row g-4 mb-5">
+      <div class="col-md-4"><div class="donate-card"><i class="fa fa-church"></i><h4 data-i18n="donate.card1">ეკლესიის ფონდი</h4><p data-i18n="donate.card1d">სარემონტო და ოპერაციული ხარჯები.</p></div></div>
+      <div class="col-md-4"><div class="donate-card" style="border-color:var(--gold);"><i class="fa fa-heart"></i><h4 data-i18n="donate.card2">კარიტასი</h4><p data-i18n="donate.card2d">პირდაპირ ეხმარება ბათუმის ოჯახებს.</p></div></div>
+      <div class="col-md-4"><div class="donate-card"><i class="fa fa-book-open"></i><h4 data-i18n="donate.card3">კათეხიზმი</h4><p data-i18n="donate.card3d">სასწავლო მასალები, ბიბლია.</p></div></div>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-5">
+        <div class="bank-box">
+          <h5 style="font-family:'Cormorant Garamond',serif;margin-bottom:.8rem;color:#fff;" data-i18n="donate.bank">საბანკო გადარიცხვა</h5>
+          <div><span style="color:rgba(255,255,255,.5);" data-i18n="donate.bank_name">ბანკი:</span> TBC Bank</div>
+          <div><span style="color:rgba(255,255,255,.5);" data-i18n="donate.iban">IBAN:</span> GE__ TB 0000 0000 0000 00</div>
+          <div><span style="color:rgba(255,255,255,.5);" data-i18n="donate.account_name">მიმღები:</span> Catholic Parish Batumi</div>
+          <p style="font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.6rem;" data-i18n="donate.bank_note">* რეკვიზიტები განახლდება. დაგვიკავშირდით.</p>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="bank-box">
+          <h5 style="font-family:'Cormorant Garamond',serif;margin-bottom:.8rem;color:#fff;" data-i18n="donate.online">ონლაინ გადახდა</h5>
+          <p style="font-size:.84rem;color:rgba(255,255,255,.68);margin-bottom:1rem;" data-i18n="donate.online_d">Stripe ინტეგრაცია — მალე. ამ ეტაპზე ბანკი ან ელ-ფოსტა.</p>
+          <!-- STRIPE BUTTON — replace href with real Payment Link -->
+          <a href="mailto:batumicatholic@gmail.com?subject=Donation" class="btn-gold" data-i18n="donate.contact_btn">დაგვიკავშირდით →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-tag" data-i18n="contact.tag">კონტაქტი</div>
+      <h2 class="section-title" data-i18n="contact.title">მოგვწერეთ ან მოგვიდეს</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <div class="contact-box">
+          <div class="contact-row"><div class="contact-icon"><i class="fa fa-location-dot"></i></div><div><div style="font-weight:700;font-size:.82rem;" data-i18n="contact.address_label">მისამართი</div><div style="font-size:.9rem;">გოგებაშვილის ქ. 74, ბათუმი</div></div></div>
+          <div class="contact-row"><div class="contact-icon"><i class="fa fa-envelope"></i></div><div><div style="font-weight:700;font-size:.82rem;">Email</div><a href="mailto:batumicatholic@gmail.com" style="font-size:.9rem;color:var(--blue);">batumicatholic@gmail.com</a></div></div>
+          <div class="contact-row"><div class="contact-icon"><i class="fab fa-facebook"></i></div><div><div style="font-weight:700;font-size:.82rem;">Facebook</div><a href="https://www.facebook.com/batumicatholic" target="_blank" style="font-size:.9rem;color:var(--blue);">facebook.com/batumicatholic</a></div></div>
+          <div class="contact-row"><div class="contact-icon"><i class="fab fa-telegram"></i></div><div><div style="font-weight:700;font-size:.82rem;">Telegram</div><a href="https://t.me/batumicatholic" target="_blank" style="font-size:.9rem;color:var(--blue);">@batumicatholic</a></div></div>
+          <div class="contact-row"><div class="contact-icon"><i class="fa fa-clock"></i></div><div><div style="font-weight:700;font-size:.82rem;" data-i18n="contact.hours_label">ეკლესია ღია</div><div style="font-size:.9rem;" data-i18n="contact.hours">ყოველდღე 07:00 – 19:00</div></div></div>
+          <div class="contact-row" style="border:none;">
+            <div class="contact-icon"><i class="fa fa-compass"></i></div>
+            <div>
+              <div style="font-weight:700;font-size:.82rem;" data-i18n="contact.pilgrim_label">✠ORDER OF CHRIST'S PILGRIMS✠</div>
+              <a href="https://pilgrim.help" target="_blank" style="font-size:.9rem;color:var(--blue);">pilgrim.help</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="map-embed">
+          <iframe src="https://maps.google.com/maps?q=41.6456,41.6499&z=16&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Church of the Holy Spirit, Batumi"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL WIDGETS (внизу перед футером) -->
+<section id="social-widgets">
+  <div class="container">
+    <div class="text-center mb-4">
+      <div class="section-tag">Social & Media</div>
+      <h2 class="section-title" data-i18n="social.title">ჩვენი სოციალური ქსელები</h2>
+    </div>
+    <div class="row g-4">
+      <!-- Telegram -->
+      <div class="col-md-4">
+        <div class="widget-frame">
+          <div class="widget-header"><i class="fab fa-telegram" style="color:#0088CC;"></i> Telegram</div>
+          <div class="widget-placeholder">
+            <i class="fab fa-telegram" style="color:#0088CC;font-size:3rem;"></i>
+            <strong>@batumicatholic</strong>
+            <p style="font-size:.82rem;color:var(--muted);">Telegram კანალი — მალე</p>
+            <a href="https://t.me/batumicatholic" target="_blank" class="btn-gold" style="font-size:.78rem;padding:6px 16px;">გახსნა →</a>
+          </div>
+        </div>
+      </div>
+      <!-- Facebook -->
+      <div class="col-md-4">
+        <div class="widget-frame">
+          <div class="widget-header"><i class="fab fa-facebook" style="color:#1877F2;"></i> Facebook</div>
+          <div id="fb-widget-inner">
+            <div id="fb-root"></div>
+            <div class="fb-page" data-href="https://www.facebook.com/batumicatholic" data-tabs="timeline" data-width="380" data-height="280" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"></div>
+            <div class="widget-placeholder" id="fb-fallback">
+              <i class="fab fa-facebook" style="color:#1877F2;font-size:3rem;"></i>
+              <strong>facebook.com/batumicatholic</strong>
+              <a href="https://www.facebook.com/batumicatholic" target="_blank" class="btn-gold" style="font-size:.78rem;padding:6px 16px;">გახსნა →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Vatican News -->
+      <div class="col-md-4">
+        <div class="widget-frame">
+          <div class="widget-header"><span style="color:#FFD700;">✝</span> Vatican News</div>
+          <div style="padding:.75rem;">
+            <div id="vn-feed" style="display:flex;flex-direction:column;gap:.5rem;">
+              <div style="color:#6B7280;font-size:.82rem;text-align:center;padding:1.5rem 0;">
+                <i class="fa fa-spinner fa-spin"></i>
+              </div>
+            </div>
+            <a href="https://www.vaticannews.va" target="_blank"
+               style="display:block;text-align:center;margin-top:.75rem;font-size:.75rem;
+                      color:#1B4F8C;font-weight:700;letter-spacing:.05em;text-transform:uppercase;">
+              vaticannews.va →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS BAND -->
+<div class="partners-band">
+  <div class="container">
+    <h6 data-i18n="partners.title">ჩვენი პარტნიორები · Our Partners</h6>
+    <div class="text-center">
+      <a href="https://www.catholicchurch.ge" target="_blank" class="partner-logo"><i class="fa fa-cross"></i> Catholic Church GE</a>
+      <a href="http://www.vaticange.org" target="_blank" class="partner-logo"><i class="fa fa-dove"></i> Vatican Nunciature</a>
+      <a href="http://www.caritas.ge" target="_blank" class="partner-logo"><i class="fa fa-heart"></i> Caritas Georgia</a>
+      <a href="https://camillians.ge" target="_blank" class="partner-logo"><i class="fa fa-hospital"></i> Camillians GE</a>
+      <a href="https://www.catholic.ge" target="_blank" class="partner-logo"><i class="fa fa-newspaper"></i> catholic.ge</a>
+      <a href="https://www.vaticannews.va" target="_blank" class="partner-logo"><i class="fa fa-globe"></i> Vatican News</a>
+      <a href="https://pilgrim.help" target="_blank" class="partner-logo" style="border-color:var(--gold);color:var(--gold);"><i class="fa fa-route"></i> Pilgrim.Help ✠OPC</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="ft-logo"><span class="cross">✝</span> სულიწმიდის მრევლი</div>
+        <p style="font-size:.84rem;max-width:280px;" data-i18n="footer.desc">ბათუმის კათოლიკური სამოციქულო მრევლი · ადჯარა, საქართველო</p>
+        <p style="font-size:.8rem;margin-top:.3rem;">გოგებაშვილის ქ. 74, ბათუმი</p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/batumicatholic" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://t.me/batumicatholic" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+          <a href="https://www.youtube.com/@batumicatholic" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="mailto:batumicatholic@gmail.com" title="Email"><i class="fa fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2 offset-lg-1">
+        <h6 data-i18n="footer.nav">ნავიგაცია</h6>
+        <ul>
+          <li><a href="/about/"    data-i18n="nav.about">შესახებ</a></li>
+          <li><a href="#schedule"  data-i18n="nav.schedule">განრიგი</a></li>
+          <li><a href="/news/"     data-i18n="nav.news">სიახლეები</a></li>
+          <li><a href="/gallery/"  data-i18n="nav.gallery">გალერეა</a></li>
+          <li><a href="/sermons/"  data-i18n="nav.sermons">ქადაგებები</a></li>
+          <li><a href="#donate"    data-i18n="nav.donate">შეწირვა</a></li>
+          <li><a href="#caritas-form" data-i18n="mercy.tag">კარიტასი</a></li>
+          <li><a href="#contact"   data-i18n="nav.contact">კონტაქტი</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6 data-i18n="footer.partners">პარტნიორები</h6>
+        <ul>
+          <li><a href="https://www.catholicchurch.ge" target="_blank">Catholic Church GE</a></li>
+          <li><a href="https://www.catholic.ge" target="_blank">catholic.ge</a></li>
+          <li><a href="http://www.caritas.ge" target="_blank">Caritas Georgia</a></li>
+          <li><a href="https://camillians.ge" target="_blank">Camillians GE</a></li>
+          <li><a href="https://www.vaticannews.va" target="_blank">Vatican News</a></li>
+          <li><a href="https://pilgrim.help" target="_blank">pilgrim.help</a></li>
+          <li><a href="https://www.vatican.va" target="_blank">Vatican.va</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <h6 data-i18n="footer.project_title">პროექტის შესახებ</h6>
+        <p style="font-size:.78rem;color:rgba(255,255,255,.45);" data-i18n="footer.project">ეს საიტი შექმნილია <strong style="color:rgba(255,255,255,.65);">✠ORDER OF CHRIST'S PILGRIMS✠</strong> მხარდაჭერით — ტიპიური გადაწყვეტა სამრევლო საიტებისთვის.</p>
+        <a href="https://pilgrim.help" target="_blank" style="font-size:.78rem;color:var(--gold);" data-i18n="footer.template">pilgrim.help →</a>
+        <div style="margin-top:.75rem;"><a href="/admin/" style="font-size:.72rem;color:rgba(255,255,255,.3);" data-i18n="footer.admin">Admin ↗</a></div>
+      </div>
+    </div>
+    <hr class="footer-divider" />
+    <div class="d-flex flex-wrap justify-content-between align-items-center footer-bottom gap-2">
+      <span>© 2026 სულიწმიდის კათოლიკური მრევლი, ბათუმი</span>
+      <span>With Love & Honor<a href="https://pilgrim.help" target="_blank">ORDER OF CHRIST'S PILGRIMS</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Facebook SDK -->
+<script>
+window.fbAsyncInit = function() {
+  FB.init({ xfbml:true, version:'v19.0' });
+  FB.XFBML.parse();
+  var fb = document.getElementById('fb-fallback');
+  if (fb) setTimeout(()=> fb.style.display='none', 1500);
+};
+(function(d,s,id){ var js,fjs=d.getElementsByTagName(s)[0]; if(d.getElementById(id))return; js=d.createElement(s); js.id=id; js.src="https://connect.facebook.net/ka_GE/sdk.js"; fjs.parentNode.insertBefore(js,fjs); }(document,'script','facebook-jssdk'));
+</script>
+
+<!-- Dynamic data loader -->
+<script>
+const LANG_DEFAULT = localStorage.getItem('parish-lang') || 'ka';
+
+// ── Load news from PHP API ──
+async function loadNews() {
+  const lang = document.documentElement.getAttribute('data-lang') || 'ka';
+  try {
+    const r = await fetch('/load-news.php?lang='+lang+'&limit=3&status=published');
+    const data = await r.json();
+    const grid = document.getElementById('news-grid');
+    if (!data.ok || !data.items.length) { renderFallbackNews(grid); return; }
+    const catClass = {liturgy:'tp-liturgy',caritas:'tp-caritas',announce:'tp-announce',event:'tp-event'};
+    const catName  = {liturgy:'ლიტურგია',caritas:'კარიტასი',announce:'განცხადება',event:'ღონისძიება',
+                      en:{liturgy:'Liturgy',caritas:'Caritas',announce:'News',event:'Event'},
+                      ru:{liturgy:'Литургия',caritas:'Каритас',announce:'Объявление',event:'Событие'}};
+    const names = catName[lang] || catName;
+    grid.innerHTML = data.items.map(n => `
+      <div class="col-md-4">
+        <div class="news-card" onclick="window.location='/news/'">
+          <img src="${n.image ? '/'+esc(n.image) : 'pexe.jpg'}" class="card-img-top" alt="${esc(n.title)}" loading="lazy" />
+          <div class="card-body">
+            <span class="tag-pill-sm ${catClass[n.category]||'tp-announce'}">${names[n.category]||n.category}</span>
+            <div class="news-date">${n.date_fmt||n.date}</div>
+            <h5>${esc(n.title)}</h5>
+            <p>${esc(n.excerpt.substring(0,100))}${n.excerpt.length>100?'…':''}</p>
+          </div>
+        </div>
+      </div>`).join('');
+  } catch(e) { renderFallbackNews(document.getElementById('news-grid')); }
+}
+
+function renderFallbackNews(grid) {
+  const lang = document.documentElement.getAttribute('data-lang') || 'ka';
+  const fallback = [
+    {title:{ka:'ახალამბები',en:'News',ru:'Новости'},date:'—',img:'pexe.jpg',cat:'announce'},
+  ];
+  grid.innerHTML = `<div class="col-12 text-center py-4" style="color:var(--muted);">
+    <i class="fa fa-newspaper fa-2x mb-3 d-block opacity-25"></i>
+    <p>სიახლეები მალე</p>
+    <a href="/news/" class="btn-gold" style="font-size:.82rem;">ყველა სიახლე →</a>
+  </div>`;
+}
+
+// ── Load events from PHP API ──
+async function loadEvents() {
+  const lang = document.documentElement.getAttribute('data-lang') || 'ka';
+  try {
+    const r = await fetch('/load-events.php?lang='+lang+'&upcoming=1');
+    const data = await r.json();
+    const list = document.getElementById('events-list');
+    if (!data.ok || !data.items.length) { renderFallbackEvents(list); return; }
+    list.innerHTML = data.items.slice(0,4).map(e => {
+      const dt = new Date(e.date+'T00:00:00');
+      const day = dt.getDate();
+      const mons = {ka:['','იან','თებ','მარ','აპრ','მაი','ივნ','ივლ','აგვ','სექ','ოქტ','ნოე','დეკ'],en:['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],ru:['','янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек']};
+      const mon = (mons[lang]||mons.ka)[dt.getMonth()+1];
+      return `<div class="event-card">
+        <div class="event-date-box"><div class="ed-day">${day}</div><div class="ed-mon">${mon}</div></div>
+        <div><h6>${esc(e.title)}</h6><div class="e-time">${e.time||''} ${e.location?'· '+esc(e.location):''}</div></div>
+      </div>`;
+    }).join('');
+  } catch(e) { renderFallbackEvents(document.getElementById('events-list')); }
+}
+
+function renderFallbackEvents(list) {
+  const upcoming = [
+    {day:20,mon:'აპრ',title:'პალმის კვირა',time:'10:00'},
+    {day:24,mon:'აპრ',title:'დიდი ხუთშაბათი',time:'18:00'},
+    {day:26,mon:'აპრ',title:'დიდი შაბათი · ვიგილია',time:'23:00'},
+  ];
+  list.innerHTML = upcoming.map(e=>`<div class="event-card">
+    <div class="event-date-box"><div class="ed-day">${e.day}</div><div class="ed-mon">${e.mon}</div></div>
+    <div><h6>${e.title}</h6><div class="e-time">${e.time}</div></div>
+  </div>`).join('');
+}
+
+// ── Caritas form async submit ──
+document.getElementById('caritasForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('caritasSubmitBtn');
+  btn.textContent = '…'; btn.style.opacity = '.6';
+  try {
+    const fd = new FormData(this);
+    const r = await fetch('caritas-form.php', {method:'POST', body:fd});
+    const ok = r.ok;
+    document.getElementById('caritasSuccess').style.display = ok ? 'block' : 'none';
+    document.getElementById('caritasError').style.display   = ok ? 'none' : 'block';
+    if (ok) this.reset();
+  } catch(err) {
+    document.getElementById('caritasError').style.display = 'block';
+  }
+  btn.textContent = translations[document.documentElement.getAttribute('data-lang')||'ka']['mercy.f_submit'] || 'გაგზავნა';
+  btn.style.opacity = '1';
+});
+
+// ── Schedule from JSON ──
+async function loadSchedule() {
+  try {
+    const r = await fetch('/data/schedule.json');
+    if (!r.ok) return;
+    const data = await r.json();
+    if (!data.rows || !data.rows.length) return;
+    const lang = document.documentElement.getAttribute('data-lang') || 'ka';
+    const langMap = {KA:'pill-ka',EN:'pill-en',RU:'pill-ru',PL:'pill-pl'};
+    // Поддержка мультиязычных объектов {ka, en, ru} и строк
+    const ml = (v) => (v && typeof v === 'object') ? (v[lang] || v.ka || '') : (v || '—');
+    document.getElementById('schedule-body').innerHTML = data.rows.map(row=>`
+      <tr>
+        <td><strong>${esc(ml(row.day))}</strong></td>
+        <td><span class="time-badge">${esc(row.time)}</span></td>
+        <td>${esc(ml(row.type))}</td>
+        <td>${(row.langs||[]).map(l=>`<span class="lang-pill ${langMap[l]||''}">${l}</span>`).join('')}</td>
+        <td>${esc(ml(row.note))}</td>
+      </tr>`).join('');
+  } catch(e) { /* use static fallback */ }
+}
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ── i18n ──
+const translations = {
+  ka:{"nav.brand":"სულიწმიდის მრევლი · ბათუმი","nav.about":"შესახებ","nav.schedule":"განრიგი","nav.news":"სიახლეები","nav.gallery":"გალერეა","nav.sermons":"ქადაგებები","nav.calendar":"კალენდარი","nav.donate":"შეწირვა","nav.contact":"კონტაქტი","hero.eyebrow":"რომაული კათოლიკური მრევლი · ბათუმი, საქართველო","hero.title1":"სულიწმიდის","hero.title2":"კათოლიკური ეკლესია","hero.subtitle":"ბათუმი, საქართველო · მამა გაბრიელე ბრაგანტინი","hero.btn1":"მსახურების განრიგი","hero.btn2":"მრევლის შესახებ","band.sunday":"კვირა","band.sunday_lang":"ქართ. / ინგლ.","band.weekdays":"სამუშ. დღეები","band.confessions":"აღსარება","band.confessions_lang":"შაბ–კვირა","band.address":"მისამართი","about.tag":"მრევლის შესახებ","about.title":"სულიწმიდის კათოლიკური ეკლესია","about.p1":"ეკლესია აშენდა 2000 წელს ქართველი არქიტექტორების პროექტით. მდებარეობს იმ ადგილას, სადაც საბჭოთა პერიოდამდე კათოლიკური ტაძარი იდგა.","about.p2":"1995 წლიდან მრევლს ხელმძღვანელობს მამა გაბრიელე ბრაგანტინი. ეკლესია ემსახურება ქართველ, ამერიკელ, ევროპელ კათოლიკეებს.","about.stat1":"დაარსება","about.stat2":"ენა","about.stat3":"ქვეყნები","about.more_btn":"ისტორია →","about.gallery_btn":"გალერეა →","sched.tag":"მსახურების განრიგი","sched.title":"ლიტურგიული განრიგი","sched.col_day":"დღე","sched.col_time":"დრო","sched.col_type":"სახეობა","sched.col_lang":"ენა","sched.col_note":"შენიშვნა","sched.main_mass":"მთავარი მესა","sched.evening":"საღამოს მესა","sched.before_mass":"მსახ.-ის წინ","sched.note":"* ზეიმებსა და სადღ. დღეებში განრიგი შეიძლება შეიცვალოს.","mass":"მესა","confession":"აღსარება","news.tag":"სიახლეები","news.title":"ბოლო სიახლეები","news.all":"ყველა →","cal.tag":"კალენდარი","cal.title":"ლიტურგიული კალენდარი","cal.lead":"კათოლიკური, ქართული სახელმწიფო და ადგილობრივი ღონისძიებები.","cal.upcoming":"მომავალი ღონისძიებები","mercy.tag":"მოწყალების სამსახური","mercy.title":"კარიტასი ბათუმი","mercy.p1":"ჩვენი სამსახური ეხმარება მოხუცებს, ოჯახებს მძიმე მდგ., ავადმყოფებს.","mercy.p2":"გჭირდებათ დახმარება ან გინდათ დახმარება გაუწიოთ?","mercy.btn_help":"დახმარების მოთხოვნა","mercy.btn_donate":"შეწირვა კარიტასისთვის","mercy.card1":"საკვები პაკეტები","mercy.card1d":"ყოველ თვე 20+ ოჯახს","mercy.card2":"სამედიცინო","mercy.card2d":"მედიკამენტები, გამოკვლევები","mercy.card3":"სასწავლო","mercy.card3d":"სტიპენდიები ბავშვებისთვის","mercy.card4":"საბინაო","mercy.card4d":"სარემონტო, კრიზისული","mercy.form_title":"დახმარების მოთხოვნის ფორმა","mercy.f_name":"სახელი *","mercy.f_phone":"ტელეფონი / Email *","mercy.f_type":"დახმარების სახე","mercy.f_food":"საკვები","mercy.f_med":"სამედიცინო","mercy.f_edu":"სასწავლო","mercy.f_house":"საბინაო","mercy.f_other":"სხვა","mercy.f_lang":"ენა","mercy.f_desc":"აღწერა","mercy.f_submit":"გაგზავნა","mercy.f_sent":"✓ მადლობა! გაგზავნილია.","mercy.f_error":"შეცდომა. სცადეთ batumicatholic@gmail.com","donate.tag":"შეწირვა","donate.title":"მხარი დაუჭირეთ მრევლს","donate.lead":"თქვენი შეწირვა ეხმარება ეკლესიის შენახვას, კარიტასს და კათეხიზმს.","donate.card1":"ეკლესიის ფონდი","donate.card1d":"სარემონტო და ოპერაციული ხარჯები.","donate.card2":"კარიტასი","donate.card2d":"პირდაპირ ეხმარება ბათუმის ოჯახებს.","donate.card3":"კათეხიზმი","donate.card3d":"სასწავლო მასალები, ბიბლია.","donate.bank":"საბანკო გადარიცხვა","donate.bank_name":"ბანკი:","donate.iban":"IBAN:","donate.account_name":"მიმღები:","donate.bank_note":"* რეკვიზიტები განახლდება.","donate.online":"ონლაინ გადახდა","donate.online_d":"Stripe — მალე. ამ ეტაპზე ბანკი ან ელ-ფოსტა.","donate.contact_btn":"დაგვიკავშირდით →","contact.tag":"კონტაქტი","contact.title":"მოგვწერეთ ან მოგვიდეს","contact.address_label":"მისამართი","contact.hours_label":"ეკლესია ღია","contact.hours":"ყოველდღე 07:00 – 19:00","contact.pilgrim_label":"OPC პროექტი","social.title":"ჩვენი სოციალური ქსელები","partners.title":"ჩვენი პარტნიორები","footer.desc":"ბათუმის კათოლიკური სამოციქულო მრევლი · ადჯარა, საქართველო","footer.nav":"ნავიგაცია","footer.partners":"პარტნიორები","footer.project_title":"პროექტის შესახებ","footer.project":"ეს საიტი შექმნილი ✠ORDER OF CHRIST'S PILGRIMS✠ მხარდაჭერით.","footer.template":"pilgrim.help →","footer.admin":"Admin ↗"},
+  en:{"nav.brand":"Holy Spirit Parish · Batumi","nav.about":"About","nav.schedule":"Schedule","nav.news":"News","nav.gallery":"Gallery","nav.sermons":"Sermons","nav.calendar":"Calendar","nav.donate":"Donate","nav.contact":"Contact","hero.eyebrow":"Roman Catholic Parish · Batumi, Georgia","hero.title1":"Church of the","hero.title2":"Holy Spirit","hero.subtitle":"Batumi, Georgia · Fr. Gabriele Bragantini","hero.btn1":"Mass Schedule","hero.btn2":"About the Parish","about.tag":"About","about.title":"Church of the Holy Spirit","about.p1":"Built in 2000 by Georgian architects Oleg Pataridze and Giorgi Baghoshvili. It stands on the site of an earlier Catholic church confiscated during the Soviet era.","about.p2":"Since 1995, the parish is led by Fr. Gabriele Bragantini, serving Georgian, American, European and international Catholics.","about.stat1":"Founded","about.stat2":"Languages","about.stat3":"Nationalities","about.more_btn":"History →","about.gallery_btn":"Gallery →","sched.tag":"Mass Schedule","sched.title":"Liturgical Schedule","sched.col_day":"Day","sched.col_time":"Time","sched.col_type":"Type","sched.col_lang":"Language","sched.col_note":"Note","sched.main_mass":"Main Mass","sched.evening":"Evening Mass","sched.before_mass":"Before Mass","sched.note":"* Schedule may change on feast days.","mass":"Mass","confession":"Confession","news.tag":"News","news.title":"Latest News","news.all":"All News →","cal.tag":"Calendar","cal.title":"Liturgical Calendar","cal.lead":"Catholic, Georgian national and local events.","cal.upcoming":"Upcoming Events","mercy.tag":"Mercy Ministry","mercy.title":"Caritas Batumi","mercy.p1":"Our ministry helps the elderly, families in need, the sick.","mercy.p2":"Need help or want to volunteer?","mercy.btn_help":"Request Help","mercy.btn_donate":"Donate to Caritas","mercy.card1":"Food Packages","mercy.card1d":"20+ families monthly","mercy.card2":"Medical Aid","mercy.card2d":"Medications, checkups","mercy.card3":"Education","mercy.card3d":"Scholarships for children","mercy.card4":"Housing","mercy.card4d":"Repairs, crisis support","mercy.form_title":"Request Help Form","mercy.f_name":"Name *","mercy.f_phone":"Phone / Email *","mercy.f_type":"Type of Help","mercy.f_food":"Food","mercy.f_med":"Medical","mercy.f_edu":"Education","mercy.f_house":"Housing","mercy.f_other":"Other","mercy.f_lang":"Language","mercy.f_desc":"Description","mercy.f_submit":"Send Request","mercy.f_sent":"✓ Thank you! Your request has been sent.","mercy.f_error":"Error. Please email batumicatholic@gmail.com","donate.tag":"Donate","donate.title":"Support the Parish","donate.lead":"Your donation helps maintain the church, support Caritas and catechism.","donate.card1":"Church Fund","donate.card1d":"Maintenance and operational costs.","donate.card2":"Caritas","donate.card2d":"Direct help to Batumi families.","donate.card3":"Catechism","donate.card3d":"Study materials, Bibles.","donate.bank":"Bank Transfer","donate.bank_name":"Bank:","donate.iban":"IBAN:","donate.account_name":"Beneficiary:","donate.bank_note":"* Bank details to be updated.","donate.online":"Online Payment","donate.online_d":"Stripe coming soon. Use bank transfer or email for now.","donate.contact_btn":"Contact Us →","contact.tag":"Contact","contact.title":"Write to Us or Visit","contact.address_label":"Address","contact.hours_label":"Church Open","contact.hours":"Daily 07:00 – 19:00","contact.pilgrim_label":"OPC Project","social.title":"Our Social Networks","partners.title":"Our Partners","footer.desc":"Catholic Apostolic Parish · Adjara, Georgia","footer.nav":"Navigation","footer.partners":"Partners","footer.project_title":"About This Project","footer.project":"This site is supported by ORDER OF CHRIST'S PILGRIMS.","footer.template":"pilgrim.help →","footer.admin":"Admin ↗"},
+  ru:{"nav.brand":"Приход Святого Духа · Батуми","nav.about":"О приходе","nav.schedule":"Расписание","nav.news":"Новости","nav.gallery":"Галерея","nav.sermons":"Проповеди","nav.calendar":"Календарь","nav.donate":"Пожертвовать","nav.contact":"Контакты","hero.eyebrow":"Римско-католический приход · Батуми, Грузия","hero.title1":"Церковь","hero.title2":"Святого Духа","hero.subtitle":"Батуми, Грузия · о. Габриэле Брагантини","hero.btn1":"Расписание богослужений","hero.btn2":"О приходе","about.tag":"О приходе","about.title":"Церковь Святого Духа","about.p1":"Построена в 2000 году по проекту грузинских архитекторов. Стоит на месте старого католического храма, конфискованного в советское время.","about.p2":"С 1995 года приходом руководит о. Габриэле Брагантини, окормляя грузинских, американских и европейских католиков.","about.stat1":"Основан","about.stat2":"Языка","about.stat3":"Национальности","about.more_btn":"История →","about.gallery_btn":"Галерея →","sched.tag":"Расписание","sched.title":"Расписание богослужений","sched.col_day":"День","sched.col_time":"Время","sched.col_type":"Тип","sched.col_lang":"Язык","sched.col_note":"Примечание","sched.main_mass":"Главная Месса","sched.evening":"Вечерняя Месса","sched.before_mass":"Перед Мессой","sched.note":"* В праздники расписание может меняться.","mass":"Месса","confession":"Исповедь","news.tag":"Новости","news.title":"Последние новости","news.all":"Все новости →","cal.tag":"Календарь","cal.title":"Литургический календарь","cal.lead":"Католические, грузинские государственные и местные события.","cal.upcoming":"Ближайшие события","mercy.tag":"Служба милосердия","mercy.title":"Каритас Батуми","mercy.p1":"Наша служба помогает пожилым, семьям в трудной ситуации, больным.","mercy.p2":"Нужна помощь или хотите помочь?","mercy.btn_help":"Запросить помощь","mercy.btn_donate":"Пожертвовать в Каритас","mercy.card1":"Продуктовые наборы","mercy.card1d":"20+ семей ежемесячно","mercy.card2":"Медицинская помощь","mercy.card2d":"Лекарства, обследования","mercy.card3":"Образование","mercy.card3d":"Стипендии для детей","mercy.card4":"Жильё","mercy.card4d":"Ремонт, кризисная помощь","mercy.form_title":"Форма запроса помощи","mercy.f_name":"Имя *","mercy.f_phone":"Телефон / Email *","mercy.f_type":"Вид помощи","mercy.f_food":"Продукты","mercy.f_med":"Медицина","mercy.f_edu":"Образование","mercy.f_house":"Жильё","mercy.f_other":"Другое","mercy.f_lang":"Язык","mercy.f_desc":"Описание","mercy.f_submit":"Отправить","mercy.f_sent":"✓ Спасибо! Запрос отправлен.","mercy.f_error":"Ошибка. Напишите на batumicatholic@gmail.com","donate.tag":"Пожертвование","donate.title":"Поддержите приход","donate.lead":"Ваше пожертвование помогает содержать церковь, поддерживать Каритас.","donate.card1":"Фонд церкви","donate.card1d":"Ремонт и операционные расходы.","donate.card2":"Каритас","donate.card2d":"Прямая помощь батумским семьям.","donate.card3":"Катехизация","donate.card3d":"Учебные материалы, Библии.","donate.bank":"Банковский перевод","donate.bank_name":"Банк:","donate.iban":"IBAN:","donate.account_name":"Получатель:","donate.bank_note":"* Реквизиты будут обновлены.","donate.online":"Онлайн-оплата","donate.online_d":"Stripe — скоро. Пока используйте банк или email.","donate.contact_btn":"Написать нам →","contact.tag":"Контакты","contact.title":"Напишите нам или приходите","contact.address_label":"Адрес","contact.hours_label":"Церковь открыта","contact.hours":"Ежедневно 07:00 – 19:00","contact.pilgrim_label":"✠ORDER OF CHRIST'S PILGRIMS✠","social.title":"Наши социальные сети","partners.title":"Наши партнёры","footer.desc":"Католический апостольский приход · Аджария, Грузия","footer.nav":"Навигация","footer.partners":"Партнёры","footer.project_title":"О проекте","footer.project":"Сайт поддерживается Орденом Христовых Паломников","footer.template":"pilgrim.help →","footer.admin":"Admin ↗"}
+};
+
+function setLang(lang) {
+  document.documentElement.setAttribute('lang', lang);
+  document.documentElement.setAttribute('data-lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.lang-btn').forEach(b => { if(b.textContent.toLowerCase().includes(lang)) b.classList.add('active'); });
+  const t = translations[lang] || translations.ka;
+  document.querySelectorAll('[data-i18n]').forEach(el => { const k=el.getAttribute('data-i18n'); if(t[k]!==undefined) el.textContent=t[k]; });
+  localStorage.setItem('parish-lang', lang);
+  loadNews();
+  loadEvents();
+  loadSchedule();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('parish-lang') || 'ka';
+  const lang = ['ka','en','ru'].includes(saved) ? saved : 'ka';
+  setLang(lang);
+  loadSchedule();
+  loadVaticanNews();
+});
+
+// ── Vatican News via RSS2JSON ──
+function loadVaticanNews() {
+  fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.vaticannews.va/en.rss.xml&count=4')
+    .then(r => r.json()).then(d => {
+      if (!d.items || !d.items.length) throw new Error();
+      document.getElementById('vn-feed').innerHTML = d.items.map(item => `
+        <a href="${esc(item.link)}" target="_blank" rel="noopener"
+           style="display:block;padding:.5rem .25rem;border-bottom:1px solid #DDE3EC;
+                  text-decoration:none;transition:background .15s;"
+           onmouseover="this.style.background='#E8F0F7'"
+           onmouseout="this.style.background=''">
+          <div style="font-size:.78rem;font-weight:700;color:#123566;line-height:1.35;margin-bottom:.2rem;">${esc(item.title)}</div>
+          <div style="font-size:.68rem;color:#6B7280;">${new Date(item.pubDate).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</div>
+        </a>`).join('');
+    }).catch(() => {
+      document.getElementById('vn-feed').innerHTML =
+        '<a href="https://www.vaticannews.va" target="_blank" rel="noopener" style="display:block;text-align:center;padding:1.5rem;color:#1B4F8C;font-weight:700;">Vatican News ↗</a>';
+    });
+}
+</script>
+</body>
+</html>

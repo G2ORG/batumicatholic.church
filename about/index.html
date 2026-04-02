@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ka" data-lang="ka">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="description" content="სულიწმიდის კათოლიკური ეკლესიის ისტორია · ბათუმი, საქართველო"/>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <title>შესახებ · სულიწმიდის მრევლი ბათუმი</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&family=Noto+Sans+Georgian:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root{--blue:#1B4F8C;--blue-dark:#123566;--blue-light:#E8F0F7;--gold:#C9A84C;--gold-light:#F5E9C8;--white:#FAFAF8;--text:#1A1A1A;--muted:#6B7280;--border:#DDE3EC}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+    body{font-family:'Lato','Noto Sans Georgian',sans-serif;background:var(--white);color:var(--text);font-size:16px;line-height:1.7}
+    h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.2}a{color:inherit;text-decoration:none}
+    .navbar{background:rgba(27,79,140,.97);backdrop-filter:blur(8px);padding:.75rem 0;position:sticky;top:0;z-index:1000;border-bottom:2px solid var(--gold)}
+    .navbar-brand{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:700;color:#fff !important}
+    .navbar-brand .cross{color:var(--gold);margin-right:.4rem}
+    .nav-link{color:rgba(255,255,255,.88) !important;font-size:.78rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.4rem .6rem !important;transition:color .2s}
+    .nav-link:hover,.nav-link.active-link{color:var(--gold) !important}
+    .navbar-toggler{border-color:rgba(255,255,255,.4)}.navbar-toggler-icon{filter:invert(1)}
+    .lang-btn{background:transparent;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);font-size:.68rem;font-weight:700;padding:2px 7px;border-radius:3px;cursor:pointer;transition:all .2s}
+    .lang-btn:hover,.lang-btn.active{background:var(--gold);border-color:var(--gold);color:#fff}
+    .page-hero{background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue) 100%);padding:3.5rem 0 2.5rem;position:relative;overflow:hidden}
+    .page-hero::before{content:'✝';position:absolute;right:-1rem;top:-2rem;font-size:12rem;color:rgba(255,255,255,.04);font-family:serif}
+    .page-hero h1{color:#fff;font-size:clamp(2rem,5vw,3rem);margin-bottom:.4rem}
+    .page-hero .breadcrumb{background:transparent;padding:0;margin:0}
+    .page-hero .breadcrumb-item{font-size:.82rem;color:rgba(255,255,255,.55)}
+    .page-hero .breadcrumb-item a{color:rgba(255,255,255,.7)}.page-hero .breadcrumb-item a:hover{color:var(--gold)}
+    .page-hero .breadcrumb-item.active{color:rgba(255,255,255,.85)}
+    .page-hero .breadcrumb-item+.breadcrumb-item::before{color:rgba(255,255,255,.35)}
+    .gold-tag{display:inline-block;background:var(--gold);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:3px 12px;border-radius:2px;margin-bottom:.8rem}
+    .main-content{max-width:800px;margin:0 auto;padding:4rem 1.5rem 6rem}
+    .main-content h2{font-size:2rem;color:var(--blue-dark);margin-top:3rem;margin-bottom:.9rem;border-left:4px solid var(--gold);padding-left:.85rem}
+    .main-content p{margin-bottom:1.1rem;font-size:1rem;line-height:1.8}
+    .main-content blockquote{border-left:3px solid var(--gold);padding:.75rem 1.25rem;background:var(--gold-light);border-radius:0 6px 6px 0;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1.2rem;margin:1.5rem 0}
+    .timeline{position:relative;padding-left:2rem}
+    .timeline::before{content:'';position:absolute;left:.5rem;top:0;bottom:0;width:2px;background:var(--border)}
+    .tl-item{position:relative;margin-bottom:2rem}
+    .tl-dot{position:absolute;left:-1.62rem;top:.3rem;width:14px;height:14px;background:var(--gold);border-radius:50%;border:2px solid var(--white)}
+    .tl-year{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:var(--blue);margin-bottom:.2rem}
+    .tl-text{font-size:.95rem;color:var(--text)}
+    .info-card{background:var(--blue-light);border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin-bottom:1.5rem}
+    .info-card h4{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--blue-dark);margin-bottom:.8rem}
+    .info-row{display:flex;gap:.75rem;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:.9rem}
+    .info-row:last-child{border-bottom:none}
+    .info-label{color:var(--muted);min-width:100px;font-weight:700;font-size:.82rem}
+    .hero-img{width:100%;height:380px;object-fit:cover;border-radius:8px;box-shadow:0 16px 48px rgba(27,79,140,.18);margin-bottom:2.5rem}
+    .btn-gold{background:var(--gold);color:#fff;border:none;padding:10px 24px;font-weight:700;font-size:.84rem;letter-spacing:.07em;text-transform:uppercase;border-radius:3px;transition:background .2s;display:inline-block}
+    .btn-gold:hover{background:#b0912f;color:#fff}
+    footer{background:#0a1e3a;color:rgba(255,255,255,.7);padding:2.5rem 0 1.5rem}
+    .ft-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;font-weight:700;margin-bottom:.4rem}
+    .ft-logo .cross{color:var(--gold);margin-right:.3rem}
+    footer ul{list-style:none;padding:0}footer ul li{margin-bottom:.3rem}
+    footer ul li a{font-size:.82rem;color:rgba(255,255,255,.6);transition:color .2s}footer ul li a:hover{color:var(--gold)}
+    .footer-divider{border-color:rgba(255,255,255,.1);margin:1.5rem 0 1rem}
+    .footer-bottom{font-size:.75rem;color:rgba(255,255,255,.4)}
+    .footer-bottom a{color:rgba(255,255,255,.5)}.footer-bottom a:hover{color:var(--gold)}
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="/"><span class="cross">✝</span><span data-i18n="nav.brand">სულიწმიდის მრევლი · ბათუმი</span></a>
+    <button class="navbar-toggler ms-auto me-2" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav mx-auto gap-0">
+        <li class="nav-item"><a class="nav-link active-link" href="/about/"   data-i18n="nav.about">შესახებ</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#schedule" data-i18n="nav.schedule">განრიგი</a></li>
+        <li class="nav-item"><a class="nav-link" href="/news/"     data-i18n="nav.news">სიახლეები</a></li>
+        <li class="nav-item"><a class="nav-link" href="/gallery/"  data-i18n="nav.gallery">გალერეა</a></li>
+        <li class="nav-item"><a class="nav-link" href="/sermons/"  data-i18n="nav.sermons">ქადაგებები</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#donate"   data-i18n="nav.donate">შეწირვა</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#contact"  data-i18n="nav.contact">კონტაქტი</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2 mt-2 mt-lg-0">
+        <div class="d-flex gap-1">
+          <button class="lang-btn active" onclick="setLang('ka')">🇬🇪 KA</button>
+          <button class="lang-btn"        onclick="setLang('en')">🇬🇧 EN</button>
+          <button class="lang-btn"        onclick="setLang('ru')">🇷🇺 RU</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="gold-tag" data-i18n="about.tag">მრევლის შესახებ</div>
+    <h1 data-i18n="about.title">სულიწმიდის კათოლიკური ეკლესია</h1>
+    <nav aria-label="breadcrumb"><ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/" data-i18n="home">მთავარი</a></li>
+      <li class="breadcrumb-item active" data-i18n="about.tag">შესახებ</li>
+    </ol></nav>
+  </div>
+</div>
+
+<div class="container">
+<div class="main-content">
+
+  <img src="/pexe.jpg" alt="Church of the Holy Spirit, Batumi" class="hero-img" loading="lazy" />
+
+  <!-- ══ KA CONTENT ══ -->
+  <div class="lang-content" id="lc-ka">
+    <blockquote>"ყველა ერი თაყვანს სცემს მას" — ფსალმ. 85:9</blockquote>
+
+    <h2>ეკლესიის ისტორია</h2>
+    <p>სულიწმიდის კათოლიკური ეკლესია ბათუმში — ეს არის ერთადერთი რომაული კათოლიკური ეკლესია ადჯარის ავტონომიურ რესპუბლიკაში. მისი ისტორია განუყოფელია ბათუმის, შავი ზღვის ნაპირის ქალაქის ისტორიასთან, სადაც საუკუნეების განმავლობაში ცხოვრობდნენ სხვადასხვა ეროვნებისა და სარწმუნოების ადამიანები.</p>
+
+    <p>ეკლესიაში 2000 წლის 8 სექტემბერს გაიხსნა კათოლიკური ჩვეულებრივი ლიტურგია. შენობა აშენდა ქართველი არქიტექტორების — ოლეგ პატარიძისა და გიორგი ბაღოშვილის — პროექტით. ეკლესია დგას იმ ადგილას, სადაც ადრე კათოლიკური ტაძარი იდგა, მაგრამ საბჭოთა პერიოდში ჩამოართვეს კათოლიკე თემს.</p>
+
+    <h2>საბჭოთა პერიოდი</h2>
+    <p>კომუნისტური ხელისუფლების მმართველობის პერიოდში ძველი კათოლიკური ტაძარი ჩამოართვეს და 1989 წლიდან ის გახდა ქართული მართლმადიდებელი ეკლესია — ღვთისმშობლის საკათედრო ტაძარი. ეს ისტორიული ფაქტი კარგი მაგალითია იმისა, როგორ გადაიკვეთება ქრისტიანული ეკლესიების ბედი ამ რეგიონში.</p>
+
+    <h2>1995 წელი — ახალი დასაწყისი</h2>
+    <p>1995 წლიდან კათოლიკური მრევლის სულიერ მწყემსად დაინიშნა მამა გაბრიელე ბრაგანტინი, იტალიელი მღვდელი, რომელმაც მიუძღვნა თავისი ცხოვრება საქართველოს კათოლიკე თემს. მისი ხელმძღვანელობით მრევლი გაიზარდა და გაძლიერდა — გაერთიანდნენ ქართველი, ამერიკელი, ევროპელი და სხვა ეროვნებების კათოლიკეები.</p>
+
+    <h2>ქრონოლოგია</h2>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">XIX ს.</div><div class="tl-text">ბათუმში პირველი კათოლიკური სამლოცველო. ქალაქი შავი ზღვის მნიშვნელოვანი სავაჭრო პუნქტი.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1921</div><div class="tl-text">საბჭოთა ხელისუფლება ხდება ბათუმის ბატონ-პატრონი. კათოლიკური ცხოვრება იდევნება.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1989</div><div class="tl-text">ძველი კათოლიკური ტაძარი გადაეცემა ქართულ მართლმადიდებელ ეკლესიას (ახლანდელი ღვთისმშობლის საკათედრო ტაძარი).</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1995</div><div class="tl-text">მამა გაბრიელე ბრაგანტინი ჩამოდის ბათუმში. იწყება ახალი კათოლიკური მრევლის ჩამოყალიბება.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2000</div><div class="tl-text">8 სექტემბერს კურთხეულ იქნება ახლახმშენებელი სულიწმიდის ეკლესია. არქიტექტორები: ო. პატარიძე, გ. ბაღოშვილი.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">დღეს</div><div class="tl-text">ეკლესია ემსახურება 30-ზე მეტი ქვეყნის კათოლიკეებს. ლიტურგიები ქართულ, ინგლისურ, რუსულ და სხვა ენებზე.</div></div>
+    </div>
+
+    <h2>მრევლი დღეს</h2>
+    <p>დღეს სულიწმიდის ეკლესია არის ნამდვილი საერთაშორისო სამრევლო — ადგილი, სადაც ერთად ილოცებენ ქართველები, ამერიკელები, პოლონელები, იტალიელები, ისრაელელები და სხვა ეროვნებების კათოლიკეები. ყოველ კვირასა და სადღესასწაულო დღეებში ლიტურგია სრულდება სამ ენაზე.</p>
+
+    <p>გარდა ლიტურგიული ცხოვრებისა, მრევლი მნიშვნელოვან სასოციალო საქმიანობას ეწევა კარიტასის სამსახურის მეშვეობით — ეხმარება ხანდაზმულ ადამიანებს, ავადმყოფ ოჯახებს და სხვა მოსაჭირეებს.</p>
+  </div>
+
+  <!-- ══ EN CONTENT ══ -->
+  <div class="lang-content" id="lc-en" style="display:none;">
+    <blockquote>"All nations shall worship before you." — Psalm 86:9</blockquote>
+    <h2>History of the Church</h2>
+    <p>The Church of the Holy Spirit in Batumi is the only Roman Catholic church in the Autonomous Republic of Adjara, Georgia. It was built in 2000 by Georgian architects Oleg Pataridze and Giorgi Baghoshvili, and consecrated on September 8, 2000.</p>
+    <p>The church stands on the site where an earlier Catholic church once stood before it was confiscated during the Soviet period. Since 1989, that former building has served as the Georgian Orthodox Cathedral of the Mother of God.</p>
+    <h2>Soviet Period</h2>
+    <p>During Soviet rule, the original Catholic church was seized and repurposed. The Catholic community in Batumi was effectively suppressed for decades, reflecting the broader pattern of religious persecution under the communist regime.</p>
+    <h2>1995 — A New Beginning</h2>
+    <p>In 1995, Fr. Gabriele Bragantini, an Italian priest, arrived in Batumi and began rebuilding the Catholic community. Under his leadership, the parish grew to serve Catholics of Georgian, American, European, Polish and other nationalities.</p>
+    <h2>Timeline</h2>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">19th c.</div><div class="tl-text">First Catholic chapel in Batumi. The city was an important Black Sea trading port.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1921</div><div class="tl-text">Soviet takeover of Batumi. Catholic life is suppressed.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1989</div><div class="tl-text">The old Catholic church building is transferred to the Georgian Orthodox Church.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1995</div><div class="tl-text">Fr. Gabriele Bragantini arrives. A new Catholic community begins to form.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2000</div><div class="tl-text">September 8: The new Church of the Holy Spirit is consecrated. Architects: Pataridze & Baghoshvili.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Today</div><div class="tl-text">The parish serves Catholics from 30+ countries, with Masses in Georgian, English, Russian and Polish.</div></div>
+    </div>
+    <h2>The Parish Today</h2>
+    <p>Today the Church of the Holy Spirit is a genuinely international community — a place where Georgians, Americans, Poles, Italians, Israelis and many others worship together. The parish also runs the Caritas ministry, providing food, medical aid and support to families in need.</p>
+  </div>
+
+  <!-- ══ RU CONTENT ══ -->
+  <div class="lang-content" id="lc-ru" style="display:none;">
+    <blockquote>"Все народы прославят Тебя." — Пс. 85:9</blockquote>
+    <h2>История церкви</h2>
+    <p>Церковь Святого Духа в Батуми — единственная римско-католическая церковь в Автономной Республике Аджария, Грузия. Она была построена в 2000 году по проекту грузинских архитекторов Олега Патаридзе и Гиорги Багошвили и освящена 8 сентября 2000 года.</p>
+    <p>Церковь стоит на месте, где прежде находился католический храм, конфискованный в советское время. С 1989 года то здание служит Грузинской православной церкви как Кафедральный собор Богородицы.</p>
+    <h2>Советский период</h2>
+    <p>В период советской власти первоначальный католический храм был изъят и перепрофилирован. Католическая община Батуми была фактически подавлена на десятилетия.</p>
+    <h2>1995 год — новое начало</h2>
+    <p>В 1995 году в Батуми прибыл о. Габриэле Брагантини, итальянский священник, который посвятил свою жизнь возрождению католической общины. Под его руководством приход вырос и стал служить католикам грузинской, американской, европейской и польской национальностей.</p>
+    <h2>Хронология</h2>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">XIX в.</div><div class="tl-text">Первая католическая часовня в Батуми. Город — важный черноморский торговый порт.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1921</div><div class="tl-text">Советская власть устанавливается в Батуми. Католическая жизнь подавляется.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1989</div><div class="tl-text">Старое здание католического храма передаётся Грузинской православной церкви.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1995</div><div class="tl-text">Прибытие о. Габриэле Брагантини. Начало формирования новой общины.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2000</div><div class="tl-text">8 сентября: освящение новой церкви Святого Духа. Архитекторы: Патаридзе и Багошвили.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Сегодня</div><div class="tl-text">Приход служит католикам из 30+ стран. Мессы на грузинском, английском, русском, польском.</div></div>
+    </div>
+    <h2>Приход сегодня</h2>
+    <p>Сегодня церковь Святого Духа — настоящая международная община: грузины, американцы, поляки, итальянцы и многие другие молятся вместе. Приход также ведёт службу Каритас, оказывая продовольственную и медицинскую помощь семьям в Батуми.</p>
+  </div>
+
+  <!-- Info card -->
+  <div class="info-card mt-4">
+    <h4>ℹ️ <span data-i18n="about.info_title">ზოგადი ინფორმაცია</span></h4>
+    <div class="info-row"><span class="info-label" data-i18n="about.i_type">ტიპი:</span> <span>Roman Catholic Church</span></div>
+    <div class="info-row"><span class="info-label" data-i18n="about.i_loc">მდებარეობა:</span> <span>Batumi, Adjara, Georgia</span></div>
+    <div class="info-row"><span class="info-label" data-i18n="about.i_year">გახსნილია:</span> <span>2000</span></div>
+    <div class="info-row"><span class="info-label" data-i18n="about.i_arch">არქიტექტორი:</span> <span>Oleg Pataridze, Giorgi Baghoshvili</span></div>
+    <div class="info-row"><span class="info-label" data-i18n="about.i_diocese">ეპარქია:</span> <span>Apostolic Administration of the Caucasus</span></div>
+    <div class="info-row"><span class="info-label" data-i18n="about.i_pastor">მწყემსი:</span> <span>Fr. Gabriele Bragantini (1995–)</span></div>
+    <div class="info-row"><span class="info-label" data-i18n="about.i_addr">მისამართი:</span> <span>გოგებაშვილის ქ. 74, ბათუმი</span></div>
+    <div class="info-row"><span class="info-label" data-i18n="about.i_coords">კოორდინატები:</span> <span>41.6456°N 41.6499°E</span></div>
+  </div>
+
+  <div class="d-flex gap-2 flex-wrap mt-4">
+    <a href="https://en.wikipedia.org/wiki/Church_of_the_Holy_Spirit_(Batumi)" target="_blank" class="btn-gold">Wikipedia →</a>
+    <a href="/gallery/" class="btn-gold" style="background:var(--blue);" data-i18n="nav.gallery">გალერეა →</a>
+    <a href="/#contact" class="btn-gold" style="background:var(--blue);" data-i18n="nav.contact">კონტაქტი →</a>
+  </div>
+</div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="row g-3 align-items-center">
+      <div class="col-md-4"><div class="ft-logo"><span class="cross">✝</span> სულიწმიდის მრევლი</div><p style="font-size:.8rem;">გოგებაშვილის ქ. 74, ბათუმი</p></div>
+      <div class="col-md-4"><ul>
+        <li><a href="/" data-i18n="home">← <span data-i18n="home">მთავარი</span></a></li>
+        <li><a href="/news/"    data-i18n="nav.news">სიახლეები</a></li>
+        <li><a href="/gallery/" data-i18n="nav.gallery">გალერეა</a></li>
+        <li><a href="/sermons/" data-i18n="nav.sermons">ქადაგებები</a></li>
+      </ul></div>
+      <div class="col-md-4" style="font-size:.8rem;color:rgba(255,255,255,.4);">
+        <a href="https://pilgrim.help" target="_blank" style="color:var(--gold);">✠ORDER OF CHRIST'S PILGRIMS✠</a>
+      </div>
+    </div>
+    <hr class="footer-divider"/>
+    <div class="footer-bottom d-flex justify-content-between flex-wrap gap-2">
+      <span>© 2026 სულიწმიდის კათოლიკური მრევლი, ბათუმი</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const translations = {
+  ka:{"nav.brand":"სულიწმიდის მრევლი · ბათუმი","nav.about":"შესახებ","nav.schedule":"განრიგი","nav.news":"სიახლეები","nav.gallery":"გალერეა","nav.sermons":"ქადაგებები","nav.donate":"შეწირვა","nav.contact":"კონტაქტი","home":"მთავარი","about.tag":"მრევლის შესახებ","about.title":"სულიწმიდის კათოლიკური ეკლესია","about.info_title":"ზოგადი ინფორმაცია","about.i_type":"ტიპი:","about.i_loc":"მდებარეობა:","about.i_year":"გახსნილია:","about.i_arch":"არქიტექტორი:","about.i_diocese":"ეპარქია:","about.i_pastor":"მწყემსი:","about.i_addr":"მისამართი:","about.i_coords":"კოორდინ.:"},
+  en:{"nav.brand":"Holy Spirit Parish · Batumi","nav.about":"About","nav.schedule":"Schedule","nav.news":"News","nav.gallery":"Gallery","nav.sermons":"Sermons","nav.donate":"Donate","nav.contact":"Contact","home":"Home","about.tag":"About the Parish","about.title":"Church of the Holy Spirit","about.info_title":"General Information","about.i_type":"Type:","about.i_loc":"Location:","about.i_year":"Opened:","about.i_arch":"Architects:","about.i_diocese":"Diocese:","about.i_pastor":"Pastor:","about.i_addr":"Address:","about.i_coords":"Coordinates:"},
+  ru:{"nav.brand":"Приход Святого Духа · Батуми","nav.about":"О приходе","nav.schedule":"Расписание","nav.news":"Новости","nav.gallery":"Галерея","nav.sermons":"Проповеди","nav.donate":"Пожертвовать","nav.contact":"Контакты","home":"Главная","about.tag":"О приходе","about.title":"Церковь Святого Духа","about.info_title":"Общая информация","about.i_type":"Тип:","about.i_loc":"Местоположение:","about.i_year":"Открыта:","about.i_arch":"Архитекторы:","about.i_diocese":"Епархия:","about.i_pastor":"Настоятель:","about.i_addr":"Адрес:","about.i_coords":"Координаты:"}
+};
+function setLang(lang){
+  document.documentElement.setAttribute('lang',lang);document.documentElement.setAttribute('data-lang',lang);
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.lang-btn').forEach(b=>{if(b.textContent.toLowerCase().includes(lang))b.classList.add('active');});
+  const t=translations[lang]||translations.ka;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(t[k])el.textContent=t[k];});
+  document.querySelectorAll('.lang-content').forEach(el=>el.style.display='none');
+  const lc=document.getElementById('lc-'+lang);if(lc)lc.style.display='block';
+  else document.getElementById('lc-ka').style.display='block';
+  localStorage.setItem('parish-lang',lang);
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  const saved=localStorage.getItem('parish-lang')||'ka';
+  setLang(['ka','en','ru'].includes(saved)?saved:'ka');
+});
+</script>
+</body>
+</html>

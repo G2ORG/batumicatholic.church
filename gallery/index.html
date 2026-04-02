@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ka" data-lang="ka">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>გალერეა · სულიწმიდის მრევლი ბათუმი</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700&family=Lato:wght@300;400;700&family=Noto+Sans+Georgian:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <!-- GLightbox -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css"/>
+  <style>
+    :root{--blue:#1B4F8C;--blue-dark:#123566;--blue-light:#E8F0F7;--gold:#C9A84C;--white:#FAFAF8;--text:#1A1A1A;--muted:#6B7280;--border:#DDE3EC}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+    body{font-family:'Lato','Noto Sans Georgian',sans-serif;background:var(--white);color:var(--text)}
+    h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.2}a{color:inherit;text-decoration:none}
+    .navbar{background:rgba(27,79,140,.97);backdrop-filter:blur(8px);padding:.75rem 0;position:sticky;top:0;z-index:1000;border-bottom:2px solid var(--gold)}
+    .navbar-brand{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:700;color:#fff !important}
+    .navbar-brand .cross{color:var(--gold);margin-right:.4rem}
+    .nav-link{color:rgba(255,255,255,.88) !important;font-size:.78rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.4rem .6rem !important;transition:color .2s}
+    .nav-link:hover,.nav-link.active-link{color:var(--gold) !important}
+    .navbar-toggler{border-color:rgba(255,255,255,.4)}.navbar-toggler-icon{filter:invert(1)}
+    .lang-btn{background:transparent;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);font-size:.68rem;font-weight:700;padding:2px 7px;border-radius:3px;cursor:pointer;transition:all .2s}
+    .lang-btn:hover,.lang-btn.active{background:var(--gold);border-color:var(--gold);color:#fff}
+    .page-hero{background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue) 100%);padding:3.5rem 0 2.5rem;position:relative;overflow:hidden}
+    .page-hero::before{content:'📷';position:absolute;right:3rem;top:50%;transform:translateY(-50%);font-size:8rem;opacity:.06}
+    .page-hero h1{color:#fff;font-size:clamp(2rem,5vw,3rem);margin-bottom:.4rem}
+    .page-hero .breadcrumb{background:transparent;padding:0}
+    .page-hero .breadcrumb-item{font-size:.82rem;color:rgba(255,255,255,.55)}
+    .page-hero .breadcrumb-item a{color:rgba(255,255,255,.7)}.page-hero .breadcrumb-item a:hover{color:var(--gold)}
+    .page-hero .breadcrumb-item.active{color:rgba(255,255,255,.85)}
+    .page-hero .breadcrumb-item+.breadcrumb-item::before{color:rgba(255,255,255,.35)}
+    .gold-tag{display:inline-block;background:var(--gold);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:3px 12px;border-radius:2px;margin-bottom:.8rem}
+    .gallery-section{padding:4rem 0 6rem}
+    /* Album selector */
+    .album-tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:2.5rem}
+    .album-tab{background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 16px;border-radius:20px;cursor:pointer;transition:all .2s}
+    .album-tab:hover,.album-tab.active{background:var(--blue);border-color:var(--blue);color:#fff}
+    /* Grid */
+    .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px}
+    .gallery-item{position:relative;overflow:hidden;border-radius:5px;aspect-ratio:4/3;cursor:pointer;background:#e8f0f7}
+    .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .35s,opacity .2s}
+    .gallery-item:hover img{transform:scale(1.06)}
+    .gallery-item .overlay{position:absolute;inset:0;background:rgba(18,53,102,0);transition:background .25s;display:flex;align-items:center;justify-content:center}
+    .gallery-item:hover .overlay{background:rgba(18,53,102,.5)}
+    .gallery-item .overlay i{color:#fff;font-size:1.8rem;opacity:0;transition:opacity .25s}
+    .gallery-item:hover .overlay i{opacity:1}
+    /* Empty state */
+    .gallery-empty{text-align:center;padding:5rem 1rem;color:var(--muted)}
+    .gallery-empty i{font-size:4rem;opacity:.2;display:block;margin-bottom:1rem}
+    /* Skeleton */
+    .skeleton{background:linear-gradient(90deg,#e8f0f7 25%,#f5f8fc 50%,#e8f0f7 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:5px}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    .btn-gold{background:var(--gold);color:#fff;border:none;padding:10px 24px;font-weight:700;font-size:.84rem;letter-spacing:.07em;text-transform:uppercase;border-radius:3px;transition:background .2s;display:inline-block;cursor:pointer}
+    .btn-gold:hover{background:#b0912f;color:#fff}
+    footer{background:#0a1e3a;color:rgba(255,255,255,.7);padding:2rem 0 1.5rem}
+    .ft-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;font-weight:700}
+    .ft-logo .cross{color:var(--gold);margin-right:.3rem}
+    footer ul{list-style:none;padding:0}footer ul li{margin-bottom:.3rem}
+    footer ul li a{font-size:.82rem;color:rgba(255,255,255,.6);transition:color .2s}footer ul li a:hover{color:var(--gold)}
+    .footer-divider{border-color:rgba(255,255,255,.1);margin:1.5rem 0 .8rem}
+    .footer-bottom{font-size:.75rem;color:rgba(255,255,255,.4)}
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="/"><span class="cross">✝</span><span data-i18n="nav.brand">სულიწმიდის მრევლი · ბათუმი</span></a>
+    <button class="navbar-toggler ms-auto me-2" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav mx-auto gap-0">
+        <li><a class="nav-link" href="/about/"   data-i18n="nav.about">შესახებ</a></li>
+        <li><a class="nav-link" href="/#schedule" data-i18n="nav.schedule">განრიგი</a></li>
+        <li><a class="nav-link" href="/news/"     data-i18n="nav.news">სიახლეები</a></li>
+        <li><a class="nav-link active-link" href="/gallery/" data-i18n="nav.gallery">გალერეა</a></li>
+        <li><a class="nav-link" href="/sermons/"  data-i18n="nav.sermons">ქადაგებები</a></li>
+        <li><a class="nav-link" href="/#donate"   data-i18n="nav.donate">შეწირვა</a></li>
+        <li><a class="nav-link" href="/#contact"  data-i18n="nav.contact">კონტაქტი</a></li>
+      </ul>
+      <div class="d-flex gap-1 mt-2 mt-lg-0">
+        <button class="lang-btn active" onclick="setLang('ka')">🇬🇪 KA</button>
+        <button class="lang-btn"        onclick="setLang('en')">🇬🇧 EN</button>
+        <button class="lang-btn"        onclick="setLang('ru')">🇷🇺 RU</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="gold-tag" data-i18n="gal.tag">გალერეა</div>
+    <h1 data-i18n="gal.title">ფოტოგალერეა</h1>
+    <nav aria-label="breadcrumb"><ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/" data-i18n="home">მთავარი</a></li>
+      <li class="breadcrumb-item active" data-i18n="gal.tag">გალერეა</li>
+    </ol></nav>
+  </div>
+</div>
+
+<div class="gallery-section">
+  <div class="container">
+
+    <!-- Album filter tabs -->
+    <div class="album-tabs" id="album-tabs">
+      <button class="album-tab active" onclick="filterAlbum('all',this)" data-i18n="gal.all">ყველა</button>
+      <button class="album-tab" onclick="filterAlbum('liturgy',this)" data-i18n="gal.liturgy">ლიტურგია</button>
+      <button class="album-tab" onclick="filterAlbum('caritas',this)" data-i18n="gal.caritas">კარიტასი</button>
+      <button class="album-tab" onclick="filterAlbum('events',this)" data-i18n="gal.events">ღონისძიებები</button>
+      <button class="album-tab" onclick="filterAlbum('church',this)" data-i18n="gal.church">ეკლესია</button>
+    </div>
+
+    <!-- Gallery grid -->
+    <div class="gallery-grid" id="gallery-grid">
+      <!-- Static demo photos using the available pexe.jpg; in production PHP loads from /uploads/ -->
+    </div>
+
+    <!-- Empty state -->
+    <div class="gallery-empty" id="gallery-empty" style="display:none;">
+      <i class="fa fa-images"></i>
+      <p data-i18n="gal.empty">ამ კატეგორიაში ფოტო ჯერ არ არის.</p>
+      <p style="font-size:.82rem;margin-top:.5rem;" data-i18n="gal.empty_admin">ფოტოები ემატება Admin → გალერეა გვერდიდან.</p>
+    </div>
+
+    <!-- Load more -->
+    <div class="text-center mt-4" id="load-more-wrap" style="display:none;">
+      <button class="btn-gold" id="load-more-btn" onclick="loadMorePhotos()" data-i18n="gal.load_more">მეტი ფოტო</button>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="row g-3 align-items-center">
+      <div class="col-md-4"><div class="ft-logo"><span class="cross">✝</span> სულიწმიდის მრევლი</div><p style="font-size:.8rem;">გოგებაშვილის ქ. 74, ბათუმი</p></div>
+      <div class="col-md-4"><ul>
+        <li><a href="/" data-i18n="home">← <span data-i18n="home">მთავარი</span></a></li>
+        <li><a href="/news/"    data-i18n="nav.news">სიახლეები</a></li>
+        <li><a href="/sermons/" data-i18n="nav.sermons">ქადაგებები</a></li>
+        <li><a href="/about/"   data-i18n="nav.about">შესახებ</a></li>
+      </ul></div>
+      <div class="col-md-4" style="font-size:.8rem;color:rgba(255,255,255,.4);">
+        <a href="https://pilgrim.help" target="_blank" style="color:var(--gold);">Ordo Peregrinorum Christi</a>
+      </div>
+    </div>
+    <hr class="footer-divider"/>
+    <div class="footer-bottom">© 2026 სულიწმიდის კათოლიკური მრევლი, ბათუმი</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/js/glightbox.min.js"></script>
+<script>
+// ── Реальная галерея из gallery-api.php ──────────────────
+let lightbox;
+let currentAlbum  = 'all';
+let currentOffset = 0;
+const PAGE_SIZE   = 24;
+const lang = () => document.documentElement.getAttribute('data-lang') || 'ka';
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+async function loadPhotos(album='all', offset=0, append=false) {
+  const grid  = document.getElementById('gallery-grid');
+  const empty = document.getElementById('gallery-empty');
+  const moreW = document.getElementById('load-more-wrap');
+  const moreB = document.getElementById('load-more-btn');
+  if (!append) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--muted);"><i class="fa fa-spinner fa-spin fa-2x"></i></div>';
+    empty.style.display='none'; moreW.style.display='none';
+  } else { moreB.innerHTML='<i class="fa fa-spinner fa-spin"></i>'; }
+  try {
+    const r = await fetch(`/gallery-api.php?album=${encodeURIComponent(album)}&limit=${PAGE_SIZE}&offset=${offset}`);
+    const d = await r.json();
+    if (!d.ok || !d.items.length) {
+      if (!append) { grid.innerHTML=''; empty.style.display='block'; }
+      moreW.style.display='none'; return;
+    }
+    const html = d.items.map(p=>`
+      <a href="${esc(p.src)}" class="glightbox gallery-item" data-album="${esc(p.album)}"
+         data-title="${esc(p.title)}" data-description="${esc(p.album)}">
+        <img src="${esc(p.src)}" alt="${esc(p.title)}" loading="lazy"/>
+        <div class="overlay"><i class="fa fa-magnifying-glass-plus"></i></div>
+      </a>`).join('');
+    if (append) grid.insertAdjacentHTML('beforeend', html);
+    else grid.innerHTML = html;
+    if (lightbox) lightbox.destroy();
+    lightbox = GLightbox({ selector:'.glightbox', touchNavigation:true, loop:true, autoplayVideos:false });
+    const loaded = offset + d.items.length;
+    if (loaded < d.total) {
+      moreW.style.display='block';
+      const t=translations[lang()];
+      moreB.innerHTML=(t&&t['gal.load_more'])||'Load More';
+      currentOffset=loaded;
+    } else { moreW.style.display='none'; }
+  } catch(e) {
+    if (!append) { grid.innerHTML=''; empty.style.display='block'; }
+    moreW.style.display='none';
+  }
+}
+
+function loadMorePhotos() { loadPhotos(currentAlbum, currentOffset, true); }
+
+function filterAlbum(album, btn) {
+  currentAlbum=album; currentOffset=0;
+  document.querySelectorAll('.album-tab').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  loadPhotos(album, 0, false);
+}
+
+// i18n
+const translations = {
+  ka:{"nav.brand":"სულიწმიდის მრევლი · ბათუმი","nav.about":"შესახებ","nav.schedule":"განრიგი","nav.news":"სიახლეები","nav.gallery":"გალერეა","nav.sermons":"ქადაგებები","nav.donate":"შეწირვა","nav.contact":"კონტაქტი","home":"მთავარი","gal.tag":"გალერეა","gal.title":"ფოტოგალერეა","gal.all":"ყველა","gal.liturgy":"ლიტურგია","gal.caritas":"კარიტასი","gal.events":"ღონისძიებები","gal.church":"ეკლესია","gal.empty":"ამ კატეგორიაში ფოტო ჯერ არ არის.","gal.empty_admin":"ემატება Admin → გალერეა გვერდიდან.","gal.load_more":"მეტი ფოტო"},
+  en:{"nav.brand":"Holy Spirit Parish · Batumi","nav.about":"About","nav.schedule":"Schedule","nav.news":"News","nav.gallery":"Gallery","nav.sermons":"Sermons","nav.donate":"Donate","nav.contact":"Contact","home":"Home","gal.tag":"Gallery","gal.title":"Photo Gallery","gal.all":"All","gal.liturgy":"Liturgy","gal.caritas":"Caritas","gal.events":"Events","gal.church":"Church","gal.empty":"No photos in this category yet.","gal.empty_admin":"Photos are added via Admin → Gallery.","gal.load_more":"Load More"},
+  ru:{"nav.brand":"Приход Святого Духа · Батуми","nav.about":"О приходе","nav.schedule":"Расписание","nav.news":"Новости","nav.gallery":"Галерея","nav.sermons":"Проповеди","nav.donate":"Пожертвовать","nav.contact":"Контакты","home":"Главная","gal.tag":"Галерея","gal.title":"Фотогалерея","gal.all":"Все","gal.liturgy":"Литургия","gal.caritas":"Каритас","gal.events":"События","gal.church":"Церковь","gal.empty":"В этой категории пока нет фото.","gal.empty_admin":"Фото добавляются через Admin → Галерея.","gal.load_more":"Загрузить ещё"}
+};
+function setLang(l){
+  document.documentElement.setAttribute('lang',l);document.documentElement.setAttribute('data-lang',l);
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.lang-btn').forEach(b=>{if(b.textContent.toLowerCase().includes(l))b.classList.add('active');});
+  const t=translations[l]||translations.ka;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(t[k])el.textContent=t[k];});
+  localStorage.setItem('parish-lang',l);
+  loadPhotos(currentAlbum, 0, false);
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  const saved=localStorage.getItem('parish-lang')||'ka';
+  setLang(['ka','en','ru'].includes(saved)?saved:'ka');
+loadPhotos('all', 0, false);
+});
+</script>
+</body>
+</html>

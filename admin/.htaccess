@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Админ-панель прихода"
+AuthUserFile "/home/enterpr2/batumicatholic.church/admin/.htpasswd"
+Require valid-user
