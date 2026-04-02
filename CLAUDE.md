@@ -1,64 +1,71 @@
-# batumicatholic.church — Контекст проекта для Claude Code
+# batumicatholic.church — Сайт католического прихода, Батуми
 
-## Что это
-Сайт католического прихода Святого Духа, Батуми, Грузия.
-Замена WordPress на Bootstrap 5 + минимальный PHP (без БД, без Node.js).
-**Типовой шаблон OPC** — потом тиражируется для других приходов.
+## Контекст
+Сайт для прихода Святого Духа (Roman Catholic Parish), Батуми, Грузия.
+Замена WordPress на Bootstrap 5 + минимальный PHP — без БД, без Node.js.
+**Типовой шаблон OPC** — потом тиражируется для других приходов мира.
 
-## Хостинг
-- Домен: batumicatholic.church
-- Путь на сервере: `/home/enterpr2/batumicatholic.church/`
-- PHP 8.1, Apache, shared hosting
-- Admin BasicAuth: `/admin/.htpasswd` (НЕ коммитить в git!)
-- Email прихода: batumicatholic@gmail.com
+**Notion:** https://www.notion.so/33370d84f3158168a501fa470b8e484e
+**GitHub:** https://github.com/G2ORG/batumicatholic.church
+**Хостинг:** batumicatholic.church → `/home/enterpr2/batumicatholic.church/`
 
 ## Стек
-- Bootstrap 5.3 + Vanilla JS (без сборщиков)
-- PHP 8.1 (только для форм и API)
+- Bootstrap 5.3 + Vanilla JS (без сборщиков, без npm)
+- PHP 8.1 на shared hosting (Apache, cPanel)
 - Контент: JSON + Markdown файлы (без БД)
-- Языки: **KA** (основной), EN, RU — i18n через `data-i18n` + `translations` объект в JS
+- Языки: **KA** (основной), EN, RU — i18n через `data-i18n` + объект `translations`
 
-## Структура
+## Быстрый старт
 ```
-index.html          — главная (одностраничник с якорями)
-about/              — история прихода
-news/               — новости (index.html + load-news.php читает news/data/*.md)
-gallery/            — галерея (gallery-api.php читает uploads/)
-sermons/            — проповеди (серmons/data/*.md + аудио)
-admin/              — CMS панель (BasicAuth защита)
-data/schedule.json  — расписание (мультиязычный формат {ka,en,ru})
-data/caritas/       — запросы каритас (НЕ публично!)
-uploads/            — фото (liturgy/, events/, caritas/)
-caritas-form.php    — обработка формы помощи
-load-news.php       — JSON API новостей
-load-events.php     — JSON API событий
-gallery-api.php     — JSON API галереи
+# Открыть папку проекта
+cd "C:\Users\user\Documents\Knights Errant Life\church Null\new Cloud WP\02042026"
+
+# Деплой — вручную через FTP/хостинг-панель
+# Git push:
+git add -A && git commit -m "..." && git push
 ```
 
-## Что сделано
-- [x] Главная страница полностью (все секции)
-- [x] i18n KA/EN/RU на главной и в /admin/
-- [x] caritas-form.php (rate limit, email, сохранение)
-- [x] .htaccess (HTTPS redirect, gzip, cache, security)
-- [x] robots.txt + sitemap.xml
-- [x] data/.htaccess (Apache 2.4/2.2 совместимый)
-- [x] Vatican News виджет (RSS2JSON)
-- [x] Admin дашборд i18n (плитки, таблица, кнопки)
-- [x] schedule.json мультиязычный
+## Соглашения
+- `data-i18n="ключ"` на всех переводимых элементах
+- Переводы: объект `translations` в `index.html`, `ADMIN_LANG` в `admin/index.html`
+- Новости в MD с frontmatter: `title_ka`, `title_en`, `title_ru`, `date`, `category`, `status`
+- НЕ коммитить: `admin/.htpasswd`, `uploads/`, `data/caritas/`
+- Контакт прихода: batumicatholic@gmail.com
 
-## Что ещё нужно
-- [ ] Stripe Payment Link → вставить в index.html (~строка 443)
-- [ ] IBAN TBC Bank → вставить в index.html (~строка 433)
-- [ ] Телефон прихода → секция #contact
-- [ ] Расписание уточнить у о. Габриэле → data/schedule.json
-- [ ] Реальные новости через /admin/
-- [ ] Фото церкви в uploads/liturgy/
-- [ ] Telegram канал embed (сейчас placeholder)
-- [ ] Google Search Console → добавить sitemap
+## Структура ключевых файлов
+```
+index.html          — главная (Hero, расписание, новости, каритас, донаты, контакты)
+about/index.html    — история прихода
+news/index.html     — новости (читает news/data/*.md через load-news.php)
+gallery/index.html  — галерея (читает uploads/ через gallery-api.php)
+sermons/index.html  — проповеди (читает sermons/data/*.md)
+admin/index.html    — CMS панель (BasicAuth, Quill WYSIWYG)
+data/schedule.json  — расписание ({ka,en,ru} мультиязычный формат)
+caritas-form.php    — форма запроса помощи (rate limit + email + JSON)
+.htaccess           — HTTPS, gzip, cache, security headers
+```
 
-## Важные соглашения
-- `data-i18n="ключ"` для всего переводимого текста
-- Переводы в JS: объект `translations` в index.html, `ADMIN_LANG` в admin/index.html
-- Новости в MD-формате с frontmatter: title_ka, title_en, title_ru, date, category, status
-- Фото через admin → загружаются в /uploads/{album}/
-- НЕ коммитить: admin/.htpasswd, uploads/, data/caritas/
+## currentStatus
+*Обновлено: 2026-04-03*
+
+- ✅ Главная страница — все секции (Hero, расписание, новости, каритас, донаты, контакты)
+- ✅ i18n KA/EN/RU — главная + admin дашборд полностью
+- ✅ caritas-form.php — rate limiting, email, сохранение в /data/caritas/
+- ✅ .htaccess — HTTPS redirect, gzip, cache, security headers (Apache 2.4/2.2)
+- ✅ robots.txt + sitemap.xml
+- ✅ Vatican News виджет — RSS2JSON (заменён нерабочий iframe)
+- ✅ data/schedule.json — мультиязычный формат, правильное расписание
+- ✅ Admin дашборд i18n — плитки, таблица, кнопки, подсказки
+- ✅ favicon.ico в корне, подключён во всех страницах
+- ✅ GitHub: github.com/G2ORG/batumicatholic.church (3 коммита)
+
+## nextSteps
+1. **Загрузить на хостинг** изменённые файлы (список в памяти Claude Code)
+2. **IBAN TBC Bank** — вставить реквизиты в `index.html` (~строка 433)
+3. **Телефон прихода** — добавить в секцию `#contact` в `index.html`
+4. Расписание уточнить у о. Габриэле → обновить `data/schedule.json`
+5. Добавить первые реальные новости через `/admin/`
+
+## Блокеры
+- Нет реальных банковских реквизитов (IBAN) — вставить placeholder
+- Расписание в JSON — тестовое, нужно подтверждение от священника
