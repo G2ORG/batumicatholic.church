@@ -7,8 +7,15 @@
  * Формат хранения: .md файлы с YAML frontmatter (ka/en/ru)
  */
 
+ini_set('session.cookie_httponly', '1');
+ini_set('session.cookie_samesite', 'Strict');
+if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+    ini_set('session.cookie_secure', '1');
+}
 session_start();
 header('Content-Type: application/json; charset=utf-8');
+header('X-Content-Type-Options: nosniff');
+header('Cache-Control: no-store, no-cache, must-revalidate');
 
 // ── Базовые пути ──────────────────────────────────────────
 define('BASE',    dirname(__DIR__) . '/');
@@ -17,6 +24,8 @@ define('NEWS',    BASE . 'news/data/');
 define('EVENTS',  BASE . 'events/');
 define('SERMONS', BASE . 'sermons/data/');
 define('SCHED',   BASE . 'data/schedule.json');
+define('SCHED_EXCEPTIONS', BASE . 'data/schedule-exceptions.json');
+define('HOME_CONTENT', BASE . 'data/home-content.json');
 
 // ── Создать папки если нет ────────────────────────────────
 foreach ([UPLOADS, NEWS, EVENTS, SERMONS, BASE.'data/'] as $dir) {
@@ -32,6 +41,41 @@ function respond($ok, $message, $data = []) {
 
 function clean($str) {
     return htmlspecialchars(strip_tags(trim($str ?? '')), ENT_QUOTES, 'UTF-8');
+}
+
+function clean_plain($str) {
+    return trim(strip_tags((string)($str ?? '')));
+}
+
+function valid_date($value) {
+    return preg_match('/^\d{4}-\d{2}-\d{2}$/', (string)$value) ? (string)$value : '';
+}
+
+function clean_ml($value) {
+    if (is_array($value)) {
+        return [
+            'ka' => clean_plain($value['ka'] ?? ''),
+            'en' => clean_plain($value['en'] ?? ''),
+            'ru' => clean_plain($value['ru'] ?? ''),
+        ];
+    }
+    $text = clean_plain($value);
+    return ['ka' => $text, 'en' => $text, 'ru' => $text];
+}
+
+function csrf_token() {
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}
+
+function require_csrf() {
+    if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') return;
+    $token = $_SERVER['HTTP_X_CSRF_TOKEN'] ?? ($_POST['csrf'] ?? '');
+    if (!$token || empty($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $token)) {
+        respond(false, 'Сессия безопасности истекла. Обновите страницу и попробуйте снова.');
+    }
 }
 
 function slug($str) {
@@ -124,6 +168,12 @@ function delete_file($type, $filename) {
 // ─────────────────────────────────────────────────────────
 $method = $_SERVER['REQUEST_METHOD'];
 $action = $_POST['action'] ?? $_GET['action'] ?? '';
+
+if ($method === 'GET' && $action === 'csrf') {
+    respond(true, 'CSRF token', ['token' => csrf_token()]);
+}
+
+require_csrf();
 
 // ── Загрузка изображения (multipart) ──
 if ($method === 'POST' && $action === 'upload_image') {
@@ -276,24 +326,95 @@ if ($method === 'POST' && $action === 'save_schedule') {
     $data = json_decode(file_get_contents('php://input'), true);
     if (!is_array($data)) respond(false, 'Неверный формат данных');
 
-    // Базовая валидация
+    // Базовая валидация: все текстовые поля расписания хранятся на KA/EN/RU.
     $clean = [];
     foreach ($data as $row) {
-        if (!isset($row['day'], $row['time'])) continue;
+        if (!is_array($row)) continue;
+        $time = clean_plain($row['time'] ?? '');
+        if ($time === '') continue;
+
+        $langs = [];
+        foreach ((array)($row['langs'] ?? []) as $lang) {
+            $lang = strtoupper(clean_plain($lang));
+            if (in_array($lang, ['KA', 'EN', 'RU', 'PL', 'LA', 'IT'], true)) $langs[] = $lang;
+        }
+
         $clean[] = [
-            'day'    => clean($row['day']),
-            'time'   => clean($row['time']),
-            'type'   => clean($row['type'] ?? 'Месса'),
-            'langs'  => array_map('clean', (array)($row['langs'] ?? [])),
-            'note'   => clean($row['note'] ?? ''),
+            'day'    => clean_ml($row['day'] ?? ''),
+            'time'   => $time,
+            'type'   => clean_ml($row['type'] ?? ''),
+            'langs'  => array_values(array_unique($langs)),
+            'note'   => clean_ml($row['note'] ?? ''),
         ];
     }
 
-    if (file_put_contents(SCHED, json_encode(['updated' => date('c'), 'rows' => $clean], JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT))) {
+    if (!$clean) respond(false, 'Добавьте хотя бы одну строку расписания');
+
+    $json = json_encode(['updated' => date('c'), 'rows' => $clean], JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
+    if ($json !== false && file_put_contents(SCHED, $json, LOCK_EX)) {
         respond(true, 'Расписание сохранено!');
     } else {
         respond(false, 'Ошибка записи расписания');
     }
+}
+
+// ── Сохранение исключений/праздников расписания ──
+if ($method === 'POST' && $action === 'save_schedule_exceptions') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    if (!is_array($data)) respond(false, 'Неверный формат данных');
+
+    $items = [];
+    foreach ($data as $row) {
+        if (!is_array($row)) continue;
+        $date = valid_date($row['date'] ?? '');
+        $time = clean_plain($row['time'] ?? '');
+        if (!$date || $time === '') continue;
+
+        $langs = [];
+        foreach ((array)($row['langs'] ?? []) as $lang) {
+            $lang = strtoupper(clean_plain($lang));
+            if (in_array($lang, ['KA', 'EN', 'RU', 'PL', 'LA', 'IT'], true)) $langs[] = $lang;
+        }
+
+        $status = clean_plain($row['status'] ?? 'changed');
+        if (!in_array($status, ['added', 'changed', 'cancelled'], true)) $status = 'changed';
+
+        $items[] = [
+            'date'   => $date,
+            'title'  => clean_ml($row['title'] ?? ''),
+            'day'    => clean_ml($row['day'] ?? ''),
+            'time'   => $time,
+            'type'   => clean_ml($row['type'] ?? ''),
+            'langs'  => array_values(array_unique($langs)),
+            'note'   => clean_ml($row['note'] ?? ''),
+            'status' => $status,
+        ];
+    }
+
+    usort($items, fn($a, $b) => strcmp($a['date'], $b['date']));
+    $json = json_encode(['updated' => date('c'), 'items' => $items], JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
+    if ($json !== false && file_put_contents(SCHED_EXCEPTIONS, $json, LOCK_EX)) {
+        respond(true, 'Праздничные изменения сохранены!');
+    }
+    respond(false, 'Ошибка записи праздничного расписания');
+}
+
+// ── Сохранение редактируемых текстов главной страницы ──
+if ($method === 'POST' && $action === 'save_home_content') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    if (!is_array($data)) respond(false, 'Неверный формат данных');
+
+    $fields = [];
+    foreach (($data['fields'] ?? []) as $key => $value) {
+        if (!preg_match('/^[a-z0-9_.-]+$/i', (string)$key) || !is_array($value)) continue;
+        $fields[$key] = clean_ml($value);
+    }
+
+    $json = json_encode(['updated' => date('c'), 'fields' => $fields], JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
+    if ($json !== false && file_put_contents(HOME_CONTENT, $json, LOCK_EX)) {
+        respond(true, 'Тексты главной сохранены!');
+    }
+    respond(false, 'Ошибка записи текстов главной');
 }
 
 // ── Удаление ──
@@ -425,6 +546,26 @@ if ($method === 'GET' && $action === 'get_schedule') {
         echo file_get_contents(SCHED);
     } else {
         echo json_encode(['rows' => []]);
+    }
+    exit;
+}
+
+// ── Загрузить исключения/праздники расписания ──
+if ($method === 'GET' && $action === 'get_schedule_exceptions') {
+    if (file_exists(SCHED_EXCEPTIONS)) {
+        echo file_get_contents(SCHED_EXCEPTIONS);
+    } else {
+        echo json_encode(['items' => []]);
+    }
+    exit;
+}
+
+// ── Загрузить редактируемые тексты главной ──
+if ($method === 'GET' && $action === 'get_home_content') {
+    if (file_exists(HOME_CONTENT)) {
+        echo file_get_contents(HOME_CONTENT);
+    } else {
+        echo json_encode(['fields' => []]);
     }
     exit;
 }
