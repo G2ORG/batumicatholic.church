@@ -50,6 +50,9 @@ RewriteRule ^data/caritas/ - [F,L]
     Header always set X-Content-Type-Options "nosniff"
     Header always set X-Frame-Options "SAMEORIGIN"
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=()"
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.quilljs.com https://connect.facebook.net https://api.rss2json.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.quilljs.com https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://api.rss2json.com https://www.vaticannews.va; frame-src 'self' https://www.google.com https://calendar.google.com https://maps.google.com https://www.facebook.com https://web.facebook.com https://www.openstreetmap.org; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
     # Cache control for JSON API
     <FilesMatch "\.(php)$">
         Header set Cache-Control "no-cache, must-revalidate"

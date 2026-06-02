@@ -76,6 +76,7 @@
     /* ── Schedule table ── */
     #schedule table th{background:var(--blue);color:#fff;font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;border:none}
     #schedule table td{vertical-align:middle;font-size:.92rem;border-color:var(--border)}
+    .schedule-exceptions{display:grid;gap:.75rem;margin-bottom:1.25rem}.schedule-exception{border:1px solid var(--gold);background:#fffaf0;border-radius:8px;padding:.85rem 1rem;display:flex;gap:1rem;align-items:flex-start}.schedule-exception .ex-date{background:var(--gold);color:#fff;border-radius:6px;padding:.35rem .55rem;font-weight:700;white-space:nowrap}.schedule-exception .ex-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:var(--blue-dark)}.schedule-exception .ex-meta{font-size:.86rem;color:var(--muted)}.schedule-exception.cancelled{border-color:#DC2626;background:#fff5f5}.schedule-exception.cancelled .ex-date{background:#DC2626}
     .time-badge{background:var(--gold-light);color:#8B6914;font-weight:700;font-size:.88rem;padding:2px 9px;border-radius:3px;white-space:nowrap}
     .lang-pill{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.05em;padding:2px 7px;border-radius:10px;margin:1px}
     .pill-ka{background:var(--blue-light);color:var(--blue)}.pill-ru{background:#FFF3F3;color:#9B2020}.pill-en{background:#F0FAF4;color:#1A6B3A}.pill-pl{background:#FFF8F0;color:#8B5B00}
@@ -167,10 +168,79 @@
     .skeleton{background:linear-gradient(90deg,#e8f0f7 25%,#f5f8fc 50%,#e8f0f7 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:5px}
     @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
+    /* Announcement popup: set data-enabled="true" in the HTML block below to publish it. */
+    .announcement-popup[hidden]{display:none!important}
+    .announcement-popup{position:fixed;inset:0;z-index:3000;display:flex;align-items:center;justify-content:center;padding:1rem;background:rgba(10,30,58,.68);backdrop-filter:blur(4px)}
+    .announcement-popup .ann-card{width:min(94vw,760px);max-height:90vh;overflow:auto;background:#fff;border-radius:14px;box-shadow:0 24px 70px rgba(0,0,0,.28);position:relative;border:1px solid rgba(201,168,76,.28)}
+    .announcement-popup .ann-close{position:absolute;top:.75rem;right:.75rem;width:36px;height:36px;border:0;border-radius:50%;background:rgba(10,30,58,.08);color:var(--blue-dark);font-size:1.25rem;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .18s;z-index:2}
+    .announcement-popup .ann-close:hover{background:var(--blue);color:#fff}
+    .announcement-popup .ann-image{width:100%;max-height:340px;object-fit:cover;display:block;background:var(--blue-light)}
+    .announcement-popup .ann-body{padding:1.6rem 1.75rem 1.75rem}
+    .announcement-popup .ann-kicker{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:.4rem}
+    .announcement-popup .ann-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.45rem);line-height:1.05;color:var(--blue-dark);font-weight:700;margin:0 2rem .75rem 0}
+    .announcement-popup .ann-text{color:var(--muted);font-size:1rem;line-height:1.65;margin:0 0 1.1rem}
+    .announcement-popup .ann-actions{display:flex;gap:.65rem;flex-wrap:wrap;align-items:center}
+    .announcement-popup .ann-btn{display:inline-flex;align-items:center;justify-content:center;padding:.65rem 1.15rem;border-radius:4px;font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;transition:all .18s}
+    .announcement-popup .ann-btn.primary{background:var(--gold);color:#fff;border:2px solid var(--gold)}
+    .announcement-popup .ann-btn.primary:hover{background:#b69335;border-color:#b69335;color:#fff}
+    .announcement-popup .ann-btn.secondary{background:transparent;color:var(--blue);border:2px solid var(--blue)}
+    .announcement-popup .ann-btn.secondary:hover{background:var(--blue);color:#fff}
+    .announcement-popup [data-ann-lang]{display:none}
+    .announcement-popup [data-ann-lang].active{display:block}
+    @media(max-width:575px){.announcement-popup{align-items:flex-end;padding:.75rem}.announcement-popup .ann-card{max-height:88vh;border-radius:12px}.announcement-popup .ann-body{padding:1.25rem}.announcement-popup .ann-image{max-height:240px}.announcement-popup .ann-title{margin-right:2.2rem}}
     @media(max-width:768px){.schedule-divider{display:none}#about .about-img{height:260px}}
   </style>
 </head>
 <body>
+
+<!-- ANNOUNCEMENT POPUP
+  Готово к загрузке на хостинг: окно включено, картинка пока не используется.
+  Чтобы заменить объявление позже, отредактируйте тексты в блоках data-ann-lang="ka/en/ru"
+  и измените data-version, чтобы посетители снова увидели новое объявление.
+-->
+<div id="announcement-popup" class="announcement-popup" data-enabled="true" data-version="mass-procession-2026-06-07" data-show-once="true" hidden>
+  <div class="ann-card" role="dialog" aria-modal="true" aria-labelledby="announcement-title">
+    <button type="button" class="ann-close" aria-label="Close announcement" data-ann-close>&times;</button>
+    <div class="ann-body">
+      <div data-ann-lang="ka">
+        <div class="ann-kicker">განცხადება</div>
+        <h2 class="ann-title" id="announcement-title">წირვის განრიგის ცვლილება</h2>
+        <p class="ann-text">7 ივნისს, კვირას, ბატუმში წირვა მხოლოდ 17:00 საათზე აღევლინება.<br>წირვას მოჰყვება მსვლელობა.</p>
+        <p class="ann-text">In Batumi, on Sunday, June 7th, Mass will be celebrated only at 5:00PM.<br>A procession will follow the Mass.</p>
+        <p class="ann-text">В Батуми в воскресенье, 7 июня, в 17:00 состоится только месса.<br>После мессы пройдет процессия.</p>
+        <p class="ann-text">W Batumi, w niedzielę 7 czerwca, Msza Święta zostanie odprawiona tylko o godzinie 17:00.<br>Po Mszy odbędzie się procesja.</p>
+        <div class="ann-actions">
+          <a class="ann-btn primary" href="#schedule">განრიგი</a>
+          <button type="button" class="ann-btn secondary" data-ann-close>დახურვა</button>
+        </div>
+      </div>
+      <div data-ann-lang="en">
+        <div class="ann-kicker">Announcement</div>
+        <h2 class="ann-title">Mass schedule change</h2>
+        <p class="ann-text">7 ივნისს, კვირას, ბატუმში წირვა მხოლოდ 17:00 საათზე აღევლინება.<br>წირვას მოჰყვება მსვლელობა.</p>
+        <p class="ann-text">In Batumi, on Sunday, June 7th, Mass will be celebrated only at 5:00PM.<br>A procession will follow the Mass.</p>
+        <p class="ann-text">В Батуми в воскресенье, 7 июня, в 17:00 состоится только месса.<br>После мессы пройдет процессия.</p>
+        <p class="ann-text">W Batumi, w niedzielę 7 czerwca, Msza Święta zostanie odprawiona tylko o godzinie 17:00.<br>Po Mszy odbędzie się procesja.</p>
+        <div class="ann-actions">
+          <a class="ann-btn primary" href="#schedule">Schedule</a>
+          <button type="button" class="ann-btn secondary" data-ann-close>Close</button>
+        </div>
+      </div>
+      <div data-ann-lang="ru">
+        <div class="ann-kicker">Объявление</div>
+        <h2 class="ann-title">Изменение расписания мессы</h2>
+        <p class="ann-text">7 ივნისს, კვირას, ბატუმში წირვა მხოლოდ 17:00 საათზე აღევლინება.<br>წირვას მოჰყვება მსვლელობა.</p>
+        <p class="ann-text">In Batumi, on Sunday, June 7th, Mass will be celebrated only at 5:00PM.<br>A procession will follow the Mass.</p>
+        <p class="ann-text">В Батуми в воскресенье, 7 июня, в 17:00 состоится только месса.<br>После мессы пройдет процессия.</p>
+        <p class="ann-text">W Batumi, w niedzielę 7 czerwca, Msza Święta zostanie odprawiona tylko o godzinie 17:00.<br>Po Mszy odbędzie się procesja.</p>
+        <div class="ann-actions">
+          <a class="ann-btn primary" href="#schedule">Расписание</a>
+          <button type="button" class="ann-btn secondary" data-ann-close>Закрыть</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg">
@@ -268,6 +338,7 @@
       <div class="section-tag" data-i18n="sched.tag">მსახურების განრიგი</div>
       <h2 class="section-title" data-i18n="sched.title">ლიტურგიული განრიგი</h2>
     </div>
+    <div id="schedule-exceptions" class="schedule-exceptions" hidden></div>
     <div class="table-responsive">
       <table class="table table-bordered table-hover" id="schedule-table">
         <thead>
@@ -721,7 +792,7 @@ document.getElementById('caritasForm').addEventListener('submit', async function
 // ── Schedule from JSON ──
 async function loadSchedule() {
   try {
-    const r = await fetch('/data/schedule.json');
+    const r = await fetch('/load-schedule.php?lang=all');
     if (!r.ok) return;
     const data = await r.json();
     if (!data.rows || !data.rows.length) return;
@@ -737,10 +808,106 @@ async function loadSchedule() {
         <td>${(row.langs||[]).map(l=>`<span class="lang-pill ${langMap[l]||''}">${l}</span>`).join('')}</td>
         <td>${esc(ml(row.note))}</td>
       </tr>`).join('');
+    renderScheduleExceptions(data.exceptions || [], lang, ml, langMap);
+    updateScheduleSchema(data.rows || [], data.exceptions || [], lang, ml);
   } catch(e) { /* use static fallback */ }
 }
 
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function renderScheduleExceptions(items, lang, ml, langMap) {
+  const wrap = document.getElementById('schedule-exceptions');
+  if (!wrap) return;
+  if (!items.length) { wrap.hidden = true; wrap.innerHTML = ''; return; }
+  const statusText = {
+    added:{ka:'დამატებითი მსახურება',en:'Additional service',ru:'Дополнительная служба'},
+    changed:{ka:'შეცვლილი განრიგი',en:'Changed schedule',ru:'Изменение расписания'},
+    cancelled:{ka:'გაუქმებულია',en:'Cancelled',ru:'Отменено'}
+  };
+  wrap.innerHTML = items.map(item => {
+    const status = statusText[item.status] || statusText.changed;
+    return `<div class="schedule-exception ${item.status === 'cancelled' ? 'cancelled' : ''}">
+      <div class="ex-date">${esc(item.date)}</div>
+      <div><div class="ex-title">${esc(ml(item.title) || ml(item.type))}</div>
+      <div class="ex-meta"><strong>${esc(status[lang] || status.ka)}</strong> · ${esc(ml(item.day))} · ${esc(item.time)} · ${esc(ml(item.type))}</div>
+      <div class="mt-1">${(item.langs||[]).map(l=>`<span class="lang-pill ${langMap[l]||''}">${l}</span>`).join('')} ${esc(ml(item.note))}</div></div>
+    </div>`;
+  }).join('');
+  wrap.hidden = false;
+}
+
+function updateScheduleSchema(rows, exceptions, lang, ml) {
+  const services = rows.map(row => ({
+    '@type':'Event',
+    name: ml(row.type),
+    eventSchedule: {'@type':'Schedule', repeatFrequency:'P1W', byDay: ml(row.day), startTime: row.time},
+    inLanguage: (row.langs || []).join(', '),
+    location: {'@id':'https://batumicatholic.church/#church'}
+  }));
+  exceptions.forEach(item => services.push({
+    '@type':'Event',
+    name: ml(item.title) || ml(item.type),
+    startDate: item.date + 'T' + (item.time || '00:00').slice(0,5) + ':00+04:00',
+    eventStatus: item.status === 'cancelled' ? 'https://schema.org/EventCancelled' : 'https://schema.org/EventScheduled',
+    location: {'@id':'https://batumicatholic.church/#church'}
+  }));
+  const graph = {
+    '@context':'https://schema.org',
+    '@graph':[
+      {'@type':'Church','@id':'https://batumicatholic.church/#church','name':'Holy Spirit Catholic Church, Batumi','url':'https://batumicatholic.church/','telephone':'+995 555 72 05 03','address':{'@type':'PostalAddress','streetAddress':'74 Gogebashvili Street','addressLocality':'Batumi','addressCountry':'GE'},'geo':{'@type':'GeoCoordinates','latitude':41.6509,'longitude':41.6423}},
+      ...services
+    ]
+  };
+  let node = document.getElementById('schema-org-jsonld');
+  if (!node) { node = document.createElement('script'); node.type = 'application/ld+json'; node.id = 'schema-org-jsonld'; document.head.appendChild(node); }
+  node.textContent = JSON.stringify(graph);
+}
+
+async function loadHomeContent() {
+  try {
+    const r = await fetch('/load-home-content.php');
+    if (!r.ok) return;
+    const data = await r.json();
+    if (!data.ok || !data.fields) return;
+    ['ka','en','ru'].forEach(lang => {
+      translations[lang] = translations[lang] || {};
+      Object.entries(data.fields).forEach(([key, value]) => {
+        if (value && value[lang]) translations[lang][key] = value[lang];
+      });
+    });
+  } catch(e) { /* keep bundled translations */ }
+}
+
+function updateAnnouncementLanguage(lang) {
+  const popup = document.getElementById('announcement-popup');
+  if (!popup) return;
+  const activeLang = ['ka','en','ru'].includes(lang) ? lang : 'ka';
+  popup.querySelectorAll('[data-ann-lang]').forEach(block => {
+    block.classList.toggle('active', block.getAttribute('data-ann-lang') === activeLang);
+  });
+}
+
+function initAnnouncementPopup() {
+  const popup = document.getElementById('announcement-popup');
+  if (!popup || popup.dataset.enabled !== 'true') return;
+  const version = popup.dataset.version || 'default';
+  const storageKey = 'parish-announcement-closed-' + version;
+  const showOnce = popup.dataset.showOnce !== 'false';
+  if (showOnce && sessionStorage.getItem(storageKey) === '1') return;
+
+  const close = () => {
+    popup.hidden = true;
+    document.body.style.overflow = '';
+    if (showOnce) sessionStorage.setItem(storageKey, '1');
+  };
+
+  updateAnnouncementLanguage(document.documentElement.getAttribute('data-lang') || 'ka');
+  popup.hidden = false;
+  document.body.style.overflow = 'hidden';
+  popup.querySelectorAll('[data-ann-close]').forEach(btn => btn.addEventListener('click', close));
+  popup.addEventListener('click', event => { if (event.target === popup) close(); });
+  document.addEventListener('keydown', event => { if (!popup.hidden && event.key === 'Escape') close(); });
+}
 
 // ── i18n ──
 const translations = {
@@ -760,13 +927,15 @@ function setLang(lang) {
   loadNews();
   loadEvents();
   loadSchedule();
+  updateAnnouncementLanguage(lang);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadHomeContent();
   const saved = localStorage.getItem('parish-lang') || 'ka';
   const lang = ['ka','en','ru'].includes(saved) ? saved : 'ka';
   setLang(lang);
-  loadSchedule();
+  initAnnouncementPopup();
   loadVaticanNews();
 });
 

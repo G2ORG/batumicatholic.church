@@ -1,0 +1,10 @@
+# Uploaded media is static only: never execute scripts from this directory.
+Options -Indexes
+<FilesMatch "\.(php|phtml|phar|cgi|pl|py|sh|asp|aspx|jsp)$">
+    Require all denied
+</FilesMatch>
+RemoveHandler .php .phtml .phar .cgi .pl .py .sh .asp .aspx .jsp
+RemoveType .php .phtml .phar .cgi .pl .py .sh .asp .aspx .jsp
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
